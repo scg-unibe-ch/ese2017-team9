@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>AUI</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/global.css" th:src="@{/css/global.css}" />
+</head>
+<body>
+<div class="header">
+    <nav class="header-left">
+        <b>DELSAY</b>
+        <a href="user" target="item">User</a>
+        <a href="delivery" target="item">Delivery</a>
+        <a href="tour" target="item">Tour</a>
+        <a href="customer" target="item">Customer</a>
+    </nav>
+
+    <div class="header-right" >
+        <button class="dropbtn" onclick="myFunction()" type="button">
+           Profile
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+            <a href="myProfile" target="item">My Profile</a>
+            <form class="logoutbtn"  th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+    </div>
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+            if (!e.target.matches('.dropbtn')) {
+                var myDropdown = document.getElementById("myDropdown");
+                if (myDropdown.classList.contains('show')) {
+                    myDropdown.classList.remove('show');
+                }
+            }
+        }
+    </script>
+    <!-- Reference: https://www.w3schools.com/howto/howto_js_dropdown.asp -->
+
+</div>
+
+<iframe class="iframe_item" src="user" name="item"></iframe>
+
+
+
+
+</body>
+</html>
