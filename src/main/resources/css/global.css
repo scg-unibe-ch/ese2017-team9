@@ -1,5 +1,151 @@
-body { background: white; }
-table {
+body {
+    background: #F0F0F0;
+    font-family: "Berlin Sans FB", sans-serif;
+    font-size: 20pt;
+    margin: 0;
+    padding: 0;
+}
+.header {
+    overflow: hidden;
     width:100%;
-    background: dodgerblue;
+    background: #552579;
+    color: white;
+    display: inline-table;
+    font-size: 18px;
+}
+
+.header-left{
+    float:left;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+.header-left a{
+    padding-left: 14px;
+}
+
+.header-right{
+    float:right;
+}
+
+.header-right a{
+    padding: 14px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+div.login{
+    width: 400px;
+    padding: 10px;
+    border: 1px solid gray;
+    margin: auto;
+    margin-top: 10px;
+    background: white;
+    color: black;
+    text-align: center;
+}
+.logoutbtn input[type=submit] {
+    font-family: "Berlin Sans FB", sans-serif;
+    color: black;
+    font-size: 18px;
+    background-color: white;
+    border: 0;
+    cursor: pointer;
+    float: right;
+    padding: 12px;
+}
+
+.loginbtn input[type=submit] {
+    font-family: "Berlin Sans FB", sans-serif;
+    color: black;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.clear { clear: both; }
+footer {
+    font-size: 10pt;
+    text-align: center;
+    padding-top: 10px;
+}
+
+
+.iframe_item {
+    width: 100%;
+    border: 0;
+}
+
+/* Drop Menu*/
+
+.dropbtn {
+    cursor: pointer;
+    outline: none;
+    padding-left:3px;
+    padding-right: 3px;
+    margin: 0;
+    background-color: #552579;
+    color: white;
+    font-size: 18px;
+    border: 0;
+    font-family: "Berlin Sans FB", sans-serif;
+}
+
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right:16px;
+    padding-right: 5px;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    padding: 12px;
+    display: block;
+    text-align: right;
+    color: black;
+}
+
+.header-right {
+    float: right;
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    background-color: inherit;
+}
+
+.show {
+    display: block;
+}
+
+
+
+/* Making the header responsive */
+
+@media all and (max-width: 600px) {
+
+
+    .header-basic .header-limiter h1 {
+        float: none;
+        text-align: center;
+        font-size: 24px;
+    }
+
+    .header-basic .header-limiter nav {
+        float:none;
+    }
+
+    .header-basic .header-limiter nav a {
+        font-size: 13px;
+    }
+
 }
