@@ -6,13 +6,13 @@
           href="../css/global.css" th:src="@{/css/global.css}" />
 </head>
 <body>
-<div class="header">
+<div class="header" th:fragment="header">
     <nav class="header-left">
         <b>DELSAY</b>
-        <a href="user" target="item">User</a>
-        <a href="delivery" target="item">Delivery</a>
-        <a href="tour" target="item">Tour</a>
-        <a href="customer" target="item">Customer</a>
+        <a href="user" target="_self">User</a>
+        <a href="delivery" target="_self">Delivery</a>
+        <a href="tour" target="_self">Tour</a>
+        <a href="customer" target="_self">Customer</a>
     </nav>
 
     <div class="header-right" >
@@ -20,7 +20,7 @@
            Profile
         </button>
         <div class="dropdown-content" id="myDropdown">
-            <a href="myProfile" target="item">My Profile</a>
+            <a href="myProfile" target="_self">My Profile</a>
             <form class="logoutbtn"  th:action="@{/logout}" method="post">
                 <input type="submit" value="Sign Out"/>
             </form>
@@ -46,11 +46,6 @@
     <!-- Reference: https://www.w3schools.com/howto/howto_js_dropdown.asp -->
 
 </div>
-
-<iframe class="iframe_item" src="user" name="item"></iframe>
-
-
-
 
 </body>
 </html>
