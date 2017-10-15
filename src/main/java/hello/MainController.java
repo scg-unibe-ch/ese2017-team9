@@ -25,4 +25,10 @@ public class MainController {
         return "greeting";
     }
 
+    @RequestMapping("/login")
+    public String login(){
+        
+        return "login";
+    }
+
 }
