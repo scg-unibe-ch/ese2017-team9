@@ -4,24 +4,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
-public class User {
+
+public class User implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    private Long userid;
     private String username;
     private String firstname;
     private String lastname;
     private String email;
-    private String roles;
     private String password;
 
-    public Integer getId() {
-        return id;
+    public Long getId() {
+        return userid;
     }
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Long userid) {
+        this.userid = userid;
     }
 
     public String getUsername() {return username;}
@@ -48,20 +54,26 @@ public class User {
         this.email = email;
     }
 
-    public String getRoles() { return roles; }
-    public void setRoles (String roles) { this.roles = roles;}
-
     public String getPassword() { return password;}
     public void setPassword(String password) {this.password = password;}
 
-    public User(String username, String firstname, String lastname, String email, String roles, String password){
+    public User(User user){
+        this.username = user.username;
+        this.firstname = user.firstname;
+        this.lastname = user.lastname;
+        this.email = user.email;
+        this.password = user.password;
+
+    }
+
+    public User(String username, String firstname, String lastname, String email, String password){
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.roles = roles;
         this.password = password;
-
     }
+
+    public User(){}
 
 }

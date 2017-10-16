@@ -8,6 +8,9 @@
 </head>
 <body>
 <div th:replace="aui :: header">Header</div>
-User
+<tr th.each="user : ${users}">
+    <td th:text="user.username">Username: </td>
+    <td th:text="user.firstname">Firstname: </td>
+</tr>
 </body>
 </html>
