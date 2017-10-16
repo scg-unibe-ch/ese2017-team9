@@ -23,10 +23,10 @@ public class User implements Serializable{
     private String email;
     private String password;
 
-    public Long getId() {
+    public Long getUserid() {
         return userid;
     }
-    public void setId(Long userid) {
+    public void setUserid(Long userid) {
         this.userid = userid;
     }
 

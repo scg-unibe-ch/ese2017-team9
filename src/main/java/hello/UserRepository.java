@@ -12,4 +12,5 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, Long> {
    public User findByUsername(String username);
    public List<User> findAll();
+   public User findByUserid(long Id);
 }

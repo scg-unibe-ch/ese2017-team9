@@ -7,10 +7,47 @@
     <title>User Edit</title>
 </head>
 <body>
-<div th:replace="aui :: header">Header</div>
-<tr th.each="user : ${users}">
-    <td th:text="user.username">Username: </td>
-    <td th:text="user.firstname">Firstname: </td>
-</tr>
+<div th:replace="aui :: header" >Header</div>
+
+<div class="search"  th:each="user : ${users}">
+    <a th:href="@{user(usrId=${user.userid})}">
+    <table class="searchItem" >
+
+        <tr >
+            <td th:text="${user.username}"></td>
+        </tr>
+
+        <tr>
+            <td th:text="${user.firstname}"></td>
+            <td th:text="${user.Lastname}"></td>
+        </tr>
+
+    </table>
+    </a>
+</div>
+
+<div class="showItem" th:if="${usrId != null}">
+
+
+    <table>
+        <tr>
+            <td>Username: </td>
+            <td th:text="${usrId.username}"></td>
+        </tr>
+        <tr>
+            <td>First Name: </td>
+            <td th:text="${usrId.firstname}"></td>
+        </tr>
+        <tr>
+            <td>Last Name: </td>
+            <td th:text="${usrId.Lastname}"></td>
+        </tr>
+        <tr>
+            <td>E-Mail: </td>
+            <td th:text="${usrId.email}"></td>
+        </tr>
+    </table>
+</div>
+
 </body>
 </html>
