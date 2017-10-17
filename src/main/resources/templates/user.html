@@ -9,7 +9,8 @@
 <body>
 <div th:replace="aui :: header" >Header</div>
 
-<div class="search"  th:each="user : ${users}">
+<div class="search">
+<div class="searchItem"  th:each="user : ${users}">
     <a th:href="@{user(usrId=${user.userid})}">
     <table class="searchItem" >
 
@@ -24,6 +25,7 @@
 
     </table>
     </a>
+</div>
 </div>
 
 <div class="showItem" th:if="${usrId != null}">

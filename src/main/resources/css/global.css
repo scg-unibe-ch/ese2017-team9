@@ -161,7 +161,11 @@ table.searchItem {
     border: 2px solid dimgray;
     border-radius: 5px;
     margin: 5px 5px 5px 5px;
-    width: 200px;
+    width: 18%;
+}
+
+div.searchItem {
+    width: 20%;
 }
 
 div.search {
@@ -171,7 +175,6 @@ div.search {
 }
 
 div.showItem {
-    float:left;
     width: 79%;
     float: right;
     background-color: lightcoral;
