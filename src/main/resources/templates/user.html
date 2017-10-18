@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>AUI</title>
+    <title>User</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../css/global.css" th:src="@{/css/global.css}" />
-    <title>User Edit</title>
 </head>
 <body>
 <div th:replace="aui :: header" >Header</div>
@@ -28,27 +27,33 @@
 </div>
 </div>
 
-<div class="showItem" th:if="${usrId != null}">
+<div class="showItem" th:if="${currentUser != null}">
 
 
     <table>
         <tr>
             <td>Username: </td>
-            <td th:text="${usrId.username}"></td>
+            <td th:text="${currentUser.username}"></td>
         </tr>
         <tr>
             <td>First Name: </td>
-            <td th:text="${usrId.firstname}"></td>
+            <td th:text="${currentUser.firstname}"></td>
         </tr>
         <tr>
             <td>Last Name: </td>
-            <td th:text="${usrId.Lastname}"></td>
+            <td th:text="${currentUser.Lastname}"></td>
         </tr>
         <tr>
             <td>E-Mail: </td>
-            <td th:text="${usrId.email}"></td>
+            <td th:text="${currentUser.email}"></td>
         </tr>
     </table>
+
+    <form th:action="@{/user/remove(usrId=${currentUser.userid})}" th:object="${usrId}" method="post">
+        <input type="submit" value="Delete"/>
+    </form>
+    <button name="edit" type="button">Edit</button>
+
 </div>
 
 </body>
