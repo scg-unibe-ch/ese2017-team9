@@ -9,16 +9,24 @@
 
 <div th:replace="aui :: header" >Header</div>
 
-<form th:object="${currentUser}" th:fragment="editUser">
-    <div>Username: <input type="text" th:field="*{username}"/></div>
-    <div>First Name: <input type="text" th:field="*{firstname}"/></div>
-    <div>Last Name: <input type="text" th:field="*{lastname}"/></div>
-    <div>E-Mail: <input type="text" th:field="*{email}"/></div>
-    <div>Roles: <input type="checkbox" th:checked="${isAdmin} == true"/>User Admin <input type="checkbox" th:checked="${isLogistician} == true"/>Logistician <input type="checkbox" th:checked="${isDriver} == true"/>Driver</div>
-    <div>Password: <input type="password"/></div>
-    <div>Confirm: <input type="password"/></div>
+<form th:action="@{/editUser}" th:object="${currentUser}" method="post">
+    <input type="hidden" name="userid" th:field="*{userid}"/>
+    <div>Username: <input type="text" name="username" th:field="*{username}"/></div>
+    <div>First Name: <input type="text" name="firstname" th:field="*{firstname}"/></div>
+    <div>Last Name: <input type="text" name="lastname" th:field="*{lastname}"/></div>
+    <div>E-Mail: <input type="text" name="email" th:field="*{email}"/></div>
+    <div>Roles: <input type="checkbox" name="isAdminCB" th:checked="${isAdmin}" />User Admin <input type="checkbox" th:checked="${isLogistician}"/>Logistician <input type="checkbox" th:checked="${isDriver}"/>Driver</div>
+    <div>Password: <input type="password" name="password"/></div>
+    <div>Confirm: <input type="password" name="confirm"/></div>
+
+    <a th:href="@{user(usrId=${currentUser.userid})}">
+        <button name="cancel" type="button">Cancel</button>
+    </a>
+
+    <button th:action="@{/editUser(user=${currentUser}, isAdmin=${isAdminCB}, isLogistician=${isLogistician}, isDriver=${isDriver}, password=${password}, confirm=${confirm})}" type="submit">Save</button>
 
 </form>
+
 
 </body>
 </html>

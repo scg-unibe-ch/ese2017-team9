@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -20,4 +21,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
    User findByUserid(long id);
    List<User> findByFirstname(String firstname);
    void removeByUserid(Long userid);
+
+   @Modifying
+   @Transactional
+   @Query("update User set password = :password where userid=:userid")
+   void setPasswordbyUsername(@Param("userid") long userid, @Param("password") String password);
 }

@@ -84,7 +84,6 @@ public class User implements Serializable{
                     return true;
             }
         }
-        System.out.println("ich bin kein Admin");
         return false;
     }
 
