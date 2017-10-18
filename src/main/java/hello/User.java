@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
@@ -75,5 +76,36 @@ public class User implements Serializable{
     }
 
     public User(){}
+
+    public boolean isUserAdmin(List<String> roles){
+        if(!roles.isEmpty()) {
+            for (int i = 0; i < roles.size(); i++) {
+                if (roles.get(i).equals("ROLE_ADMIN"))
+                    return true;
+            }
+        }
+        System.out.println("ich bin kein Admin");
+        return false;
+    }
+
+    public boolean isLogistician(List<String> roles){
+        if(!roles.isEmpty()) {
+            for (int i = 0; i < roles.size(); i++) {
+                if (roles.get(i).equals("LOGISTICIAN"))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isDriver(List<String> roles){
+        if(!roles.isEmpty()) {
+            for (int i = 0; i < roles.size(); i++) {
+                if (roles.get(i).equals("DRIVER"))
+                    return true;
+            }
+        }
+        return false;
+    }
 
 }
