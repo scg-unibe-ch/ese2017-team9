@@ -18,17 +18,6 @@
 <dependencies>
 
     <dependency>
-        <groupId>org.apache.omcat.embed</groupId>
-        <artifactId>tomcat-embed-jasper</artifactId>
-        <scope>provided</scope>
-    </dependency>
-    
-    <dependency>
-        <groupId>javax.servelet</groupId>
-        <artifactId>jstl</artifactId>
-    </dependency>
-
-    <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
