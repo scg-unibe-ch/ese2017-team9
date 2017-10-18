@@ -56,17 +56,14 @@ public class UserController {
 
     @Modifying
     @PostMapping("/editUser")
-    public String saveUser(@Param("user") User user, @Param("isAdmin") boolean isAdmin,
-                           @Param("isLogistcian") boolean isLogistician, @Param("isDriver") boolean isDriver,
+    public String saveUser(@Param("user") User user, @RequestParam("Checkboxes") List<String> checked,
                            @Param("password") String password, @Param("confirm") String confirm) {
 
-        System.out.println("isAdmin: "+isAdmin);
+        updateRoles(checked, user.getUserid());
 
-        if(password.equals(confirm) && !password.isEmpty()) {
-            System.out.println("Password: "+password);
-
+        if(password.equals(confirm) && !password.isEmpty())
             userRepository.setPasswordbyUsername(user.getUserid(), password);
-        }
+
         userRepository.save(user);
         return "redirect:/user";
     }
@@ -87,6 +84,19 @@ public class UserController {
             model.addAttribute("isDriver", true);
         else
             model.addAttribute("isDriver", false);
+    }
+
+    public void updateRoles(List<String> checked, long userid){
+
+        userRoleRepository.removeAllByUserid(userid);
+        if(checked != null){
+            for(String checkedStr : checked){
+                UserRole userRole = new UserRole(userid, checkedStr);
+                userRoleRepository.save(userRole);
+            }
+        }
+
+
     }
 
 }

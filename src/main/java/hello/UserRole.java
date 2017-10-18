@@ -37,4 +37,12 @@ public class UserRole {
     public void setUserid (long userid){
         this.userid = userid;
     }
+
+    public UserRole(long userid, String role){
+        this.userid = userid;
+        this.role = role;
+
+    }
+
+    public UserRole(){}
 }
