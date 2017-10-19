@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/global.css" th:src="@{/css/global.css}" />
+</head>
+<body>
+
+<div th:replace="aui :: header" >Header</div>
+
+<form th:action="@{/editCustomer}" th:object="${currentCustomer}" method="post">
+    <input type="hidden" name="customerId" th:field="*{customerId}"/>
+    <div>Company: <input type="text" name="company" th:field="*{company}"/></div>
+    <div>Contact Person: <input type="text" name="contact" th:field="*{contact}"/></div>
+    <div>Street: <input type="text" name="street" th:field="*{street}"/></div>
+    <div>City: <input type="text" name="city" th:field="*{city}"/></div>
+    <div>Phone: <input type="text" name="phone" th:field="*{phone}"/></div>
+    <div>E-Mail: <input type="text" name="email" th:field="*{email}" /></div>
+
+
+    <a th:href="@{customer(customerId=*{customerId})}">
+        <button name="cancel" type="button">Cancel</button>
+    </a>
+
+    <button th:action="@{/editCustomer(customer=${currentCustomer})}" type="submit">Save</button>
+
+</form>
+
+
+</body>
+</html>

@@ -7,6 +7,73 @@
 </head>
 <body>
 <div th:replace="aui :: header">Header</div>
-Customer
+
+
+
+
+<div class="search">
+
+    <div class="new">
+        <a th:href="@{editCustomer}">new Customer</a>
+    </div>
+    <div class="searchItem"  th:each="customer : ${customers}">
+        <a th:href="@{customer(customerId=${customer.customerId})}">
+            <table class="searchItem" >
+
+                <tr >
+                    <td th:text="${customer.company}"></td>
+                </tr>
+
+                <tr>
+                    <td th:text="${customer.contact}"></td>
+                </tr>
+
+            </table>
+        </a>
+    </div>
+</div>
+
+<div class="showItem" th:if="${currentCustomer != null}">
+
+    <table>
+        <tr>
+            <td>Company: </td>
+            <td th:text="${currentCustomer.company}"></td>
+        </tr>
+        <tr>
+            <td>Contact Person: </td>
+            <td th:text="${currentCustomer.contact}"></td>
+        </tr>
+        <tr>
+            <td>Street: </td>
+            <td th:text="${currentCustomer.street}"></td>
+        </tr>
+        <tr>
+            <td>City: </td>
+            <td th:text="${currentCustomer.city}"></td>
+        </tr>
+        <tr>
+            <td>Phone: </td>
+            <td th:text="${currentCustomer.phone}"></td>
+        </tr>
+        <tr>
+            <td>E-Mail: </td>
+            <td th:text="${currentCustomer.email}"></td>
+        </tr>
+    </table>
+
+    <form th:action="@{/customer/remove(customerId=${currentCustomer.customerId})}" th:object="${currentCustomer}" method="post">
+        <input type="submit" value="Delete"/>
+    </form>
+
+
+    <a th:href="@{editCustomer(customerId=${currentCustomer.customerId})}">
+        <button name="edit" type="button">Edit</button>
+    </a>
+
+</div>
+
+
+
 </body>
 </html>

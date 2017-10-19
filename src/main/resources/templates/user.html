@@ -54,7 +54,7 @@
         </tr>
     </table>
 
-    <form th:action="@{/user/remove(usrId=${currentUser.userid})}" th:object="${usrId}" method="post">
+    <form th:action="@{/user/remove(usrId=${currentUser.userid})}" th:object="${currentUser}" method="post">
         <input type="submit" value="Delete"/>
     </form>
 
