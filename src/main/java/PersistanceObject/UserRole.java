@@ -1,4 +1,4 @@
-package hello;
+package PersistanceObject;
 
 import javax.persistence.*;
 import java.util.Set;

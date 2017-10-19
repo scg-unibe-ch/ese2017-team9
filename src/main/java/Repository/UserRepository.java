@@ -1,6 +1,6 @@
-package hello;
+package Repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import PersistanceObject.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

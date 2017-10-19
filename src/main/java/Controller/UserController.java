@@ -1,16 +1,18 @@
-package hello;
+package Controller;
 
+import PersistanceObject.User;
+import Repository.UserRepository;
+import PersistanceObject.UserRole;
+import Repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.constraints.Null;
 import java.util.List;
 
 @Controller
@@ -68,7 +70,7 @@ public class UserController {
         }
 
         userRepository.save(user);
-        updateRoles(checked, user.getUserid());
+        updateRoles(checked, user.getUserId());
 
         return "redirect:/user";
     }

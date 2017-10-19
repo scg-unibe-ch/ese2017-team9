@@ -1,13 +1,11 @@
-package hello;
+package PersistanceObject;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
 
@@ -17,18 +15,18 @@ public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long userid;
+    private Long userId;
     private String username;
     private String firstname;
     private String lastname;
     private String email;
     private String password;
 
-    public Long getUserid() {
-        return userid;
+    public Long getUserId() {
+        return userId;
     }
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {return username;}
