@@ -57,14 +57,19 @@ public class UserController {
     @Modifying
     @PostMapping("/editUser")
     public String saveUser(@Param("user") User user, @RequestParam("Checkboxes") List<String> checked,
-                           @Param("password") String password, @Param("confirm") String confirm) {
+                           @Param("newPassword") String newPassword, @Param("confirm") String confirm) {
 
-        updateRoles(checked, user.getUserid());
+        System.out.println("password user: " + user.getPassword());
+        System.out.println("password password: " + newPassword);
+        System.out.println("password confirm: " + confirm);
 
-        if(password.equals(confirm) && !password.isEmpty())
-            userRepository.setPasswordbyUsername(user.getUserid(), password);
+        if(newPassword.equals(confirm) && !newPassword.equals("")) {
+            user.setPassword(confirm);
+        }
 
         userRepository.save(user);
+        updateRoles(checked, user.getUserid());
+
         return "redirect:/user";
     }
 
