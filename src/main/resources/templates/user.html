@@ -16,7 +16,7 @@
         <a th:href="@{editUser}">new User</a>
     </div>
 <div class="searchItem"  th:each="user : ${users}">
-    <a th:href="@{user(usrId=${user.userId})}">
+    <a th:href="@{user(usrId=${user.userid})}">
     <table class="searchItem" >
 
         <tr >
@@ -54,12 +54,12 @@
         </tr>
     </table>
 
-    <form th:action="@{/user/remove(usrId=${currentUser.userId})}" th:object="${currentUser}" method="post">
+    <form th:action="@{/user/remove(usrId=${currentUser.userid})}" th:object="${currentUser}" method="post">
         <input type="submit" value="Delete"/>
     </form>
 
 
-    <a th:href="@{editUser(usrId=${currentUser.userId})}">
+    <a th:href="@{editUser(usrId=${currentUser.userid})}">
         <button name="edit" type="button">Edit</button>
     </a>
 

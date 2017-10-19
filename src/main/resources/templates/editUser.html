@@ -10,7 +10,7 @@
 <div th:replace="aui :: header" >Header</div>
 
 <form th:action="@{/editUser}" th:object="${currentUser}" method="post">
-    <input type="hidden" name="userId" th:field="*{userId}"/>
+    <input type="hidden" name="userid" th:field="*{userid}"/>
     <input type="hidden" th:field="*{password}" />
     <div>Username: <input type="text" name="username" th:field="*{username}"/></div>
     <div>First Name: <input type="text" name="firstname" th:field="*{firstname}"/></div>
@@ -20,7 +20,7 @@
     <div>Password: <input type="password" name="newPassword" /></div>
     <div>Confirm: <input type="password" name="confirm" /></div>
 
-    <a th:href="@{user(usrId=${currentUser.userId})}">
+    <a th:href="@{user(usrId=${currentUser.userid})}">
         <button name="cancel" type="button">Cancel</button>
     </a>
 

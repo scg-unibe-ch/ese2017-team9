@@ -1,8 +1,6 @@
-package Controller;
+package hello;
 
 
-import PersistanceObject.Customer;
-import Repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
