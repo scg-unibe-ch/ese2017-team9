@@ -18,4 +18,7 @@ public interface UserRoleRepository extends CrudRepository<UserRole, Long> {
     @Transactional
     void removeByUseridAndRole(long userId, String role);
 
+    @Transactional
+    UserRole findByUseridAndRole(long userId, String role);
+
 }
