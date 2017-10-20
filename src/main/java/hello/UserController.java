@@ -40,8 +40,7 @@ public class UserController {
             User currentUser = new User();
             model.addAttribute("currentUser", currentUser);
             model.addAttribute("isAdmin", false);
-            model.addAttribute("isLogistician", false);
-            model.addAttribute("isDriver", false);
+            model.addAttribute("isUser", false);
 
         }
         return "editUser";
@@ -59,10 +58,6 @@ public class UserController {
     public String saveUser(@Param("user") User user, @RequestParam("Checkboxes") List<String> checked,
                            @Param("newPassword") String newPassword, @Param("confirm") String confirm) {
 
-        System.out.println("password user: " + user.getPassword());
-        System.out.println("password password: " + newPassword);
-        System.out.println("password confirm: " + confirm);
-
         if(newPassword.equals(confirm) && !newPassword.equals("")) {
             user.setPassword(confirm);
         }
@@ -75,20 +70,16 @@ public class UserController {
 
 
     public void isRole(List<String> roles, User user, Model model){
-        if(user.isUserAdmin(roles))
+        if(user.isAdmin(roles))
             model.addAttribute("isAdmin", true);
         else
             model.addAttribute("isAdmin", false);
 
-        if(user.isLogistician(roles))
-            model.addAttribute("isLogistician", true);
+        if(user.isUser(roles))
+            model.addAttribute("isUser", true);
         else
-            model.addAttribute("isLogistician", false);
+            model.addAttribute("isUser", false);
 
-        if(user.isDriver(roles))
-            model.addAttribute("isDriver", true);
-        else
-            model.addAttribute("isDriver", false);
     }
 
     public void updateRoles(List<String> checked, long userid){

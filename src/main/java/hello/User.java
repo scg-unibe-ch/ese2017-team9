@@ -77,7 +77,7 @@ public class User implements Serializable{
 
     public User(){}
 
-    public boolean isUserAdmin(List<String> roles){
+    public boolean isAdmin(List<String> roles){
         if(!roles.isEmpty()) {
             for (int i = 0; i < roles.size(); i++) {
                 if (roles.get(i).equals("ROLE_ADMIN"))
@@ -87,20 +87,10 @@ public class User implements Serializable{
         return false;
     }
 
-    public boolean isLogistician(List<String> roles){
+    public boolean isUser(List<String> roles){
         if(!roles.isEmpty()) {
             for (int i = 0; i < roles.size(); i++) {
-                if (roles.get(i).equals("LOGISTICIAN"))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isDriver(List<String> roles){
-        if(!roles.isEmpty()) {
-            for (int i = 0; i < roles.size(); i++) {
-                if (roles.get(i).equals("DRIVER"))
+                if (roles.get(i).equals("ROLE_USER"))
                     return true;
             }
         }
