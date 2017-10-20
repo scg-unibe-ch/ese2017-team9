@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @ControllerAdvice
 public class CurrentUserController {
 
-    @ModelAttribute("currentUser")
-    public User getCurrentUser(@AuthenticationPrincipal User currentUser) {
-        return (currentUser == null) ? null: currentUser;
+    @ModelAttribute("loggedInUser")
+    public User getCurrentUser(@AuthenticationPrincipal User loggedInUser) {
+        return (loggedInUser == null) ? null: loggedInUser;
     }
 }

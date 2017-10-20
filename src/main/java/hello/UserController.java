@@ -1,6 +1,7 @@
 package hello;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.constraints.Null;
 import java.util.List;
@@ -50,48 +52,53 @@ public class UserController {
     @PostMapping("/user/remove")
     public String removeUser(@RequestParam("usrId") long usrId){
         userRepository.removeByUserid(usrId);
+        userRoleRepository.removeAllByUserid(usrId);
         return "redirect:/user";
     }
 
     @Modifying
     @PostMapping("/editUser")
-    public String saveUser(@Param("user") User user, @RequestParam("Checkboxes") List<String> checked,
-                           @Param("newPassword") String newPassword, @Param("confirm") String confirm) {
+    public ModelAndView saveUser(@Param("user") User user, @RequestParam("Checkboxes") List<String> checked,
+                                 @Param("newPassword") String newPassword, @Param("confirm") String confirm) {
 
         if(newPassword.equals(confirm) && !newPassword.equals("")) {
             user.setPassword(confirm);
         }
 
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        }
+        catch (DataIntegrityViolationException ex) {
+            System.out.println("Exception: " + ex.toString());
+            return new ModelAndView("redirect:editUser?usrId=" + user.getUserid() + "&error");
+        }
         updateRoles(checked, user.getUserid());
 
-        return "redirect:/user";
+        return new ModelAndView("redirect:/user");
     }
 
 
     public void isRole(List<String> roles, User user, Model model){
-        if(user.isAdmin(roles))
-            model.addAttribute("isAdmin", true);
-        else
-            model.addAttribute("isAdmin", false);
 
-        if(user.isUser(roles))
-            model.addAttribute("isUser", true);
-        else
-            model.addAttribute("isUser", false);
+        model.addAttribute("isAdmin", user.isAdmin(roles));
+        model.addAttribute("isUser", user.isUser(roles));
+
 
     }
 
-    public void updateRoles(List<String> checked, long userid){
+    public void updateRoles(List<String> checked, long userId){
 
-        userRoleRepository.removeAllByUserid(userid);
-        if(checked != null){
-            for(String checkedStr : checked){
-                UserRole userRole = new UserRole(userid, checkedStr);
-                userRoleRepository.save(userRole);
-            }
+        for(String checkedStr : checked){
+            UserRole userRole = new UserRole(userId, checkedStr);
+            userRoleRepository.save(userRole);
         }
 
+        if(checked.size() != 2){
+            if(checked.get(0).equals("ROLE_ADMIN"))
+                userRoleRepository.removeByUseridAndRole(userId, "ROLE_USER");
+            else
+                userRoleRepository.removeByUseridAndRole(userId, "ROLE_ADMIN");
+        }
 
     }
 

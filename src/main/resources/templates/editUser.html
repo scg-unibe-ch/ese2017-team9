@@ -26,6 +26,9 @@
 
     <button th:action="@{/editUser(user=${currentUser}, newPassword=${newPassword}, confirm=${confirm})}" type="submit">Save</button>
 
+    <div style="color: red;" th:if="${param.error}" >
+        This Username is already taken!
+    </div>
 </form>
 
 
