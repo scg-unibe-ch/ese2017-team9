@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.constraints.Null;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -58,7 +58,7 @@ public class UserController {
 
     @Modifying
     @PostMapping("/editUser")
-    public ModelAndView saveUser(@Param("user") User user, @RequestParam("Checkboxes") List<String> checked,
+    public ModelAndView saveUser(@Param("user") User user, @RequestParam(value = "Checkboxes", required = false, defaultValue = "-1") List<String> checked,
                                  @Param("newPassword") String newPassword, @Param("confirm") String confirm) {
 
         if(newPassword.equals(confirm) && !newPassword.equals("")) {
@@ -72,7 +72,12 @@ public class UserController {
             System.out.println("Exception: " + ex.toString());
             return new ModelAndView("redirect:editUser?usrId=" + user.getUserid() + "&error");
         }
-        updateRoles(checked, user.getUserid());
+
+        if(checked.get(0).equals("-1"))
+            userRoleRepository.removeAllByUserid(user.getUserid());
+        else
+            updateRoles(checked, user.getUserid());
+
 
         return new ModelAndView("redirect:/user");
     }
@@ -89,8 +94,10 @@ public class UserController {
     public void updateRoles(List<String> checked, long userId){
 
         for(String checkedStr : checked){
-            UserRole userRole = new UserRole(userId, checkedStr);
-            userRoleRepository.save(userRole);
+            if(userRoleRepository.findByUseridAndRole(userId, checkedStr) == null) {
+                UserRole userRole = new UserRole(userId, checkedStr);
+                userRoleRepository.save(userRole);
+            }
         }
 
         if(checked.size() != 2){

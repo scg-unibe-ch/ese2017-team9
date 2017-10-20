@@ -7,6 +7,82 @@
 </head>
 <body>
 <div th:replace="aui :: header">Header</div>
-Delivery
+
+<div class="search">
+
+    <div class="new">
+        <a th:href="@{editDelivery}">new Delivery</a>
+    </div>
+    <div class="searchItem"  th:each="delivery : ${deliveries}">
+        <a th:href="@{delivery(deliveryId=${delivery.deliveryId})}">
+            <table class="searchItem" >
+
+                <tr >
+                    <td th:text="${delivery.deliveryName}"></td>
+                </tr>
+                <tr >
+                    <td th:text="${delivery.type}"></td>
+                </tr>
+
+            </table>
+        </a>
+    </div>
+</div>
+
+<div class="showItem" th:if="${currentDelivery != null}">
+
+    <table>
+        <tr>
+            <td>Delivery Name: </td>
+            <td th:text="${currentDelivery.deliveryName}"></td>
+        </tr>
+        <tr>
+            <td>Width: </td>
+            <td th:text="${currentDelivery.width}"></td>
+        </tr>
+        <tr>
+            <td>Height: </td>
+            <td th:text="${currentDelivery.height}"></td>
+        </tr>
+        <tr>
+            <td>Depth: </td>
+            <td th:text="${currentDelivery.depth}"></td>
+        </tr>
+        <tr>
+            <td>Weight: </td>
+            <td th:text="${currentDelivery.weight}"></td>
+        </tr>
+        <tr>
+            <td>Delivery Window Start: </td>
+            <td th:text="${currentDelivery.deliveryWindowStart}"></td>
+        </tr>
+
+        <tr>
+            <td>Delivery Window End: </td>
+            <td th:text="${currentDelivery.deliveryWindowEnd}"></td>
+        </tr>
+
+        <tr>
+            <td>Type: </td>
+            <td th:text="${currentDelivery.type}"></td>
+        </tr>
+
+        <tr>
+            <td>Comment: </td>
+            <td th:text="${currentDelivery.comment}"></td>
+        </tr>
+    </table>
+
+    <form th:action="@{/delivery/remove(deliveryId=${currentDelivery.deliveryId})}" th:object="${currentDelivery}" method="post">
+        <input type="submit" value="Delete"/>
+    </form>
+
+
+    <a th:href="@{editDelivery(deliveryId=${currentDelivery.deliveryId})}">
+        <button name="edit" type="button">Edit</button>
+    </a>
+
+</div>
+
 </body>
 </html>

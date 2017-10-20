@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/global.css" th:src="@{/css/global.css}" />
+</head>
+<body>
+
+<div th:replace="aui :: header" >Header</div>
+
+<form th:action="@{/editDelivery}" th:object="${currentDelivery}" method="post">
+    <input type="hidden" name="customerId" th:field="*{deliveryId}"/>
+    <div>Delivery Name: <input type="text" name="deliveryId" th:field="*{deliveryName}"/></div>
+    <div>Width: <input type="text" name="width" th:field="*{width}"/></div>
+    <div>Height: <input type="text" name="height" th:field="*{height}"/></div>
+    <div>Depth: <input type="text" name="depth" th:field="*{depth}"/></div>
+    <div>Weight: <input type="text" name="weight" th:field="*{weight}"/></div>
+    <div>Delivery Window Start: <input type="date" name="deliveryWindowStart" th:field="*{deliveryWindowStart}" /></div>
+    <div>Delivery Window End: <input type="date" name="deliveryWindowEnd" th:field="*{deliveryWindowEnd}" /></div>
+    <div>Type: <select name="type" >
+        <option></option>
+        <option value="Dangerous Goods" th:selected="*{type=='Dangerous Goods'}">Dangerous Goods</option>
+        <option value="Endangered Goods" th:selected="*{type=='Endangered Goods'}">Endangered Goods</option>
+    </select></div>
+    <div>Customer: <input type="text" name="customer" th:field="*{customer}"/></div>
+    <div>Comment: <input type="text" name="comment" th:field="*{comment}"/></div>
+
+
+    <a th:href="@{delivery(deliveryId=*{deliveryId})}">
+        <button name="cancel" type="button">Cancel</button>
+    </a>
+
+    <button th:action="@{/editDelivery(delivery=${currentDelivery})}" type="submit">Save</button>
+
+</form>
+
+
+</body>
+</html>
