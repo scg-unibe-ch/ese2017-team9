@@ -7,6 +7,66 @@
 </head>
 <body>
 <div th:replace="aui :: header">Header</div>
-Delivery
+
+<div class="search">
+
+    <div class="new">
+        <a th:href="@{editDelivery}">new Delivery</a>
+    </div>
+    <div class="searchItem"  th:each="delivery : ${deliveries}">
+        <a th:href="@{delivery(deliveryId=${delivery.deliveryId})}">
+            <table class="searchItem" >
+
+                <tr >
+                    <td th:text="${delivery.deliveryId}"></td>
+                </tr>
+
+            </table>
+        </a>
+    </div>
+</div>
+
+<div class="showItem" th:if="${currentDelivery != null}">
+
+    <table>
+        <tr>
+            <td>DeliveryId: </td>
+            <td th:text="${currentDelivery.deliveryId}"></td>
+        </tr>
+        <tr>
+            <td>Length in centimeter: </td>
+            <td th:text="${currentDelivery.length}"></td>
+        </tr>
+        <tr>
+            <td>Width in centimeter: </td>
+            <td th:text="${currentDelivery.width}"></td>
+        </tr>
+        <tr>
+            <td>Height in centimeter: </td>
+            <td th:text="${currentDelivery.Height}"></td>
+        </tr>
+        <tr>
+            <td>Weight in kilogram: </td>
+            <td th:text="${currentDelivery.weight}"></td>
+        </tr>
+        <tr>
+            <td>Comments: </td>
+            <td th:text="${currentDelivery.comments}"></td>
+        </tr>
+    </table>
+
+    <form th:action="@{/delivery/remove(deliveryId=${currentDelivery.deliveryId})}" th:object="${currentDelivery}" method="post">
+        <input type="submit" value="Delete"/>
+    </form>
+
+
+    <a th:href="@{editDelivery(deliveryId=${currentDelivery.deliveryId})}">
+        <button name="edit" type="button">Edit</button>
+    </a>
+
+</div>
+
+
+
 </body>
 </html>
