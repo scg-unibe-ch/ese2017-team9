@@ -24,6 +24,7 @@ public class Tour implements Serializable{
     private Time usedTime;
     private long driver;
 
+
     public Long getTourId() { return tourId; }
     public void setTourId(Long tourId) { this.tourId = tourId; }
 
@@ -34,7 +35,7 @@ public class Tour implements Serializable{
     public void setDeliverDay(Date deliverDay) { this.deliverDay = deliverDay; }
 
     public Time getEstimatedTime() { return estimatedTime;}
-    public void setEstimatedTime(Time deliveryWindowStart) {this.estimatedTime = estimatedTime;}
+    public void setEstimatedTime(Time estimatedTime) {this.estimatedTime = estimatedTime;}
 
     public Time getUsedTime() { return usedTime;}
     public void setUsedTime(Time usedTime) {this.usedTime = usedTime;}
