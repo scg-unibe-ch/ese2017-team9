@@ -20,7 +20,7 @@ public class DeliveryController {
     DeliveryRepository deliveryRepository;
 
     @RequestMapping("/delivery")
-    public String user(@RequestParam(value="deliveryId", defaultValue = "-1", required = false) long deliveryId,
+    public String delivery(@RequestParam(value="deliveryId", defaultValue = "-1", required = false) long deliveryId,
                        Model model){
         if(deliveryId != -1){model.addAttribute("currentDelivery", deliveryRepository.findByDeliveryId(deliveryId));}
         model.addAttribute("deliveries", deliveryRepository.findAll());
@@ -28,7 +28,7 @@ public class DeliveryController {
     }
 
     @RequestMapping("/editDelivery")
-    public String editUser(@RequestParam(value="deliveryId", defaultValue = "-1") long deliveryId, Model model){
+    public String editDelivery(@RequestParam(value="deliveryId", defaultValue = "-1") long deliveryId, Model model){
         if(deliveryId != -1){
             Delivery currentDelivery = deliveryRepository.findByDeliveryId(deliveryId);
             model.addAttribute("currentDelivery", currentDelivery);
@@ -42,14 +42,14 @@ public class DeliveryController {
 
     @Transactional
     @PostMapping("/delivery/remove")
-    public String removeUser(@RequestParam("usrId") long usrId){
-        deliveryRepository.removeByDeliveryId(usrId);
+    public String removeDelivery(@RequestParam("deliveryId") long deliveryId){
+        deliveryRepository.removeByDeliveryId(deliveryId);
         return "redirect:/delivery";
     }
 
     @Modifying
     @PostMapping("/editDelivery")
-    public String saveUser(@Param("delivery") Delivery delivery) {
+    public String saveDelivery(@Param("delivery") Delivery delivery) {
 
         deliveryRepository.save(delivery);
 

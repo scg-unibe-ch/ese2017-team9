@@ -27,5 +27,52 @@
 </form>
 
 
+
+<div>
+    <button th:action="@{/addDelivery}">add Delivery</button>
+</div>
+
+<div>Click on a delivery to remove:</div>
+
+<div>
+
+    <div th:each="deliverySelected : ${deliveriesSelected}">
+        <a th:href="@{removeDelivery(tourId=${currentTour.tourId}, deliveryId=${deliverySelected.deliveryId})}">
+            <table>
+
+                <tr >
+                    <td th:text="${deliverySelected.deliveryName}"></td>
+                </tr>
+                <tr >
+                    <td th:text="${deliverySelected.type}"></td>
+                </tr>
+
+            </table>
+        </a>
+    </div>
+</div>
+
+<div>Click on a delivery to add:</div>
+
+<div>
+
+    <div th:each="delivery : ${deliveries}">
+        <a th:href="@{addDelivery(tourId=${currentTour.tourId}, deliveryId=${delivery.deliveryId})}">
+            <table>
+
+                <tr >
+                    <td th:text="${delivery.deliveryName}"></td>
+                </tr>
+                <tr >
+                    <td th:text="${delivery.type}"></td>
+                </tr>
+
+            </table>
+        </a>
+    </div>
+</div>
+
+
+
 </body>
 </html>

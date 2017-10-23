@@ -1,9 +1,6 @@
 package hello;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -78,6 +75,20 @@ public class Delivery implements Serializable{
     public void setComment(String comment) { this.comment = comment; }
 
     public Delivery(String deliveryName, float width, float height, float depth, float weight, Date deliveryWindowStart, Date deliveryWindowEnd, String type, long customer, String comment){
+        this.deliveryName = deliveryName;
+        this.width = width;
+        this.height = height;
+        this.depth = depth;
+        this.weight = weight;
+        this.deliveryWindowStart = deliveryWindowStart;
+        this.deliveryWindowEnd = deliveryWindowEnd;
+        this.type = type;
+        this.customer = customer;
+        this.comment = comment;
+    }
+
+    public Delivery(long deliveryId, String deliveryName, float width, float height, float depth, float weight, Date deliveryWindowStart, Date deliveryWindowEnd, String type, long customer, String comment){
+        this.deliveryId = deliveryId;
         this.deliveryName = deliveryName;
         this.width = width;
         this.height = height;

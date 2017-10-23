@@ -16,9 +16,9 @@ public interface TourDeliveryRepository extends CrudRepository<TourDelivery, Lon
     void removeByTourIdAndDeliveryId(long tourId, long deliveryId);
 
     @Transactional
-    UserRole findByTourIdAndDeliveryId(long tourId, long deliveryId);
+    TourDelivery findByTourIdAndDeliveryId(long tourId, long deliveryId);
 
     @Transactional
-    List<UserRole> findByTourId(long tourId);
+    List<TourDelivery> findByTourId(long tourId);
 
 }

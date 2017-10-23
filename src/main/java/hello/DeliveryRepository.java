@@ -18,4 +18,9 @@ public interface DeliveryRepository extends CrudRepository<Delivery, Long> {
    Delivery findByDeliveryId(long deliveryId);
    List<Delivery> findAll();
    void removeByDeliveryId(long deliveryId);
+
+
+   //@Query(value = "select del from Delivery del left outer join TourDelivery td on del.deliveryId = td.deliveryId", nativeQuery = true)
+   //List<Delivery> findAllDeliveryNotScheduled();
+
 }

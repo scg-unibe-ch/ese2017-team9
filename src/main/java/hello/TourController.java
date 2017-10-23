@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,10 +22,15 @@ public class TourController {
     @Autowired
     TourDeliveryRepository tourDeliveryRepository;
 
+    @Autowired
+    DeliveryRepository deliveryRepository;
+
     @RequestMapping("/tour")
     public String tour(@RequestParam(value="tourId", defaultValue = "-1", required = false) long tourId,
                        Model model){
-        if(tourId != -1){model.addAttribute("currentTour", tourRepository.findByTourId(tourId));}
+        if(tourId != -1){
+            model.addAttribute("currentTour", tourRepository.findByTourId(tourId));
+        }
         model.addAttribute("tours", tourRepository.findAll());
         return "tour";
     }
@@ -37,6 +44,14 @@ public class TourController {
         else{
             model.addAttribute("currentTour", new Tour());
         }
+
+        model.addAttribute("deliveries", deliveryRepository.findAll());
+        List<TourDelivery> delSel = tourDeliveryRepository.findByTourId(tourId);
+        List<Delivery> deliveriesSelected = new ArrayList<>();
+        for(int i = 0; i< delSel.size(); i++){
+            deliveriesSelected.add(deliveryRepository.findByDeliveryId(delSel.get(i).getDeliveryId()));
+        }
+        model.addAttribute("deliveriesSelected", deliveriesSelected);
         return "editTour";
     }
 
@@ -57,15 +72,21 @@ public class TourController {
         return "redirect:/tour";
     }
 
-    /*public void updateTourDelivery(List<String> checked, long tourId){
-
-        for(String checkedStr : checked){
-            if(tourDeliveryRepository.findByTourId(tourId, checkedStr) == null) {
-                TourDelivery tourDelivery = new TourDelivery(tourId, checkedStr);
-                tourDeliveryRepository.save(tourDelivery);
-            }
+    @Modifying
+    @RequestMapping("/addDelivery")
+    public ModelAndView addDelivery(@RequestParam(value="tourId") long tourId, @RequestParam(value="deliveryId") long deliveryId, Model model){
+        if(tourDeliveryRepository.findByTourIdAndDeliveryId(tourId, deliveryId) == null){
+            tourDeliveryRepository.save(new TourDelivery(tourId, deliveryId));
+            System.out.println(tourId);
         }
+        return new ModelAndView("redirect:/editTour?tourId=" + tourId);
+    }
 
-    }*/
+    @Transactional
+    @RequestMapping("/removeDelivery")
+    public ModelAndView removeDelivery(@RequestParam(value="tourId") long tourId, @RequestParam(value="deliveryId") long deliveryId, Model model){
+        tourDeliveryRepository.removeByTourIdAndDeliveryId(tourId, deliveryId);
+        return new ModelAndView("redirect:/editTour?tourId=" + tourId);
+    }
 
 }
