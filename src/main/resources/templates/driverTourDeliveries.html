@@ -7,18 +7,15 @@
 </head>
 <body>
 
-<a style="color:black;" th:href="@{/driverTours(loggedInUser=${loggedInUser.username})}">Load Tours</a>
-
-<div th:each="tour : ${tours}" th:if="tours != null">
+<div th:each="currentTour : ${tourDeliveries}">
     <a th:href="@{/driverTourDeliveries(tourId=${tour.tourId})}" >
         <table class="searchItem">
             <tr>
-                <td th:text="${tour.tourName}"></td>
+                <td th:text="${delivery.deliveryName}"></td>
             </tr>
         </table>
     </a>
 </div>
-
 
 
 </body>

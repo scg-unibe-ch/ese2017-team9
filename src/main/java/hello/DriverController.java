@@ -1,17 +1,10 @@
 package hello;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -21,17 +14,34 @@ public class DriverController {
     TourRepository tourRepository;
     @Autowired
     UserRepository userRepository;
-
+    @Autowired
+    TourDeliveryRepository tourDeliveryRepository;
+    @Autowired
+    DeliveryRepository deliveryRepository;
 
 
     @RequestMapping("/driverTours")
-    public String loadTours(@RequestParam(value = "loggedInUser", defaultValue = "-1") String loggedInUser, Model model){
-        if(!loggedInUser.equals("-1")) {
+    public String loadTours(@RequestParam(value = "loggedInUser", defaultValue = "-1") String loggedInUser, Model model) {
+        if (!loggedInUser.equals("-1")) {
             User user = userRepository.findByUsername(loggedInUser);
             model.addAttribute("tours", tourRepository.findAllByDriver(user.getUserid()));
         }
         return "driverTours";
     }
+
+
+    @RequestMapping("/driverTourDeliveries")
+    public String delivery(@RequestParam(value="currentTour", defaultValue = "-1") long currentTour, Model model) {
+
+        List tourDeliveries, tourDeliveriesTemp = null;
+        tourDeliveries = tourDeliveryRepository.findByTourId(currentTour); /*.getDeliveryId()*/
+        for(int i = 0; i < tourDeliveries.size(); i++){
+            tourDeliveriesTemp.add(tourDeliveries.get(i));
+        }
+        
+        model.addAttribute("deliveries", tourDeliveriesTemp);
+        
+        return "/driverTourDeliveries";
 
 
     /*@Transactional
@@ -67,6 +77,5 @@ public class DriverController {
 
         return new ModelAndView("redirect:/user");
     }*/
-
-
+    }
 }
