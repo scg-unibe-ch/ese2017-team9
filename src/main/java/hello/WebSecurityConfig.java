@@ -1,11 +1,13 @@
 package hello;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
+import org.springframework.security.core.Authentication;
 
 
 @Configuration
@@ -13,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @ComponentScan(basePackageClasses = CustomUserDetailsService.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private SecurityHandler successHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -22,12 +26,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/greeting", "/driverTours", "/driverTourDeliveries").access("hasRole('ROLE_USER')")
                 .anyRequest().permitAll()
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin().successHandler(successHandler).loginPage("/login")
                 .usernameParameter("username").passwordParameter("password")
                 .and()
                 .logout().logoutSuccessUrl("/login?logout")
                 .and()
-                .exceptionHandling().accessDeniedPage("/login?error");
+                .exceptionHandling().accessDeniedPage("/login?noAccess");
     }
 
 }

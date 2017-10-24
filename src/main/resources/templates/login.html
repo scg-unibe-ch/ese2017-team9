@@ -26,6 +26,9 @@
     <div style="color: blue;" th:if="${param.logout}" >
         You have been logged out.
     </div>
+    <div style="color: red;" th:if="${param.noAccess}" >
+       You have no access rights to this site.
+    </div>
     </div>
 
     <div style="float:left; width:150px; text-align:right;">
@@ -34,7 +37,7 @@
     </div>
     <div style="float:right; width: 230px; text-align:left;">
     <form th:action="@{/login}" method="post">
-        <div><label><input type="text" name="username"/> </label></div>
+        <div><label><input type="text" name='username'/> </label></div>
         <div><label><input type="password" name="password"/> </label></div>
         <div class="loginbtn"><input type="submit" value="Sign In"/></div>
     </form>
