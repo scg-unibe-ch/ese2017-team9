@@ -25,6 +25,9 @@ public class TourController {
     @Autowired
     DeliveryRepository deliveryRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @RequestMapping("/tour")
     public String tour(@RequestParam(value="tourId", defaultValue = "-1", required = false) long tourId,
                        Model model){
@@ -52,6 +55,7 @@ public class TourController {
             deliveriesSelected.add(deliveryRepository.findByDeliveryId(delSel.get(i).getDeliveryId()));
         }
         model.addAttribute("deliveriesSelected", deliveriesSelected);
+        model.addAttribute("drivers", userRepository.findAllUserByRole("ROLE_USER"));
         return "editTour";
     }
 

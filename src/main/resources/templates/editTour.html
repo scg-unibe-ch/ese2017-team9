@@ -12,10 +12,15 @@
 <form th:action="@{/editTour}" th:object="${currentTour}" method="post">
     <input type="hidden" name="tourId" th:field="*{tourId}"/>
     <div>Tour Name: <input type="text" name="tourId" th:field="*{tourName}"/></div>
-    <div>Deliver Day: <input type="text" name="deliverDay" th:field="*{deliverDay}"/></div>
+    <div>Deliver Day: <input type="date" name="deliverDay" th:field="*{deliverDay}"/></div>
     <div>Estimated Time: <input type="text" name="estimatedTime" th:field="*{estimatedTime}"/></div>
     <div>Used Time: <input type="text" name="usedTime" th:field="*{usedTime}"/></div>
-    <div>Driver: <input type="text" name="driver" th:field="*{driver}"/></div>
+    <div>Driver:
+
+        <select name="driver" >
+            <option th:each="driver : ${drivers}" th:value="${driver.userid}" th:selected="${driver.userid == currentTour.driver}" th:text="${driver.firstname+' '+driver.lastname}"></option>
+        </select>
+        <input type="text" name="driver" th:field="*{driver}"/></div>
 
 
     <a th:href="@{tour(tourId=*{tourId})}">
@@ -26,11 +31,7 @@
 
 </form>
 
-
-
-<div>
-    <button th:action="@{/addDelivery}">add Delivery</button>
-</div>
+<div th:if="${currentTour.tourId != null}">
 
 <div>Click on a delivery to remove:</div>
 
@@ -72,7 +73,7 @@
     </div>
 </div>
 
-
+</div>
 
 </body>
 </html>

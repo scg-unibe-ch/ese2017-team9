@@ -26,4 +26,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
    @Transactional
    @Query("update User set password = :password where userid=:userid")
    void setPasswordbyUsername(@Param("userid") long userid, @Param("password") String password);
+
+   @Query("select u from User u, UserRole ur where u.userid = ur.userid and ur.role = :role")
+   List<User> findAllUserByRole(@Param("role") String role);
+
 }

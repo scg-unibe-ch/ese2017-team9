@@ -7,7 +7,11 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
+
+import static org.aspectj.bridge.Version.getTime;
 
 @Entity // This tells Hibernate to make a table out of this class
 
@@ -52,6 +56,12 @@ public class Tour implements Serializable{
         this.driver = driver;
     }
 
-    public Tour(){}
+    public Tour(){
+        deliverDay = new java.sql.Date(getTime());
+        Time time = new Time(0);
+        estimatedTime = time;
+        usedTime = time;
+
+    }
 
 }
