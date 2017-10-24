@@ -18,12 +18,19 @@ import java.util.List;
 public class DeliveryController {
     @Autowired
     DeliveryRepository deliveryRepository;
+    @Autowired
+    CustomerRepository customerRepository;
 
     @RequestMapping("/delivery")
     public String delivery(@RequestParam(value="deliveryId", defaultValue = "-1", required = false) long deliveryId,
                        Model model){
-        if(deliveryId != -1){model.addAttribute("currentDelivery", deliveryRepository.findByDeliveryId(deliveryId));}
+        if(deliveryId != -1){
+            Delivery delivery = deliveryRepository.findByDeliveryId(deliveryId);
+            model.addAttribute("currentDelivery", delivery);
+            model.addAttribute("customer", customerRepository.findByCustomerId(delivery.getCustomer()));
+        }
         model.addAttribute("deliveries", deliveryRepository.findAll());
+
         return "delivery";
     }
 
@@ -37,6 +44,7 @@ public class DeliveryController {
             Delivery currentDelivery = new Delivery();
             model.addAttribute("currentDelivery", currentDelivery);
         }
+        model.addAttribute("customers", customerRepository.findAll());
         return "editDelivery";
     }
 

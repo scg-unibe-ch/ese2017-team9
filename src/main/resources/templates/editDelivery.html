@@ -23,7 +23,9 @@
         <option value="Dangerous Goods" th:selected="*{type=='Dangerous Goods'}">Dangerous Goods</option>
         <option value="Endangered Goods" th:selected="*{type=='Endangered Goods'}">Endangered Goods</option>
     </select></div>
-    <div>Customer: <input type="text" name="customer" th:field="*{customer}"/></div>
+    <div>Customer: <select name="customer" >
+        <option th:each="customer : ${customers}" th:value="${customer.customerId}" th:selected="${customer.customerId == currentDelivery.customer}" th:text="${customer.company+': '+customer.contact}"></option>
+    </select></div>
     <div>Comment: <input type="text" name="comment" th:field="*{comment}"/></div>
 
 
