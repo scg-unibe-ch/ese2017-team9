@@ -7,8 +7,8 @@
 </head>
 <body>
 
-<div th:each="currentTour : ${tourDeliveries}">
-    <a th:href="@{/driverTourDeliveries(tourId=${tour.tourId})}" >
+<div th:each="delivery : ${deliveries}">
+    <a th:href="@{/driverDelivery(deliveryId=${delivery.deliveryId})}" >
         <table class="searchItem">
             <tr>
                 <td th:text="${delivery.deliveryName}"></td>

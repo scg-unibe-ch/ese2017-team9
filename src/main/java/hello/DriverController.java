@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,17 +32,25 @@ public class DriverController {
 
 
     @RequestMapping("/driverTourDeliveries")
-    public String delivery(@RequestParam(value="currentTour", defaultValue = "-1") long currentTour, Model model) {
-
-        List tourDeliveries, tourDeliveriesTemp = null;
-        tourDeliveries = tourDeliveryRepository.findByTourId(currentTour); /*.getDeliveryId()*/
+    public String showDeliveriesOfTour(@RequestParam(value="tourId", defaultValue = "-1") long tourId, Model model) {
+        List<Delivery> tourDeliveriesTemp = new ArrayList<>();
+        List<TourDelivery> tourDeliveries = tourDeliveryRepository.findByTourId(tourId); /*.getDeliveryId()*/
+        System.out.println("tourId: " + tourId);
+        System.out.println("tourSize: " + tourDeliveries.size());
         for(int i = 0; i < tourDeliveries.size(); i++){
-            tourDeliveriesTemp.add(tourDeliveries.get(i));
+            tourDeliveriesTemp.add(deliveryRepository.findByDeliveryId(tourDeliveries.get(i).getDeliveryId()));
+            System.out.println("delivery: " + i);
         }
-        
+
         model.addAttribute("deliveries", tourDeliveriesTemp);
         
         return "/driverTourDeliveries";
+    }
+
+    @RequestMapping("/driverDelivery")
+    public String showDelivery(@RequestParam(value = "deliveryId") long deliveryId, Model model){
+        return "driverDelivery";
+    }
 
 
     /*@Transactional
@@ -77,5 +86,5 @@ public class DriverController {
 
         return new ModelAndView("redirect:/user");
     }*/
-    }
+
 }
