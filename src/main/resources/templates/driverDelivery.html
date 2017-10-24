@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Delivery</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/global.css" th:src="@{/css/global.css}" />
+</head>
+<body>
+
+    <table>
+        <tr>
+            <td>Delivery Name: </td>
+            <td th:text="${currentDelivery.deliveryName}"></td>
+        </tr>
+        <tr>
+            <td>Width: </td>
+            <td th:text="${currentDelivery.width}"></td>
+        </tr>
+        <tr>
+            <td>Height: </td>
+            <td th:text="${currentDelivery.height}"></td>
+        </tr>
+        <tr>
+            <td>Depth: </td>
+            <td th:text="${currentDelivery.depth}"></td>
+        </tr>
+        <tr>
+            <td>Weight: </td>
+            <td th:text="${currentDelivery.weight}"></td>
+        </tr>
+        <tr>
+            <td>Delivery Window Start: </td>
+            <td th:text="${currentDelivery.deliveryWindowStart}"></td>
+        </tr>
+
+        <tr>
+            <td>Delivery Window End: </td>
+            <td th:text="${currentDelivery.deliveryWindowEnd}"></td>
+        </tr>
+
+        <tr>
+            <td>Type: </td>
+            <td th:text="${currentDelivery.type}"></td>
+        </tr>
+
+        <tr>
+            <td>Customer Contact: </td>
+            <td th:text="${customer.company+': '+customer.contact}"></td>
+        </tr>
+
+        <tr>
+            <td>Comment: </td>
+            <td th:text="${currentDelivery.comment}"></td>
+        </tr>
+    </table>
+
+
+<a th:href="@{driverTours}">
+    <button name="back" type="button">Back</button>
+</a>
+
+</body>
+</html>

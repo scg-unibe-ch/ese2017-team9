@@ -3,11 +3,9 @@ package hello;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 
 
 @Configuration
@@ -23,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(  "/aui", "/", "/user", "/customer", "/delivery", "/tour", "/myProfile").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/greeting", "/driverTours", "/driverTourDeliveries").access("hasRole('ROLE_USER')")
+                .antMatchers("/greeting", "/driverTours", "/driverTourDeliveries", "/driverDelivery").access("hasRole('ROLE_USER')")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().successHandler(successHandler).loginPage("/login")

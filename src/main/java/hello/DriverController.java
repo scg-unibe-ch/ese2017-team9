@@ -19,6 +19,8 @@ public class DriverController {
     TourDeliveryRepository tourDeliveryRepository;
     @Autowired
     DeliveryRepository deliveryRepository;
+    @Autowired
+    CustomerRepository customerRepository;
 
 
     @RequestMapping("/driverTours")
@@ -34,7 +36,7 @@ public class DriverController {
     @RequestMapping("/driverTourDeliveries")
     public String showDeliveriesOfTour(@RequestParam(value="tourId", defaultValue = "-1") long tourId, Model model) {
         List<Delivery> tourDeliveriesTemp = new ArrayList<>();
-        List<TourDelivery> tourDeliveries = tourDeliveryRepository.findByTourId(tourId); /*.getDeliveryId()*/
+        List<TourDelivery> tourDeliveries = tourDeliveryRepository.findByTourId(tourId);
         System.out.println("tourId: " + tourId);
         System.out.println("tourSize: " + tourDeliveries.size());
         for(int i = 0; i < tourDeliveries.size(); i++){
@@ -48,8 +50,18 @@ public class DriverController {
     }
 
     @RequestMapping("/driverDelivery")
-    public String showDelivery(@RequestParam(value = "deliveryId") long deliveryId, Model model){
-        return "driverDelivery";
+    public String driverDelivery(@RequestParam(value="deliveryId", defaultValue = "-1", required = false) long deliveryId,
+                           Model model){
+        if(deliveryId != -1){
+            Delivery delivery = deliveryRepository.findByDeliveryId(deliveryId);
+            model.addAttribute("currentDelivery", delivery);
+            model.addAttribute("customer", customerRepository.findByCustomerId(delivery.getCustomer()));
+        }
+        model.addAttribute("deliveries", deliveryRepository.findByDeliveryId(deliveryId));
+
+        return "/driverDelivery";
+
+
     }
 
 
