@@ -20,7 +20,7 @@
         <select name="driver" >
             <option th:each="driver : ${drivers}" th:value="${driver.userid}" th:selected="${driver.userid == currentTour.driver}" th:text="${driver.firstname+' '+driver.lastname}"></option>
         </select>
-        <input type="text" name="driver" th:field="*{driver}"/></div>
+    </div>
 
 
     <a th:href="@{tour(tourId=*{tourId})}">
@@ -39,7 +39,7 @@
 
     <div th:each="deliverySelected : ${deliveriesSelected}">
         <a th:href="@{removeDelivery(tourId=${currentTour.tourId}, deliveryId=${deliverySelected.deliveryId})}">
-            <table>
+            <table class="searchItem">
 
                 <tr >
                     <td th:text="${deliverySelected.deliveryName}"></td>
@@ -59,7 +59,7 @@
 
     <div th:each="delivery : ${deliveries}">
         <a th:href="@{addDelivery(tourId=${currentTour.tourId}, deliveryId=${delivery.deliveryId})}">
-            <table>
+            <table class="searchItem">
 
                 <tr >
                     <td th:text="${delivery.deliveryName}"></td>
