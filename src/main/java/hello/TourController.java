@@ -33,8 +33,11 @@ public class TourController {
                        Model model){
         if(tourId != -1){
             model.addAttribute("currentTour", tourRepository.findByTourId(tourId));
+            model.addAttribute("driver", userRepository.findByUserid(tourRepository.findByTourId(tourId).getDriver()));
+            model.addAttribute("deliveryCount", tourDeliveryRepository.countByTourId(tourId));
         }
         model.addAttribute("tours", tourRepository.findAll());
+
         return "tour";
     }
 
@@ -49,12 +52,7 @@ public class TourController {
         }
 
         model.addAttribute("deliveries", deliveryRepository.findAll());
-        List<TourDelivery> delSel = tourDeliveryRepository.findByTourId(tourId);
-        List<Delivery> deliveriesSelected = new ArrayList<>();
-        for(int i = 0; i< delSel.size(); i++){
-            deliveriesSelected.add(deliveryRepository.findByDeliveryId(delSel.get(i).getDeliveryId()));
-        }
-        model.addAttribute("deliveriesSelected", deliveriesSelected);
+        addSelectedDeliveriesToModel(tourId, model);
         model.addAttribute("drivers", userRepository.findAllUserByRole("ROLE_USER"));
         return "editTour";
     }
@@ -91,6 +89,16 @@ public class TourController {
     public ModelAndView removeDelivery(@RequestParam(value="tourId") long tourId, @RequestParam(value="deliveryId") long deliveryId, Model model){
         tourDeliveryRepository.removeByTourIdAndDeliveryId(tourId, deliveryId);
         return new ModelAndView("redirect:/editTour?tourId=" + tourId);
+    }
+
+    private void addSelectedDeliveriesToModel (long tourId, Model model){
+        List<TourDelivery> delSel = tourDeliveryRepository.findByTourId(tourId);
+        List<Delivery> deliveriesSelected = new ArrayList<>();
+        for(int i = 0; i< delSel.size(); i++){
+            deliveriesSelected.add(deliveryRepository.findByDeliveryId(delSel.get(i).getDeliveryId()));
+        }
+        model.addAttribute("deliveriesSelected", deliveriesSelected);
+
     }
 
 }

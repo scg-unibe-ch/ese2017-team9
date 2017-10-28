@@ -20,4 +20,6 @@ public interface TourDeliveryRepository extends CrudRepository<TourDelivery, Lon
     @Transactional
     List<TourDelivery> findByTourId(long tourId);
 
+    int countByTourId(long tourId);
+
 }

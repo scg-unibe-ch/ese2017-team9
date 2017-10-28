@@ -45,6 +45,15 @@
             <td th:text="${currentTour.usedTime}"></td>
         </tr>
 
+        <tr>
+            <td>Driver: </td>
+            <td th:text="${driver.firstname + ' ' + driver.lastname}"></td>
+        </tr>
+        <tr>
+            <td>#Deliveries: </td>
+            <td th:text="${deliveryCount}"></td>
+        </tr>
+
     </table>
 
     <form th:action="@{/tour/remove(tourId=${currentTour.tourId})}" th:object="${currentTour}" method="post">
