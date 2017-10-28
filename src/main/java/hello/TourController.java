@@ -67,11 +67,11 @@ public class TourController {
 
     @Modifying
     @PostMapping("/editTour")
-    public String saveTour(@Param("tour") Tour tour) {
+    public ModelAndView saveTour(@Param("tour") Tour tour) {
 
         tourRepository.save(tour);
 
-        return "redirect:/tour";
+        return new ModelAndView("redirect:/tour?tourId=" + tour.getTourId());
     }
 
     @Modifying
