@@ -22,4 +22,9 @@ public class MyProfileController {
         return "myProfile";
     }
 
+    @RequestMapping("/aui")
+    public String aui(){
+        return "aui";
+    }
+
 }

@@ -16,11 +16,11 @@
     </nav>
 
     <div class="header-right" >
-        <button class="dropbtn" onclick="myFunction()" type="button">
-           Profile
+        <button class="dropbtn" onclick="myFunction()" type="button" th:text ="${loggedInUser.firstname + ' ' + loggedInUser.lastname}">
+
         </button>
         <div class="dropdown-content" id="myDropdown">
-            <a href="myProfile" target="_self">My Profile</a>
+            <a href="myProfile" target="_self" >My Profile</a>
             <form class="logoutbtn"  th:action="@{/logout}" method="post">
                 <input type="submit" value="Sign Out"/>
             </form>
