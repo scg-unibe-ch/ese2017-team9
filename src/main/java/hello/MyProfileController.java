@@ -27,4 +27,11 @@ public class MyProfileController {
         return "aui";
     }
 
+    @RequestMapping("/editMyProfile")
+    public String editMyProfile() {
+
+        return "editMyProfile";
+    }
+    
+
 }
