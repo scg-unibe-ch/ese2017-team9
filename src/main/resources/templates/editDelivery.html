@@ -23,6 +23,14 @@
         <option value="Dangerous Goods" th:selected="*{type=='Dangerous Goods'}">Dangerous Goods</option>
         <option value="Endangered Goods" th:selected="*{type=='Endangered Goods'}">Endangered Goods</option>
     </select></div>
+    <div>Status: <select name="status" >
+        <option></option>
+        <option value="Open" th:selected="*{type=='Open'}">Open</option>
+        <option value="Scheduled" th:selected="*{type=='Scheduled'}">Scheduled</option>
+        <option value="Delivery Success" th:selected="*{type=='Delivery Success'}">Delivery Success</option>
+        <option value="Delivery Failed" th:selected="*{type=='Delivery Failed'}">Delivery Failed</option>
+        <option value="No Delivery Possible" th:selected="*{type=='No Delivery Possible'}">No Delivery Possible</option>
+    </select></div>
     <div>Customer: <select name="customer" >
         <option th:each="customer : ${customers}" th:value="${customer.customerId}" th:selected="${customer.customerId == currentDelivery.customer}" th:text="${customer.company+': '+customer.contact}"></option>
     </select></div>

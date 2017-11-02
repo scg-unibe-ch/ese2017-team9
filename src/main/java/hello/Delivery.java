@@ -22,6 +22,7 @@ public class Delivery implements Serializable{
     private Date deliveryWindowStart;
     private Date deliveryWindowEnd;
     private String type;
+    private String status;
     private long customer;
     private String comment;
 
@@ -67,6 +68,9 @@ public class Delivery implements Serializable{
 
     public String getType() {return type;}
     public void setType(String type) {this.type = type;}
+
+    public String getStatus() {return status;}
+    public void setStatus(String status) {this.status = status;}
 
     public long getCustomer() {return customer;}
     public void setCustomer(long customer) {this.customer = customer;}
