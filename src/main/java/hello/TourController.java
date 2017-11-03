@@ -89,6 +89,7 @@ public class TourController {
     @Transactional
     @RequestMapping("/removeDelivery")
     public ModelAndView removeDelivery(@RequestParam(value="tourId") long tourId, @RequestParam(value="deliveryId") long deliveryId, Model model){
+        deliveryRepository.setStatusByDeliveryId(deliveryId, "Open");
         tourDeliveryRepository.removeByTourIdAndDeliveryId(tourId, deliveryId);
         return new ModelAndView("redirect:/editTour?tourId=" + tourId);
     }

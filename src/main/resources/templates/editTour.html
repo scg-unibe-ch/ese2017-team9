@@ -43,45 +43,6 @@
 
     <div>Click on a delivery to remove:</div>
 
-<div>
-
-    <div th:each="deliverySelected : ${deliveriesSelected}">
-        <a th:href="@{removeDelivery(tourId=${currentTour.tourId}, deliveryId=${deliverySelected.deliveryId})}">
-            <table class="searchItem">
-
-                <tr >
-                    <td th:text="${deliverySelected.deliveryName}"></td>
-                </tr>
-                <tr >
-                    <td th:text="${deliverySelected.type}"></td>
-                </tr>
-
-            </table>
-        </a>
-    </div>
-</div>
-
-<div>Click on a delivery to add:</div>
-
-<div>
-
-    <div th:each="delivery : ${deliveries}">
-        <a th:href="@{addDelivery(tourId=${currentTour.tourId}, deliveryId=${delivery.deliveryId})}">
-            <table class="searchItem">
-
-                <tr >
-                    <td th:text="${delivery.deliveryName}"></td>
-                </tr>
-                <tr >
-                    <td th:text="${delivery.type}"></td>
-                </tr>
-
-            </table>
-        </a>
-    </div>
-</div>
-
-</div>
 
 <!-- drag und drop -->
 
@@ -110,11 +71,18 @@
                 <tr >
                     <td th:text="${deliverySelected.type}"></td>
                 </tr>
+                <tr>
+                    <td>
+                        <a th:href="@{removeDelivery(tourId=${currentTour.tourId}, deliveryId=${deliverySelected.deliveryId})}">
+                            <button type="button">Remove</button>
+                        </a>
+                    </td>
+                </tr>
 
             </table>
         </li>
     </ul>
-
+</div>
 
     <a th:href="@{tour(tourId=*{tourId})}">
         <button name="cancel" type="button">Cancel</button>
