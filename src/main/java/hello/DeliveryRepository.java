@@ -1,8 +1,13 @@
 package hello;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import sun.security.x509.DeltaCRLIndicatorExtension;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -16,7 +21,12 @@ public interface DeliveryRepository extends CrudRepository<Delivery, Long> {
    void removeByDeliveryId(long deliveryId);
 
 
-   //@Query(value = "select del from Delivery del left outer join TourDelivery td on del.deliveryId = td.deliveryId", nativeQuery = true)
-   //List<Delivery> findAllDeliveryNotScheduled();
+   @Query("select d from Delivery d where d.status != 'Scheduled'")
+   List<Delivery> findAllDeliveryNotScheduled();
+
+   @Modifying
+   @Transactional
+   @Query("update Delivery set status = :status where deliveryId=:deliveryId")
+   void setStatusByDeliveryId(@Param("deliveryId") long deliveryId, @Param("status") String status);
 
 }

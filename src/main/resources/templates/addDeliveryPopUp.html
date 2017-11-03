@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Delivery</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/global.css" th:src="@{/css/global.css}" />
+</head>
+<body>
+
+
+<div>Select Deliveries to Add: <br/>
+    <form th:action="@{/addDeliveryPopUp}" th:method="post">
+        <input type="hidden" name="tourId" th:field="${currentTour.tourId}"/>
+        <input type="checkbox" th:each="delivery : ${deliveries}" name="Checkboxes" th:value="${delivery.deliveryId}" >
+            <table class="searchItem">
+
+                <tr >
+                    <td th:text="${delivery.deliveryName}"></td>
+                </tr>
+                <tr >
+                    <td th:text="${delivery.type}"></td>
+                </tr>
+
+            </table>
+        </input>
+
+        <button th:action="@{/addDeliveryPopUp(tourId=${tourId})}" type="submit">Save</button>
+    </form>
+</div>
+
+
+</body>
+</html>

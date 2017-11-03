@@ -4,6 +4,12 @@
     <title>Tour</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../css/global.css" th:src="@{/css/global.css}" />
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
+
 </head>
 <body>
 
@@ -27,7 +33,15 @@
 
 <div th:if="${currentTour.tourId != null}">
 
-<div>Click on a delivery to remove:</div>
+    <input type="button" value="Add Delivery" th:onclick="'javascript:popup(' + ${currentTour.tourId} + ');'"/>
+
+    <script>
+        function popup(tourId) {
+            window.open("/addDeliveryPopUp?tourId="+tourId, "window", "width=400,height=500");
+        }
+    </script>
+
+    <div>Click on a delivery to remove:</div>
 
 <div>
 
@@ -68,6 +82,40 @@
 </div>
 
 </div>
+
+<!-- drag und drop -->
+
+    <script>
+        $(function () {
+            $("#items1").sortable({
+                connectWith: "#items1",
+                start: function (event, ui) {
+                    ui.item.toggleClass("highlight");
+                },
+                stop: function (event, ui) {
+                    ui.item.toggleClass("highlight");
+                }
+            });
+            $("#items1").disableSelection();
+        });
+    </script>
+
+    <ul id="items1" class="items">
+        <li style="list-style-type: none;" class="list g" th:each="deliverySelected : ${deliveriesSelected}">
+            <table class="searchItem">
+
+                <tr >
+                    <td th:text="${deliverySelected.deliveryName}"></td>
+                </tr>
+                <tr >
+                    <td th:text="${deliverySelected.type}"></td>
+                </tr>
+
+            </table>
+        </li>
+    </ul>
+
+
     <a th:href="@{tour(tourId=*{tourId})}">
         <button name="cancel" type="button">Cancel</button>
     </a>

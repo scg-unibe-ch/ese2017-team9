@@ -51,7 +51,7 @@ public class TourController {
             model.addAttribute("currentTour", new Tour());
         }
 
-        model.addAttribute("deliveries", deliveryRepository.findAll());
+        model.addAttribute("deliveries", deliveryRepository.findAllDeliveryNotScheduled());
         addSelectedDeliveriesToModel(tourId, model);
         model.addAttribute("drivers", userRepository.findAllUserByRole("ROLE_USER"));
         return "editTour";
@@ -70,6 +70,8 @@ public class TourController {
     public ModelAndView saveTour(@Param("tour") Tour tour) {
 
         tourRepository.save(tour);
+
+
 
         return new ModelAndView("redirect:/tour?tourId=" + tour.getTourId());
     }
@@ -99,6 +101,32 @@ public class TourController {
         }
         model.addAttribute("deliveriesSelected", deliveriesSelected);
 
+    }
+
+    @RequestMapping("/addDeliveryPopUp")
+    public String addDeliveryPopUp(@RequestParam(value="tourId") long tourId, Model model){
+        model.addAttribute("currentTour", tourRepository.findByTourId(tourId));
+
+        model.addAttribute("deliveries", deliveryRepository.findAllDeliveryNotScheduled());
+        addSelectedDeliveriesToModel(tourId, model);
+        model.addAttribute("drivers", userRepository.findAllUserByRole("ROLE_USER"));
+        return "addDeliveryPopUp";
+    }
+
+    @Modifying
+    @PostMapping("/addDeliveryPopUp")
+    public ModelAndView saveDeliveries(@Param("tourId") Long tourId, @RequestParam(value = "Checkboxes", required = false, defaultValue = "-1") List<String> deliveryIds){
+        if(deliveryIds.get(0).equals("-1"))
+            return new ModelAndView("redirect:/editTour?tourId=" + tourId);
+        else{
+            for (String deliveryId:deliveryIds) {
+                long deliveryIdLong = Long.parseLong(deliveryId);
+                deliveryRepository.setStatusByDeliveryId(deliveryIdLong, "Scheduled");
+                tourDeliveryRepository.save(new TourDelivery(tourId, deliveryIdLong));
+            }
+        }
+
+        return new ModelAndView("redirect:/editTour?tourId=" + tourId);
     }
 
 }
