@@ -21,10 +21,30 @@
         </button>
         <div class="dropdown-content" id="myDropdown">
             <a href="myProfile" target="_self" >My Profile</a>
+
+            <a id="changePwLink">Change Password</a>
+
             <form class="logoutbtn"  th:action="@{/logout}" method="post">
                 <input type="submit" value="Sign Out"/>
             </form>
         </div>
+    </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p>Change Password</p>
+            <form th:action="@{/editMyProfile}" th:object="${loggedInUser}" method="post">
+                <div>old password: <input type="password" name="oldpassword"/></div>
+                <div>new password: <input type="password" name="newPassword"/></div>
+                <div>confirm new password: <input type="password" name="confirm"/></div>
+                <div>old pw: <input type="text" name="oldPw" th:field="*{password}"/></div>
+                <button name="exitmodal" type="button">Cancel</button>
+                <button th:action="@{/editMyProfile(user=${logginInUser}, newPassword=${newPassword}, confirm=${confirm})}" type="submitPw">Save Password</button>
+            </form>
+        </div>
+
     </div>
     <script>
         /* When the user clicks on the button,
@@ -43,9 +63,41 @@
             }
         }
     </script>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("changePwLink");
+
+        // Get the span element that closes the modal
+        var span = document.getElementsByName("exitmodal")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on span (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
     <!-- Reference: https://www.w3schools.com/howto/howto_js_dropdown.asp -->
 
 </div>
+
+
+
+
 
 </body>
 </html>

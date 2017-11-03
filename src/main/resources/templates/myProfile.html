@@ -26,9 +26,13 @@
         <td>E-Mail: </td>
         <td th:text ="${loggedInUser.email}"></td>
     </tr>
+    <tr>
+        <td>Id: </td>
+        <td th:text ="${loggedInUser.userid}"></td>
+    </tr>
 </table>
 
-<a th:href="@{editMyProfile(usrId=${loggedInUser.userid})}">
+<a th:href="@{editMyProfile(username=${loggedInUser.username})}">
     <button name="edit" type="button">Edit</button>
 </a>
 

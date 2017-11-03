@@ -21,6 +21,12 @@ public interface UserRepository extends CrudRepository<User, Long> {
    User findByUserid(long id);
    List<User> findByFirstname(String firstname);
    void removeByUserid(Long userid);
+   long findUserIdByUsername(String username);
+
+   @Modifying
+   @Transactional
+   @Query("update User set userid = :userid where username=:username")
+   void setUserIdByUsername(@Param("username") String username, @Param("userid") long userid);
 
    @Modifying
    @Transactional
