@@ -23,6 +23,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
    void removeByUserid(Long userid);
    long findUserIdByUsername(String username);
 
+
    @Modifying
    @Transactional
    @Query("update User set userid = :userid where username=:username")

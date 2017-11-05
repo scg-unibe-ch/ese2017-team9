@@ -38,7 +38,6 @@ public class MyProfileController {
     @RequestMapping("/editMyProfile")
     public String editMyProfile(@RequestParam(value="username", defaultValue = "-1") String username, Model model){
 
-        System.out.println("abc");
         if(username != "-1"){
             User loggedInUser = userRepository.findByUsername(username);
             model.addAttribute("loggedInUser", loggedInUser);
@@ -55,27 +54,18 @@ public class MyProfileController {
 
     @Modifying
     @PostMapping("/editMyProfile")
-    public ModelAndView saveMyProfile(@Param("user") User user,
-                                 @Param("newPassword") String newPassword, @Param("confirm") String confirm) {
+    public ModelAndView saveMyProfile(@Param("user") User user) {
 
-        //String username="mtester";
-        //long userId = -1;
-        //userId = userRepository.findUserIdByUsername(username);
 
-        System.out.println(user.getUserid());
-        System.out.println(user.getUsername());
+        user.setUserid(userRepository.findByUsername(user.getUsername()).getUserid());
 
-        if(newPassword.equals(confirm) && !newPassword.equals("")) {
-
-            user.setPassword(confirm);
-        }
 
         try {
             userRepository.save(user);
         }
         catch (DataIntegrityViolationException ex) {
             System.out.println("Exception: " + ex.toString());
-            return new ModelAndView("redirect:editUser?usrId=" + user.getUserid() + "&error");
+            return new ModelAndView("redirect:editMyProfile?username=" + user.getUsername() + "&error");
         }
 
         return new ModelAndView("redirect:/myProfile");

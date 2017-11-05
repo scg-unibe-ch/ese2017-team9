@@ -12,12 +12,11 @@
 <div th:replace="aui :: header" >Header</div>
 
 <form th:action="@{/editMyProfile}" th:object="${loggedInUser}" method="post">
-    <div>Username: <input type="text" name="username" th:field="*{username}"/></div>
+    <div> <input type="hidden" name="username" th:field="*{username}"/></div>
     <div>First Name: <input type="text" name="firstname" th:field="*{firstname}"/></div>
     <div>Last Name: <input type="text" name="lastname" th:field="*{lastname}"/></div>
     <div>E-Mail: <input type="text" th:name="email" th:field="*{email}" /></div>
     <input type="hidden" name="newPassword" th:field="*{password}"/>
-    <input type="hidden" name="confirm" th:field="*{password}"/>
 
 
 
@@ -26,7 +25,7 @@
             <button name="cancel" type="button">Cancel</button>
         </a>
 
-        <button th:action="@{/editMyProfile(user=${loggedInUser}, newPassword=${password}, confirm=${password})}" type="submit">Save</button>
+        <button th:action="@{/editMyProfile(user=${loggedInUser})}" type="submit">Save</button>
     </div>
 
 </form>

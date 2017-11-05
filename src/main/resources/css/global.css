@@ -205,3 +205,22 @@ div.showItem {
     background-color: lightcoral;
 }
 
+/*------------------------------------------------------------------------------------------
+ SEARCH
+ --------------------------------------------------------------------------------------------*/
+
+div.itemList {
+    width: 100%;
+    background-color: lightgray;
+
+}
+
+table.itemListItem {
+    width: 100%
+}
+
+table.itemListItem, td.itemListItem {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+}
