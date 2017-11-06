@@ -170,13 +170,13 @@ footer {
 .popupShow-content {
     /*display: inline-block;*/
 
-    background-color: darkgray;
+    background-color: black;
     color: white;
     text-align: center;
     margin: auto;
     padding: 10px;
     border-radius: 5px;
-    width: 120px;
+    width: 520px;
 }
 
 

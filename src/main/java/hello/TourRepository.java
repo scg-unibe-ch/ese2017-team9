@@ -15,4 +15,5 @@ public interface TourRepository extends CrudRepository<Tour, Long> {
    List<Tour> findAll();
    void removeByTourId(long tourId);
    List<Tour> findAllByDriver(long driverId);
+   Tour findByTourName(String tourname);
 }
