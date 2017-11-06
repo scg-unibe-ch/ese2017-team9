@@ -36,10 +36,10 @@
         <div class="modal-content">
             <p>Change Password</p>
             <form th:action="@{/editMyProfile}" th:object="${loggedInUser}" method="post">
-                <div>old password: <input type="password" name="oldpassword"/></div>
-                <div>new password: <input type="password" name="newPassword"/></div>
-                <div>confirm new password: <input type="password" name="confirm"/></div>
-                <div>old pw: <input type="text" name="oldPw" th:field="*{password}"/></div>
+                <div>old Password: <input type="password" name="oldpassword"/></div>
+                <div>new Password: <input type="password" name="newPassword"/></div>
+                <div>confirm new Password<input type="password" name="confirm"/></div>
+                <div>old pw:<input type="text" name="oldPw" th:field="*{password}"/></div>
                 <button name="exitmodal" type="button">Cancel</button>
                 <button th:action="@{/editMyProfile(user=${logginInUser}, newPassword=${newPassword}, confirm=${confirm})}" type="submitPw">Save Password</button>
             </form>

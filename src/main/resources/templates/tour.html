@@ -7,22 +7,96 @@
 </head>
 <body>
 <div th:replace="aui :: header">Header</div>
-<div class="search">
 
+<div class="itemList">
     <div class="new">
         <a th:href="@{editTour}">new Tour</a>
     </div>
-    <div class="searchItem"  th:each="tour : ${tours}">
-        <a th:href="@{tour(tourId=${tour.tourId})}">
-            <table class="searchItem" >
+    <table class="itemListItem">
+        <tr>
+            <th>Name</th>
+            <th>Deliver Day</th>
+            <th>Estimated Time</th>
+            <th>User Time</th>
+            <!--<th>Driver</th>-->
+            <th>Deliveries</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="tour : ${tours}">
+            <td class="itemListItem" th:text="${tour.tourName}"></td>
+            <td class="itemListItem" th:text="${tour.deliverDay}"></td>
+            <td class="itemListItem" th:text="${tour.estimatedTime}"></td>
+            <td class="itemListItem" th:text="${tour.usedTime}"></td>
+            <!--<td class="itemListItem" th:text="${driver.firstname + ' ' + driver.lastname}"></td>-->
+            <td>
+                <button id="showItemList" type="button">Show Deliveries</button>
+            </td>
+            <td>
+                <a th:href="@{editTour(tourId=${tour.tourId})}">
+                    <button name="edit" type="button">Edit</button>
+                </a>
+            </td>
+            <td>
+                <form th:action="@{/tour/remove(tourId=${tour.tourId})}" th:object="${tour}" method="post">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+        </tr>
+    </table>
 
-                <tr >
-                    <td th:text="${tour.tourName}"></td>
-                </tr>
+    <div id="myPopupShow" class="popupShow">
+        <div class="popupShow-content">
 
-            </table>
-        </a>
+            <p th:text="${deliveryCount}"></p>
+            <p>Change Password</p>
+            <form th:action="@{/tour}" th:object="${tour}" method="post">
+                <p>List</p>
+            </form>
+        </div>
     </div>
+
+    <script>
+        // Get the modal
+        var popupShow = document.getElementById('myPopupShow');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("showItemList");
+
+        // Get the span element that closes the modal
+        var span = document.getElementsByName("exitmodal")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            popupShow.style.display = "block";
+        }
+
+        // When the user clicks on span (x), close the modal
+        span.onclick = function() {
+            popupShow.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == popupShow) {
+                popupShow.style.display = "none";
+            }
+        }
+    </script>
+
+</div>
+
+
+<div class="searchItem"  th:each="tour : ${tours}">
+    <a th:href="@{tour(tourId=${tour.tourId})}">
+        <table class="searchItem" >
+
+            <tr >
+                <td th:text="${tour.tourName}"></td>
+            </tr>
+
+        </table>
+    </a>
 </div>
 
 <div class="showItem" th:if="${currentTour != null}">
