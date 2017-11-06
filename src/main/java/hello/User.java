@@ -4,10 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
 
@@ -23,6 +21,8 @@ public class User implements Serializable{
     private String lastname;
     private String email;
     private String password;
+    private boolean locked;
+
 
     public Long getUserid() {
         return userid;
@@ -58,21 +58,29 @@ public class User implements Serializable{
     public String getPassword() { return password;}
     public void setPassword(String password) {this.password = password;}
 
+    public boolean isLocked() {
+        return locked;
+    }
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
+
     public User(User user){
         this.username = user.username;
         this.firstname = user.firstname;
         this.lastname = user.lastname;
         this.email = user.email;
         this.password = user.password;
-
+        this.locked = user.locked;
     }
 
-    public User(String username, String firstname, String lastname, String email, String password){
+    public User(String username, String firstname, String lastname, String email, String password, boolean locked){
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
+        this.locked = locked;
     }
 
     public User(){}
