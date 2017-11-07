@@ -15,7 +15,7 @@
     <div>Username: <input type="text" name="username" th:field="*{username}"/></div>
     <div>First Name: <input type="text" name="firstname" th:field="*{firstname}"/></div>
     <div>Last Name: <input type="text" name="lastname" th:field="*{lastname}"/></div>
-    <div>E-Mail: <input type="text" th:name="email" th:field="*{email}" /></div>
+    <div>E-Mail: <input type="email" th:name="email" th:field="*{email}" /></div>
     <div>Roles: <input type="checkbox" name="Checkboxes" th:checked="${isAdmin}" value="ROLE_ADMIN"/>Admin <input type="checkbox" th:name="Checkboxes" th:checked="${isUser}" value="ROLE_USER"/>Driver</div>
     <div>Password: <input type="password" name="newPassword" /></div>
     <div>Confirm: <input type="password" name="confirm" /></div>
