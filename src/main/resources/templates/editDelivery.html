@@ -18,8 +18,8 @@
     <div>Weight: <input type="text" name="weight" th:field="*{weight}"/></div>
     <div>Recipient: <textarea type="text" cols="40"
                            rows="4" name="recipient" th:field="*{recipient}"/></div>
-    <div>Delivery Window Start: <input type="date" name="deliveryWindowStart" th:field="*{deliveryWindowStart}" /></div>
-    <div>Delivery Window End: <input type="date" name="deliveryWindowEnd" th:field="*{deliveryWindowEnd}" /></div>
+    <div>Delivery Window Start: <input type="time" value="00:00" name="deliveryWindowStart" th:field="*{deliveryWindowStart}" /></div>
+    <div>Delivery Window End: <input type="time" value="00:00" name="deliveryWindowEnd" th:field="*{deliveryWindowEnd}" /></div>
     <div>Type: <select name="type" >
         <option></option>
         <option value="Dangerous Goods" th:selected="*{type=='Dangerous Goods'}">Dangerous Goods</option>
@@ -27,11 +27,11 @@
     </select></div>
     <div>Status: <select name="status" >
         <option></option>
-        <option value="Open" th:selected="*{type=='Open'}">Open</option>
-        <option value="Scheduled" th:selected="*{type=='Scheduled'}">Scheduled</option>
-        <option value="Delivery Success" th:selected="*{type=='Delivery Success'}">Delivery Success</option>
-        <option value="Delivery Failed" th:selected="*{type=='Delivery Failed'}">Delivery Failed</option>
-        <option value="No Delivery Possible" th:selected="*{type=='No Delivery Possible'}">No Delivery Possible</option>
+        <option value="Open" th:selected="*{status=='Open'}">Open</option>
+        <option value="Scheduled" th:selected="*{status=='Scheduled'}">Scheduled</option>
+        <option value="Delivery Success" th:selected="*{status=='Delivery Success'}">Delivery Success</option>
+        <option value="Delivery Failed" th:selected="*{status=='Delivery Failed'}">Delivery Failed</option>
+        <option value="No Delivery Possible" th:selected="*{status=='No Delivery Possible'}">No Delivery Possible</option>
     </select></div>
     <div>Customer: <select name="customer" >
         <option th:each="customer : ${customers}" th:value="${customer.customerId}" th:selected="${customer.customerId == currentDelivery.customer}" th:text="${customer.company+': '+customer.contact}"></option>

@@ -1,9 +1,13 @@
 package hello;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.List;
+
+import java.util.Date;
+import java.sql.Time;
 
 @Entity // This tells Hibernate to make a table out of this class
 
@@ -20,7 +24,13 @@ public class Delivery implements Serializable{
     private float depth;
     private float weight;
     private String recipient;
+    @NotNull
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     private Date deliveryWindowStart;
+    @NotNull
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     private Date deliveryWindowEnd;
     private String type;
     private String status;
@@ -82,12 +92,13 @@ public class Delivery implements Serializable{
     public String getComment() { return comment; }
     public void setComment(String comment) { this.comment = comment; }
 
-    public Delivery(String deliveryName, float width, float height, float depth, float weight, Date deliveryWindowStart, Date deliveryWindowEnd, String type, long customer, String comment){
+    public Delivery(String deliveryName, float width, float height, float depth, float weight, String recipient, Date deliveryWindowStart, Date deliveryWindowEnd, String type, long customer, String comment){
         this.deliveryName = deliveryName;
         this.width = width;
         this.height = height;
         this.depth = depth;
         this.weight = weight;
+        this.recipient = recipient;
         this.deliveryWindowStart = deliveryWindowStart;
         this.deliveryWindowEnd = deliveryWindowEnd;
         this.type = type;
@@ -95,13 +106,14 @@ public class Delivery implements Serializable{
         this.comment = comment;
     }
 
-    public Delivery(long deliveryId, String deliveryName, float width, float height, float depth, float weight, Date deliveryWindowStart, Date deliveryWindowEnd, String type, long customer, String comment){
+    public Delivery(long deliveryId, String deliveryName, float width, float height, float depth, float weight, String recipient, Date deliveryWindowStart, Date deliveryWindowEnd, String type, long customer, String comment){
         this.deliveryId = deliveryId;
         this.deliveryName = deliveryName;
         this.width = width;
         this.height = height;
         this.depth = depth;
         this.weight = weight;
+        this.recipient = recipient;
         this.deliveryWindowStart = deliveryWindowStart;
         this.deliveryWindowEnd = deliveryWindowEnd;
         this.type = type;
@@ -109,6 +121,9 @@ public class Delivery implements Serializable{
         this.comment = comment;
     }
 
-    public Delivery(){}
+    public Delivery(){
+        this.deliveryWindowStart = new Time(0,0,0);
+        this.deliveryWindowEnd = new Time(0,0,0);
+    }
 
 }

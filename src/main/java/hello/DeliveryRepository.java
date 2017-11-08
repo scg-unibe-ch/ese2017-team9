@@ -21,7 +21,7 @@ public interface DeliveryRepository extends CrudRepository<Delivery, Long> {
    void removeByDeliveryId(long deliveryId);
 
 
-   @Query("select d from Delivery d where d.status != 'Scheduled'")
+   @Query("select d from Delivery d where d.status != 'Scheduled' and d.status != 'No Delivery Possible'")
    List<Delivery> findAllDeliveryNotScheduled();
 
    @Modifying

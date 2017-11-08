@@ -26,8 +26,8 @@
         <tr th:each="tour : ${tours}">
             <td class="itemListItem" th:text="${tour.tourName}"></td>
             <td class="itemListItem" th:text="${tour.deliverDay}"></td>
-            <td class="itemListItem" th:text="${tour.estimatedTime}"></td>
-            <td class="itemListItem" th:text="${tour.usedTime}"></td>
+            <td class="itemListItem" th:text="${{tour.estimatedTime}}"></td>
+            <td class="itemListItem" th:text="${{tour.usedTime}}"></td>
             <!--<td class="itemListItem" th:text="${driver.firstname + ' ' + driver.lastname}"></td>-->
             <td>
                 <button id="showItemList" type="button">Show Deliveries</button>

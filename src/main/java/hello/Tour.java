@@ -1,14 +1,12 @@
 package hello;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 import static org.aspectj.bridge.Version.getTime;
@@ -23,9 +21,18 @@ public class Tour implements Serializable{
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long tourId;
     private String tourName;
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date deliverDay;
-    private Time estimatedTime;
-    private Time usedTime;
+    @NotNull
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
+    private Date estimatedTime;
+    @NotNull
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
+    private Date usedTime;
     private long driver;
 
 
@@ -38,17 +45,17 @@ public class Tour implements Serializable{
     public Date getDeliverDay() { return deliverDay; }
     public void setDeliverDay(Date deliverDay) { this.deliverDay = deliverDay; }
 
-    public Time getEstimatedTime() { return estimatedTime;}
-    public void setEstimatedTime(Time estimatedTime) {this.estimatedTime = estimatedTime;}
+    public Date getEstimatedTime() { return estimatedTime;}
+    public void setEstimatedTime(Date estimatedTime) {this.estimatedTime = estimatedTime;}
 
-    public Time getUsedTime() { return usedTime;}
-    public void setUsedTime(Time usedTime) {this.usedTime = usedTime;}
+    public Date getUsedTime() { return usedTime;}
+    public void setUsedTime(Date usedTime) {this.usedTime = usedTime;}
 
     public long getDriver() {return driver;}
     public void setDriver(long driver) {this.driver = driver;}
     
 
-    public Tour(String tourName, Date deliveryDay, Time estimatedTime, Time usedTime, long driver){
+    public Tour(String tourName, Date deliveryDay, Date estimatedTime, Date usedTime, long driver){
         this.tourName = tourName;
         this.deliverDay = deliveryDay;
         this.estimatedTime = estimatedTime;
@@ -57,10 +64,9 @@ public class Tour implements Serializable{
     }
 
     public Tour(){
-        deliverDay = new java.sql.Date(getTime());
-        Time time = new Time(0);
-        estimatedTime = time;
-        usedTime = time;
+        this.deliverDay = new Date(0);
+        this.estimatedTime = new Time(0,0,0);
+        this.usedTime = new Time(0,0,0);;
 
     }
 
