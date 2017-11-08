@@ -13,12 +13,13 @@ public class Delivery implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long deliveryId;
+    private long deliveryId;
     private String deliveryName;
     private float width;
     private float height;
     private float depth;
     private float weight;
+    private String recipient;
     private Date deliveryWindowStart;
     private Date deliveryWindowEnd;
     private String type;
@@ -26,10 +27,10 @@ public class Delivery implements Serializable{
     private long customer;
     private String comment;
 
-    public Long getDeliveryId() {
+    public long getDeliveryId() {
         return deliveryId;
     }
-    public void setDeliveryId(Long deliveryId) {
+    public void setDeliveryId(long deliveryId) {
         this.deliveryId = deliveryId;
     }
 
@@ -59,6 +60,9 @@ public class Delivery implements Serializable{
 
     public float getWeight() { return weight; }
     public void setWeight(float weight) { this.weight = weight; }
+
+    public String getRecipient() {return recipient;}
+    public void setRecipient(String recipient) {this.recipient = recipient;}
 
     public Date getDeliveryWindowStart() { return deliveryWindowStart;}
     public void setDeliveryWindowStart(Date deliveryWindowStart) {this.deliveryWindowStart = deliveryWindowStart;}
