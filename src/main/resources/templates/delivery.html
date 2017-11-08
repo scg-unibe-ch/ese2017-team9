@@ -8,93 +8,54 @@
 <body>
 <div th:replace="aui :: header">Header</div>
 
-<div class="search">
+<div class="itemList">
 
     <div class="new">
         <a th:href="@{editDelivery}">new Delivery</a>
     </div>
-    <div class="searchItem"  th:each="delivery : ${deliveries}">
-        <a th:href="@{delivery(deliveryId=${delivery.deliveryId})}">
-            <table class="searchItem" >
 
-                <tr >
-                    <td th:text="${delivery.deliveryName}"></td>
-                </tr>
-                <tr >
-                    <td th:text="${delivery.type}"></td>
-                </tr>
-
-            </table>
-        </a>
-    </div>
-</div>
-
-<div class="showItem" th:if="${currentDelivery != null}">
-
-    <table>
+    <table class="itemListItem">
         <tr>
-            <td>Delivery Name: </td>
-            <td th:text="${currentDelivery.deliveryName}"></td>
-        </tr>
-        <tr>
-            <td>Width: </td>
-            <td th:text="${currentDelivery.width}"></td>
-        </tr>
-        <tr>
-            <td>Height: </td>
-            <td th:text="${currentDelivery.height}"></td>
-        </tr>
-        <tr>
-            <td>Depth: </td>
-            <td th:text="${currentDelivery.depth}"></td>
-        </tr>
-        <tr>
-            <td>Weight: </td>
-            <td th:text="${currentDelivery.weight}"></td>
-        </tr>
-        <tr>
-            <td>Recipient: </td>
-            <td th:text="${currentDelivery.recipient}"></td>
-        </tr>
-        <tr>
-            <td>Delivery Window Start: </td>
-            <td th:text="${{currentDelivery.deliveryWindowStart}}"></td>
+            <th>Delivery Name</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Depth</th>
+            <th>Weight</th>
+            <th>Recipient</th>
+            <th>Delivery Window Start</th>
+            <th>Delivery Window End</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
         </tr>
 
-        <tr>
-            <td>Delivery Window End: </td>
-            <td th:text="${{currentDelivery.deliveryWindowEnd}}"></td>
+        <tr th:each="delivery : ${deliveries}">
+
+            <td th:text="${delivery.deliveryName}"></td>
+            <td th:text="${delivery.width}"></td>
+            <td th:text="${delivery.height}"></td>
+            <td th:text="${delivery.depth}"></td>
+            <td th:text="${delivery.weight}"></td>
+            <td th:text="${delivery.recipient}"></td>
+            <td th:text="${{delivery.deliveryWindowStart}}"></td>
+            <td th:text="${{delivery.deliveryWindowEnd}}"></td>
+            <td th:text="${delivery.type}"></td>
+            <td th:text="${delivery.status}"></td>
+            <td>
+                <form th:action="@{/delivery/remove(deliveryId=${delivery.deliveryId})}" th:object="${currentDelivery}" method="post">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{editDelivery(deliveryId=${delivery.deliveryId})}">
+                    <button name="edit" type="button">Edit</button>
+                </a>
+            </td>
+
         </tr>
 
-        <tr>
-            <td>Type: </td>
-            <td th:text="${currentDelivery.type}"></td>
-        </tr>
-
-        <tr>
-            <td>Status: </td>
-            <td th:text="${currentDelivery.status}"></td>
-        </tr>
-
-        <tr>
-            <td>Customer Contact: </td>
-            <td th:text="${customer.company+': '+customer.contact}"></td>
-        </tr>
-
-        <tr>
-            <td>Comment: </td>
-            <td th:text="${currentDelivery.comment}"></td>
-        </tr>
     </table>
-
-    <form th:action="@{/delivery/remove(deliveryId=${currentDelivery.deliveryId})}" th:object="${currentDelivery}" method="post">
-        <input type="submit" value="Delete"/>
-    </form>
-
-
-    <a th:href="@{editDelivery(deliveryId=${currentDelivery.deliveryId})}">
-        <button name="edit" type="button">Edit</button>
-    </a>
 
 </div>
 
