@@ -9,7 +9,6 @@ import java.util.Date;
 import java.sql.Time;
 import java.util.List;
 
-import static org.aspectj.bridge.Version.getTime;
 
 @Entity // This tells Hibernate to make a table out of this class
 
@@ -23,7 +22,7 @@ public class Tour implements Serializable{
     private String tourName;
     @NotNull
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/mm/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deliverDay;
     @NotNull
     @Temporal(TemporalType.TIME)
@@ -64,7 +63,7 @@ public class Tour implements Serializable{
     }
 
     public Tour(){
-        this.deliverDay = new Date(0);
+        this.deliverDay = new Date();
         this.estimatedTime = new Time(0,0,0);
         this.usedTime = new Time(0,0,0);;
 
