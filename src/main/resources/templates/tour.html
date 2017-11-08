@@ -45,10 +45,10 @@
         </tr>
     </table>
 
-    <div id="myPopupShow" class="popupShow">
-        <div class="popupShow-content">
+    <div id="myPopupShow" class="modal">
+        <div class="modal-content">
             <p>List of Deliveries</p>
-
+            <button name="exitDeliveryList" type="button">Cancel</button>
         </div>
     </div>
 
@@ -57,18 +57,18 @@
         var popupShow = document.getElementById('myPopupShow');
 
         // Get the button that opens the modal
-        var btn = document.getElementById("showItemList");
+        var btnList = document.getElementById("showItemList");
 
         // Get the span element that closes the modal
-        var span = document.getElementsByName("exitmodal")[0];
+        var spanList = document.getElementsByName("exitDeliveryList")[0];
 
         // When the user clicks the button, open the modal
-        btn.onclick = function() {
+        btnList.onclick = function() {
             popupShow.style.display = "block";
         }
 
         // When the user clicks on span (x), close the modal
-        span.onclick = function() {
+        spanList.onclick = function() {
             popupShow.style.display = "none";
         }
 
