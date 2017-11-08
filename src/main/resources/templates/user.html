@@ -10,62 +10,40 @@
 
 
 
-<div class="search">
+<div class="itemList">
 
     <div class="new">
         <a th:href="@{editUser}">new User</a>
     </div>
-<div class="searchItem"  th:each="user : ${users}">
-    <a th:href="@{user(usrId=${user.userid})}">
-    <table class="searchItem" >
 
-        <tr >
-            <td th:text="${user.username}"></td>
-        </tr>
-
+    <table class="itemListItem">
         <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>E-Mail</th>
+            <th>Locked</th>
+
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
             <td th:text="${user.firstname}"></td>
             <td th:text="${user.Lastname}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.locked}"></td>
+            <td>
+                <form th:action="@{/user/remove(usrId=${user.userid})}" th:object="${user}" method="post">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{editUser(usrId=${user.userid})}">
+                    <button name="edit" type="button">Edit</button>
+                </a>
+            </td>
         </tr>
 
     </table>
-    </a>
-</div>
-</div>
-
-<div class="showItem" th:if="${currentUser != null}">
-
-    <table>
-        <tr>
-            <td>Username: </td>
-            <td th:text="${currentUser.username}"></td>
-        </tr>
-        <tr>
-            <td>First Name: </td>
-            <td th:text="${currentUser.firstname}"></td>
-        </tr>
-        <tr>
-            <td>Last Name: </td>
-            <td th:text="${currentUser.Lastname}"></td>
-        </tr>
-        <tr>
-            <td>E-Mail: </td>
-            <td th:text="${currentUser.email}"></td>
-        </tr>
-        <tr>
-            <td>Locked: </td>
-            <td th:text="${currentUser.locked}"></td>
-        </tr>
-    </table>
-
-    <form th:action="@{/user/remove(usrId=${currentUser.userid})}" th:object="${currentUser}" method="post">
-        <input type="submit" value="Delete"/>
-    </form>
-
-
-    <a th:href="@{editUser(usrId=${currentUser.userid})}">
-        <button name="edit" type="button">Edit</button>
-    </a>
 
 </div>
 
