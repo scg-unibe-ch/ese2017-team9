@@ -11,13 +11,13 @@
 
 <form th:action="@{/editDelivery}" th:object="${currentDelivery}" method="post">
     <input type="hidden" name="customerId" th:field="*{deliveryId}"/>
-    <div>Delivery Name: <input type="text" name="deliveryId" th:field="*{deliveryName}"/></div>
-    <div>Width: <input type="text" name="width" th:field="*{width}"/></div>
-    <div>Height: <input type="text" name="height" th:field="*{height}"/></div>
-    <div>Depth: <input type="text" name="depth" th:field="*{depth}"/></div>
-    <div>Weight: <input type="text" name="weight" th:field="*{weight}"/></div>
-    <div>Recipient: <textarea type="text" cols="40"
-                           rows="4" name="recipient" th:field="*{recipient}"/></div>
+    <div>Delivery Name: <input type="text" maxlength="255" name="deliveryId" th:field="*{deliveryName}"/></div>
+    <div>Width: <input type="number" name="width" th:field="*{width}"/></div>
+    <div>Height: <input type="number" name="height" th:field="*{height}"/></div>
+    <div>Depth: <input type="number" name="depth" th:field="*{depth}"/></div>
+    <div>Weight: <input type="number" name="weight" th:field="*{weight}"/></div>
+    <div>Recipient: <textarea type="text" cols="40" maxlength="255"
+                           rows="3" name="recipient" th:field="*{recipient}"/></div>
     <div>Delivery Window Start: <input type="time" value="00:00" name="deliveryWindowStart" th:field="*{deliveryWindowStart}" /></div>
     <div>Delivery Window End: <input type="time" value="00:00" name="deliveryWindowEnd" th:field="*{deliveryWindowEnd}" /></div>
     <div>Type: <select name="type" >
@@ -35,7 +35,7 @@
     <div>Customer: <select name="customer" >
         <option th:each="customer : ${customers}" th:value="${customer.customerId}" th:selected="${customer.customerId == currentDelivery.customer}" th:text="${customer.company+': '+customer.contact}"></option>
     </select></div>
-    <div>Comment: <input type="text" name="comment" th:field="*{comment}"/></div>
+    <div>Comment: <input type="text" maxlength="255" name="comment" th:field="*{comment}"/></div>
 
 
     <a th:href="@{delivery(deliveryId=*{deliveryId})}">

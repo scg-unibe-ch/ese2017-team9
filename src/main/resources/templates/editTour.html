@@ -17,7 +17,7 @@
 
 <form th:action="@{/editTour}" th:object="${currentTour}" method="post">
     <input type="hidden" name="tourId" th:field="*{tourId}"/>
-    <div>Tour Name: <input type="text" name="tourId" th:field="*{tourName}"/></div>
+    <div>Tour Name: <input type="text" maxlength="255" name="tourId" th:field="*{tourName}"/></div>
     <div>Deliver Day: <input type="date" name="deliverDay" th:field="*{deliverDay}"/></div>
     <div>Estimated Time: <input type="time" name="estimatedTime" th:field="*{estimatedTime}"/></div>
     <div>Used Time: <input type="time" name="usedTime" th:field="*{usedTime}"/></div>

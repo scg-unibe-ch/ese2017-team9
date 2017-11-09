@@ -11,11 +11,11 @@
 
 <form th:action="@{/editCustomer}" th:object="${currentCustomer}" method="post">
     <input type="hidden" name="customerId" th:field="*{customerId}"/>
-    <div>Company: <input type="text" name="company" th:field="*{company}"/></div>
-    <div>Contact Person: <input type="text" name="contact" th:field="*{contact}"/></div>
-    <div>Street: <input type="text" name="street" th:field="*{street}"/></div>
-    <div>City: <input type="text" name="city" th:field="*{city}"/></div>
-    <div>Phone: <input type="text" name="phone" th:field="*{phone}"/></div>
+    <div>Company: <input type="text" maxlength="255" name="company" th:field="*{company}"/></div>
+    <div>Contact Person: <input type="text" maxlength="255" name="contact" th:field="*{contact}"/></div>
+    <div>Street: <input type="text" maxlength="255" name="street" th:field="*{street}"/></div>
+    <div>City: <input type="text" maxlength="255" name="city" th:field="*{city}"/></div>
+    <div>Phone(10 digests): <input type="tel" pattern="\d{10}" name="phone" th:field="*{phone}"/></div>
     <div>E-Mail: <input type="email" name="email" th:field="*{email}" /></div>
 
 

@@ -18,7 +18,7 @@ public class Tour implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long tourId;
+    private long tourId;
     private String tourName;
     @NotNull
     @Temporal(TemporalType.DATE)
@@ -35,8 +35,8 @@ public class Tour implements Serializable{
     private long driver;
 
 
-    public Long getTourId() { return tourId; }
-    public void setTourId(Long tourId) { this.tourId = tourId; }
+    public long getTourId() { return tourId; }
+    public void setTourId(long tourId) { this.tourId = tourId; }
 
     public String getTourName() {return tourName;}
     public void setTourName(String tourName) {this.tourName = tourName;}

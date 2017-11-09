@@ -20,15 +20,15 @@
 <div class="login">
 
     <div>
-    <div style="color: red;" th:if="${param.error}" >
-        Invalid username and password.
-    </div>
-    <div style="color: blue;" th:if="${param.logout}" >
-        You have been logged out.
-    </div>
-    <div style="color: red;" th:if="${param.noAccess}" >
-       You have no access rights to this site.
-    </div>
+        <div style="color: red;" th:if="${param.error}" >
+            Invalid username and password.
+        </div>
+        <div style="color: blue;" th:if="${param.logout}" >
+            You have been logged out.
+        </div>
+        <div style="color: red;" th:if="${param.noAccess}" >
+           You have no access rights to this site.
+        </div>
     </div>
 
     <div style="float:left; width:150px; text-align:right;">

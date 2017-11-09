@@ -15,7 +15,7 @@ public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long customerId;
+    private long customerId;
     private String company;
     private String contact;
     private String street;
@@ -23,11 +23,11 @@ public class Customer implements Serializable {
     private String phone;
     private String email;
 
-    public Long getCustomerId() {
+    public long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Long customerId) {
+    public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
 
