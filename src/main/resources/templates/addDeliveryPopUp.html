@@ -7,25 +7,61 @@
 </head>
 <body>
 
+<div th:fragment="deliveryPopup">
+    <button id="addDeliveryButton" type="button">Add Delivery</button>
 
-<div>Select Deliveries to Add: <br/>
-    <form th:action="@{/addDeliveryPopUp}" th:method="post">
-        <input type="hidden" name="tourId" th:field="${currentTour.tourId}"/>
-        <input type="checkbox" th:each="delivery : ${deliveries}" name="Checkboxes" th:value="${delivery.deliveryId}" >
-            <table class="searchItem">
+    <div id="addDeliveryPopup" class="modal">
+        <div class="modal-content">
+            <div>Select Deliveries to Add: <br/>
+                <form th:action="@{/addDeliveryPopUp}" th:method="post">
+                    <input type="hidden" name="tourId" th:field="${currentTour.tourId}"/>
+                    <input type="checkbox" th:each="delivery : ${deliveries}" name="Checkboxes" th:value="${delivery.deliveryId}" >
+                    <table class="searchItem">
 
-                <tr >
-                    <td th:text="${delivery.deliveryName}"></td>
-                </tr>
-                <tr >
-                    <td th:text="${delivery.type}"></td>
-                </tr>
+                        <tr >
+                            <td th:text="${delivery.deliveryName}"></td>
+                        </tr>
+                        <tr >
+                            <td th:text="${delivery.type}"></td>
+                        </tr>
 
-            </table>
-        </input>
+                    </table>
+                    </input>
 
-        <button th:action="@{/addDeliveryPopUp(tourId=${tourId})}" type="submit">Save</button>
-    </form>
+                    <button th:action="@{/addDeliveryPopUp(tourId=${tourId})}" type="submit">Save</button>
+                </form>
+            </div>
+            <button name="exitAddDelivery" type="button">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var popupDelList = document.getElementById('addDeliveryPopup');
+
+        // Get the button that opens the modal
+        var btnDelList = document.getElementById("addDeliveryButton");
+
+        // Get the span element that closes the modal
+        var spanDelList = document.getElementsByName("exitAddDelivery")[0];
+
+        // When the user clicks the button, open the modal
+        btnDelList.onclick = function() {
+            popupDelList.style.display = "block";
+        }
+
+        // When the user clicks on span (x), close the modal
+        spanDelList.onclick = function() {
+            popupDelList.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == popupDelList) {
+                popupDelList.style.display = "none";
+            }
+        }
+    </script>
 </div>
 
 

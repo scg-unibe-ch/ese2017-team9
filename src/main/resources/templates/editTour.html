@@ -28,20 +28,21 @@
         </select>
     </div>
 
+    <a th:href="@{tour}">
+        <button name="cancel" type="button">Cancel</button>
+    </a>
 
+    <button th:action="@{/editTour(tour=${currentTour})}" type="submit">Save</button>
+
+</form>
 
 
 <div th:if="${currentTour.tourId != null}">
 
-    <input type="button" value="Add Delivery" th:onclick="'javascript:popup(' + ${currentTour.tourId} + ');'"/>
 
-    <script>
-        function popup(tourId) {
-            window.open("/addDeliveryPopUp?tourId="+tourId, "window", "width=400,height=500");
-        }
-    </script>
+    <div th:replace="addDeliveryPopUp :: deliveryPopup" >AddDeliveriesInTour</div>
 
-    <div>Click on a delivery to remove:</div>
+
 
 
 <!-- drag und drop -->
@@ -84,13 +85,7 @@
     </ul>
 </div>
 
-    <a th:href="@{tour}">
-        <button name="cancel" type="button">Cancel</button>
-    </a>
 
-    <button th:action="@{/editTour(tour=${currentTour})}" type="submit">Save</button>
-
-</form>
 
 </body>
 </html>
