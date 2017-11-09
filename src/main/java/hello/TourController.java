@@ -70,7 +70,7 @@ public class TourController {
     public ModelAndView saveTour(@Param("tour") Tour tour) {
         tour.setTourId(tourRepository.findByTourName(tour.getTourName()).getTourId());
         tourRepository.save(tour);
-
+        System.out.println("falsch");
         //return new ModelAndView("redirect:/tour?tourId=" + tour.getTourId());
         return new ModelAndView("redirect:/tour");
     }
@@ -103,7 +103,7 @@ public class TourController {
 
     }
 
-    @RequestMapping("/addDeliveryPopUp")
+    /*@RequestMapping("/addDeliveryPopUp")
     public String addDeliveryPopUp(@RequestParam(value="tourId") long tourId, Model model){
         model.addAttribute("currentTour", tourRepository.findByTourId(tourId));
 
@@ -111,7 +111,7 @@ public class TourController {
         addSelectedDeliveriesToModel(tourId, model);
         model.addAttribute("drivers", userRepository.findAllUserByRole("ROLE_USER"));
         return "addDeliveryPopUp";
-    }
+    }*/
 
     @Modifying
     @PostMapping("/addDeliveryPopUp")
@@ -128,9 +128,5 @@ public class TourController {
 
         return new ModelAndView("redirect:/editTour?tourId=" + tourId);
     }
-
-
-
-
 
 }
