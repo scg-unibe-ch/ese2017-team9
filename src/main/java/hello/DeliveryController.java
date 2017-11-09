@@ -22,13 +22,7 @@ public class DeliveryController {
     CustomerRepository customerRepository;
 
     @RequestMapping("/delivery")
-    public String delivery(@RequestParam(value="deliveryId", defaultValue = "-1", required = false) long deliveryId,
-                       Model model){
-        if(deliveryId != -1){
-            Delivery delivery = deliveryRepository.findByDeliveryId(deliveryId);
-            model.addAttribute("currentDelivery", delivery);
-            model.addAttribute("customer", customerRepository.findByCustomerId(delivery.getCustomer()));
-        }
+    public String delivery(Model model){
         model.addAttribute("deliveries", deliveryRepository.findAll());
 
         return "delivery";

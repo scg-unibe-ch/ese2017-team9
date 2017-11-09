@@ -23,9 +23,7 @@ public class UserController {
     UserRoleRepository userRoleRepository;
 
     @RequestMapping("/user")
-    public String user(@RequestParam(value="usrId", defaultValue = "-1", required = false) long usrId,
-                       Model model){
-        if(usrId != -1){model.addAttribute("currentUser", userRepository.findByUserid(usrId));}
+    public String user(Model model){
         model.addAttribute("users", userRepository.findAll());
         return "user";
     }
@@ -43,7 +41,6 @@ public class UserController {
             model.addAttribute("currentUser", currentUser);
             model.addAttribute("isAdmin", false);
             model.addAttribute("isUser", false);
-
         }
         return "editUser";
     }
@@ -87,8 +84,6 @@ public class UserController {
 
         model.addAttribute("isAdmin", user.isAdmin(roles));
         model.addAttribute("isUser", user.isUser(roles));
-
-
     }
 
     public void updateRoles(List<String> checked, long userId){

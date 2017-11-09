@@ -18,12 +18,7 @@ public class CustomerController {
     CustomerRepository customerRepository;
 
     @RequestMapping("/customer")
-    public String customer(@RequestParam(value = "customerId", defaultValue = "-1") long customerId, Model model){
-
-        if(customerId != -1){
-            model.addAttribute("currentCustomer", customerRepository.findByCustomerId(customerId));
-        }
-
+    public String customer(Model model){
         model.addAttribute("customers", customerRepository.findAll());
 
         return "customer";

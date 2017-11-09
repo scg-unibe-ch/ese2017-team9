@@ -29,13 +29,7 @@ public class TourController {
     UserRepository userRepository;
 
     @RequestMapping("/tour")
-    public String tour(@RequestParam(value="tourId", defaultValue = "-1", required = false) long tourId,
-                       Model model){
-        if(tourId != -1){
-            model.addAttribute("currentTour", tourRepository.findByTourId(tourId));
-            model.addAttribute("driver", userRepository.findByUserid(tourRepository.findByTourId(tourId).getDriver()));
-            model.addAttribute("deliveryCount", tourDeliveryRepository.countByTourId(tourId));
-        }
+    public String tour(Model model){
         model.addAttribute("tours", tourRepository.findAll());
 
         return "tour";
@@ -70,7 +64,6 @@ public class TourController {
     public ModelAndView saveTour(@Param("tour") Tour tour) {
         tour.setTourId(tourRepository.findByTourName(tour.getTourName()).getTourId());
         tourRepository.save(tour);
-        System.out.println("falsch");
         //return new ModelAndView("redirect:/tour?tourId=" + tour.getTourId());
         return new ModelAndView("redirect:/tour");
     }
@@ -102,16 +95,6 @@ public class TourController {
         model.addAttribute("deliveriesSelected", deliveriesSelected);
 
     }
-
-    /*@RequestMapping("/addDeliveryPopUp")
-    public String addDeliveryPopUp(@RequestParam(value="tourId") long tourId, Model model){
-        model.addAttribute("currentTour", tourRepository.findByTourId(tourId));
-
-        model.addAttribute("deliveries", deliveryRepository.findAllDeliveryNotScheduled());
-        addSelectedDeliveriesToModel(tourId, model);
-        model.addAttribute("drivers", userRepository.findAllUserByRole("ROLE_USER"));
-        return "addDeliveryPopUp";
-    }*/
 
     @Modifying
     @PostMapping("/addDeliveryPopUp")
