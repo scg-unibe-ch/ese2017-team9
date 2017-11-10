@@ -11,6 +11,7 @@ public class TourDelivery {
     private long tourDeliveryId;
     private long tourId;
     private long deliveryId;
+    private long orderId;
 
 
     public long getTourDeliveryId() {
@@ -34,9 +35,13 @@ public class TourDelivery {
         this.deliveryId = deliveryId;
     }
 
-    public TourDelivery(long tourId, long deliveryId){
+    public long getOrder() {return orderId;}
+    public void setOrder(long orderId) {this.orderId = orderId;}
+
+    public TourDelivery(long tourId, long deliveryId, long orderId){
         this.tourId = tourId;
         this.deliveryId = deliveryId;
+        this.orderId = orderId;
     }
 
     public TourDelivery(){}

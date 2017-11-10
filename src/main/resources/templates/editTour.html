@@ -28,6 +28,49 @@
         </select>
     </div>
 
+    <!-- drag und drop -->
+    <div th:if="${currentTour.tourId != null}">
+
+        <script>
+            $(function () {
+                $("#items1").sortable({
+                    connectWith: "#items1",
+                    start: function (event, ui) {
+                        ui.item.toggleClass("highlight");
+                    },
+                    stop: function (event, ui) {
+                        ui.item.toggleClass("highlight");
+                    }
+                });
+                $("#items1").disableSelection();
+            });
+        </script>
+
+        <ul id="items1" class="items">
+            <li style="list-style-type: none;" class="list g" th:each="deliverySelected : ${deliveriesSelected}">
+                <table class="searchItem">
+                    <input type="hidden" name="orderIds" th:value="${deliverySelected.deliveryId}"/>
+
+                    <tr >
+                        <td th:text="${deliverySelected.deliveryName}"></td>
+                    </tr>
+                    <tr >
+                        <td th:text="${deliverySelected.type}"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{removeDelivery(tourId=${currentTour.tourId}, deliveryId=${deliverySelected.deliveryId})}">
+                                <button type="button">Remove</button>
+                            </a>
+                        </td>
+                    </tr>
+
+                </table>
+            </li>
+        </ul>
+
+    </div>
+
     <a th:href="@{tour}">
         <button name="cancel" type="button">Cancel</button>
     </a>
@@ -43,46 +86,6 @@
     <div th:replace="addDeliveryPopUp :: deliveryPopup" >AddDeliveriesInTour</div>
 
 
-
-
-<!-- drag und drop -->
-
-    <script>
-        $(function () {
-            $("#items1").sortable({
-                connectWith: "#items1",
-                start: function (event, ui) {
-                    ui.item.toggleClass("highlight");
-                },
-                stop: function (event, ui) {
-                    ui.item.toggleClass("highlight");
-                }
-            });
-            $("#items1").disableSelection();
-        });
-    </script>
-
-    <ul id="items1" class="items">
-        <li style="list-style-type: none;" class="list g" th:each="deliverySelected : ${deliveriesSelected}">
-            <table class="searchItem">
-
-                <tr >
-                    <td th:text="${deliverySelected.deliveryName}"></td>
-                </tr>
-                <tr >
-                    <td th:text="${deliverySelected.type}"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <a th:href="@{removeDelivery(tourId=${currentTour.tourId}, deliveryId=${deliverySelected.deliveryId})}">
-                            <button type="button">Remove</button>
-                        </a>
-                    </td>
-                </tr>
-
-            </table>
-        </li>
-    </ul>
 </div>
 
 

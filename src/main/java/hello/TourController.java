@@ -61,21 +61,18 @@ public class TourController {
 
     @Modifying
     @PostMapping("/editTour")
-    public ModelAndView saveTour(@Param("tour") Tour tour) {
+    public ModelAndView saveTour(@Param("tour") Tour tour, @RequestParam(value = "orderIds", required = false, defaultValue = "-1") List<Long> deliveryOrder) {
         tour.setTourId(tourRepository.findByTourName(tour.getTourName()).getTourId());
         tourRepository.save(tour);
+        long order = 0;
+        long tourId = tour.getTourId();
+        for (long tourDeliveryId : deliveryOrder){
+            order++;
+            tourDeliveryRepository.setOrderIdbyDeliveryIdAndTourId(order, tourDeliveryId, tourId);
+            System.out.println("Id: " + tourDeliveryId);
+        }
         //return new ModelAndView("redirect:/tour?tourId=" + tour.getTourId());
         return new ModelAndView("redirect:/tour");
-    }
-
-    @Modifying
-    @RequestMapping("/addDelivery")
-    public ModelAndView addDelivery(@RequestParam(value="tourId") long tourId, @RequestParam(value="deliveryId") long deliveryId, Model model){
-        if(tourDeliveryRepository.findByTourIdAndDeliveryId(tourId, deliveryId) == null){
-            tourDeliveryRepository.save(new TourDelivery(tourId, deliveryId));
-            System.out.println(tourId);
-        }
-        return new ModelAndView("redirect:/editTour?tourId=" + tourId);
     }
 
     @Transactional
@@ -87,7 +84,7 @@ public class TourController {
     }
 
     private void addSelectedDeliveriesToModel (long tourId, Model model){
-        List<TourDelivery> delSel = tourDeliveryRepository.findByTourId(tourId);
+        List<TourDelivery> delSel = tourDeliveryRepository.findByTourIdOrderByOrderId(tourId);
         List<Delivery> deliveriesSelected = new ArrayList<>();
         for(int i = 0; i< delSel.size(); i++){
             deliveriesSelected.add(deliveryRepository.findByDeliveryId(delSel.get(i).getDeliveryId()));
@@ -99,13 +96,17 @@ public class TourController {
     @Modifying
     @PostMapping("/addDeliveryPopUp")
     public ModelAndView saveDeliveries(@Param("tourId") Long tourId, @RequestParam(value = "Checkboxes", required = false, defaultValue = "-1") List<String> deliveryIds){
-        if(deliveryIds.get(0).equals("-1"))
+         if(deliveryIds.get(0).equals("-1"))
             return new ModelAndView("redirect:/editTour?tourId=" + tourId);
         else{
-            for (String deliveryId:deliveryIds) {
-                long deliveryIdLong = Long.parseLong(deliveryId);
-                deliveryRepository.setStatusByDeliveryId(deliveryIdLong, "Scheduled");
-                tourDeliveryRepository.save(new TourDelivery(tourId, deliveryIdLong));
+            long lowestOrder;
+             lowestOrder = tourDeliveryRepository.getLowestOrderIdByTourId(tourId);
+
+             for (String deliveryId:deliveryIds) {
+                 lowestOrder++;
+                 long deliveryIdLong = Long.parseLong(deliveryId);
+                 deliveryRepository.setStatusByDeliveryId(deliveryIdLong, "Scheduled");
+                 tourDeliveryRepository.save(new TourDelivery(tourId, deliveryIdLong, lowestOrder));
             }
         }
 

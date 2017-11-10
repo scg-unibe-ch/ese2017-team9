@@ -36,7 +36,7 @@ public class DriverController {
     @RequestMapping("/driverTourDeliveries")
     public String showDeliveriesOfTour(@RequestParam(value="tourId", defaultValue = "-1") long tourId, Model model) {
         List<Delivery> tourDeliveriesTemp = new ArrayList<>();
-        List<TourDelivery> tourDeliveries = tourDeliveryRepository.findByTourId(tourId);
+        List<TourDelivery> tourDeliveries = tourDeliveryRepository.findByTourIdOrderByOrderId(tourId);
         System.out.println("tourId: " + tourId);
         System.out.println("tourSize: " + tourDeliveries.size());
         for(int i = 0; i < tourDeliveries.size(); i++){
