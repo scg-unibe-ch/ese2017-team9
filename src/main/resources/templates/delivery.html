@@ -43,16 +43,15 @@
             <td th:text="${delivery.type}"></td>
             <td th:text="${delivery.status}"></td>
             <td>
-                <form th:action="@{/delivery/remove(deliveryId=${delivery.deliveryId})}" th:object="${currentDelivery}" method="post">
-                    <input type="submit" value="Delete"/>
-                </form>
-            </td>
-            <td>
                 <a th:href="@{editDelivery(deliveryId=${delivery.deliveryId})}">
                     <button name="edit" type="button">Edit</button>
                 </a>
             </td>
-
+            <td>
+                <form th:action="@{/delivery/remove(deliveryId=${delivery.deliveryId})}" th:object="${currentDelivery}" method="post">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
         </tr>
 
     </table>
