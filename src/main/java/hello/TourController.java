@@ -113,4 +113,10 @@ public class TourController {
         return new ModelAndView("redirect:/editTour?tourId=" + tourId);
     }
 
+    @RequestMapping("/showDeliveriesPopup")
+    public String showDeliveriesFromTour(@Param("tourId") Long tourId){
+        System.out.println("something");
+        return "tour";
+    }
+
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show Deliveries</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/global.css" th:src="@{/css/global.css}" />
+</head>
+<body>
+
+<div th:fragment="showDelsPopup">
+
+    <button id="showItemList" type="button">Show Dels</button>
+
+    <div id="myPopupShow" class="modal">
+        <div class="modal-content">
+            
+            <p>List of Deliveries</p>
+            <button name="exitDeliveryList" type="button">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var popupShow = document.getElementById('myPopupShow');
+
+        // Get the button that opens the modal
+        var btnList = document.getElementById("showItemList");
+
+        // Get the span element that closes the modal
+        var spanList = document.getElementsByName("exitDeliveryList")[0];
+
+        // When the user clicks the button, open the modal
+        btnList.onclick = function() {
+            popupShow.style.display = "block";
+        }
+
+        // When the user clicks on span (x), close the modal
+        spanList.onclick = function() {
+            popupShow.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == popupShow) {
+                popupShow.style.display = "none";
+            }
+        }
+    </script>
+
+</div>
+
+
+</body>
+</html>

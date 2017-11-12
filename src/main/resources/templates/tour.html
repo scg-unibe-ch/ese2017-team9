@@ -29,8 +29,12 @@
             <td class="itemListItem" th:text="${{tour.estimatedTime}}"></td>
             <td class="itemListItem" th:text="${{tour.usedTime}}"></td>
             <!--<td class="itemListItem" th:text="${driver.firstname + ' ' + driver.lastname}"></td>-->
-            <td>
+
+            <!--<td>
                 <button id="showItemList" type="button">Show Deliveries</button>
+            </td>-->
+            <td>
+                <div th:replace="showDeliveriesPopup :: showDelsPopup">ShowDels</div>
             </td>
 
             <td>
@@ -46,9 +50,10 @@
         </tr>
     </table>
 
-    <div id="myPopupShow" class="modal">
+    <!--<div id="myPopupShow" class="modal">
         <div class="modal-content">
             <p>List of Deliveries</p>
+
             <button name="exitDeliveryList" type="button">Cancel</button>
         </div>
     </div>
@@ -79,7 +84,7 @@
                 popupShow.style.display = "none";
             }
         }
-    </script>
+    </script>-->
 
 </div>
 
