@@ -84,22 +84,10 @@
                 popupShow.style.display = "none";
             }
         }
-    </script>-->
+    </script>
 
 </div>
 
-
-<div class="searchItem"  th:each="tour : ${tours}">
-    <a th:href="@{tour(tourId=${tour.tourId})}">
-        <table class="searchItem" >
-
-            <tr >
-                <td th:text="${tour.tourName}"></td>
-            </tr>
-
-        </table>
-    </a>
-</div>
 
 <div class="showItem" th:if="${currentTour != null}">
 
@@ -140,8 +128,9 @@
     <a th:href="@{editTour(tourId=${currentTour.tourId})}">
         <button name="edit" type="button">Edit</button>
     </a>
-
+-->
 </div>
+
 
 
 </body>

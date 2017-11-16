@@ -15,18 +15,22 @@
             <div>Select Deliveries to Add: <br/>
                 <form th:action="@{/addDeliveryPopUp}" th:method="post">
                     <input type="hidden" name="tourId" th:field="${currentTour.tourId}"/>
-                    <input type="checkbox" th:each="delivery : ${deliveries}" name="Checkboxes" th:value="${delivery.deliveryId}" >
-                    <table class="searchItem">
+                    <th:block th:each="delivery : ${deliveries}">
+                    <label><input type="checkbox" th:each="delivery : ${deliveries}" name="Checkboxes" th:value="${delivery.deliveryId}" >
 
-                        <tr >
-                            <td th:text="${delivery.deliveryName}"></td>
-                        </tr>
-                        <tr >
-                            <td th:text="${delivery.recipient}"></td>
-                        </tr>
+                        <table class="searchItem">
 
-                    </table>
+                            <tr >
+                                <td th:text="${delivery.deliveryName}"></td>
+                            </tr>
+                            <tr >
+                                <td th:text="${delivery.recipient}"></td>
+                            </tr>
+
+                        </table>
                     </input>
+                    </label>
+                    </th:block>
 
                     <button th:action="@{/addDeliveryPopUp(tourId=${tourId})}" type="submit">Save</button>
                 </form>

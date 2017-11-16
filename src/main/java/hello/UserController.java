@@ -23,10 +23,35 @@ public class UserController {
     UserRoleRepository userRoleRepository;
 
     @RequestMapping("/user")
-    public String user(Model model){
+    public String user(@RequestParam(value="filter", defaultValue="No Filter", required=false) String filter , Model model){
         model.addAttribute("users", userRepository.findAll());
+
+        switch(filter){
+            case "noFilter":
+                model.addAttribute("users", userRepository.findAll());
+                model.addAttribute("filter", filter);
+                break;
+            case "lockedUsers":
+                model.addAttribute("users", userRepository.findByLockedTrue());
+                model.addAttribute("filter", filter);
+                break;
+
+            case "drivers":
+                model.addAttribute("users", userRepository.findAllUserByRole("ROLE_USER"));
+                model.addAttribute("filter", filter);
+                break;
+
+            case "admins":
+                model.addAttribute("users", userRepository.findAllUserByRole("ROLE_ADMIN"));
+                model.addAttribute("filter", filter);
+                break;
+
+            default:
+                model.addAttribute("users", userRepository.findAll());
+        }
         return "user";
     }
+
 
     @RequestMapping("/editUser")
     public String editUser(@RequestParam(value="usrId", defaultValue = "-1") long usrId, Model model){

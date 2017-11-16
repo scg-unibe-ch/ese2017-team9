@@ -62,7 +62,7 @@ public class TourController {
     @Modifying
     @PostMapping("/editTour")
     public ModelAndView saveTour(@Param("tour") Tour tour, @RequestParam(value = "orderIds", required = false, defaultValue = "-1") List<Long> deliveryOrder) {
-        tour.setTourId(tourRepository.findByTourName(tour.getTourName()).getTourId());
+        //tour.setTourId(tourRepository.findByTourName(tour.getTourName()).getTourId());
         tourRepository.save(tour);
         long order = 0;
         long tourId = tour.getTourId();

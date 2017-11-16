@@ -12,10 +12,10 @@
 <form th:action="@{/editDelivery}" th:object="${currentDelivery}" method="post">
     <input type="hidden" name="customerId" th:field="*{deliveryId}"/>
     <div>Delivery Name: <input type="text" maxlength="255" name="deliveryId" th:field="*{deliveryName}"/></div>
-    <div>Width: <input type="number" name="width" th:field="*{width}"/></div>
-    <div>Height: <input type="number" name="height" th:field="*{height}"/></div>
-    <div>Depth: <input type="number" name="depth" th:field="*{depth}"/></div>
-    <div>Weight: <input type="number" name="weight" th:field="*{weight}"/></div>
+    <div>Width: <input type="number" name="width" th:field="*{width}" min="0"/> cm</div>
+    <div>Height: <input type="number" name="height" th:field="*{height}" min="0"/> cm</div>
+    <div>Depth: <input type="number" name="depth" th:field="*{depth}" min="0"/> cm</div>
+    <div>Weight: <input type="number" name="weight" th:field="*{weight}" step="any" min="0"/> kg</div>
     <div>Recipient: <textarea type="text" cols="40" maxlength="255"
                            rows="3" name="recipient" th:field="*{recipient}"/></div>
     <div>Delivery Window Start: <input type="time" value="00:00" name="deliveryWindowStart" th:field="*{deliveryWindowStart}" /></div>

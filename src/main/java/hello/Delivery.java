@@ -19,9 +19,9 @@ public class Delivery implements Serializable{
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long deliveryId;
     private String deliveryName;
-    private float width;
-    private float height;
-    private float depth;
+    private int width;
+    private int height;
+    private int depth;
     private float weight;
     private String recipient;
     @NotNull
@@ -47,24 +47,24 @@ public class Delivery implements Serializable{
     public String getDeliveryName() {return deliveryName;}
     public void setDeliveryName(String deliveryName) {this.deliveryName = deliveryName;}
 
-    public float getWidth() {
+    public int getWidth() {
         return width;
     }
-    public void setWidth(float width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
     }
-    public void setHeight(float height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public float getDepth() {
+    public int getDepth() {
         return depth;
     }
-    public void setDepth(float depth) {
+    public void setDepth(int depth) {
         this.depth = depth;
     }
 
@@ -92,7 +92,7 @@ public class Delivery implements Serializable{
     public String getComment() { return comment; }
     public void setComment(String comment) { this.comment = comment; }
 
-    public Delivery(String deliveryName, float width, float height, float depth, float weight, String recipient, Date deliveryWindowStart, Date deliveryWindowEnd, String type, long customer, String comment){
+    public Delivery(String deliveryName, int width, int height, int depth, float weight, String recipient, Date deliveryWindowStart, Date deliveryWindowEnd, String type, long customer, String comment){
         this.deliveryName = deliveryName;
         this.width = width;
         this.height = height;
@@ -106,7 +106,7 @@ public class Delivery implements Serializable{
         this.comment = comment;
     }
 
-    public Delivery(long deliveryId, String deliveryName, float width, float height, float depth, float weight, String recipient, Date deliveryWindowStart, Date deliveryWindowEnd, String type, long customer, String comment){
+    public Delivery(long deliveryId, String deliveryName, int width, int height, int depth, float weight, String recipient, Date deliveryWindowStart, Date deliveryWindowEnd, String type, long customer, String comment){
         this.deliveryId = deliveryId;
         this.deliveryName = deliveryName;
         this.width = width;
