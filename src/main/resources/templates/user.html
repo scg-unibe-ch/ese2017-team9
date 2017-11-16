@@ -16,6 +16,17 @@
         <a th:href="@{editUser}">new User</a>
     </div>
 
+    <form th:action="@{/user}" th:object="${filter}">
+        <select name="filter">
+            <option value="noFilter" th:selected="${filter == 'noFilter'}">No Filter</option>
+            <option value="lockedUsers" th:selected="${filter == 'lockedUsers'}">Locked Users</option>
+            <option value="drivers" th:selected="${filter == 'drivers'}">Drivers</option>
+            <option value="admins" th:selected="${filter == 'admins'}">Admins</option>
+        </select>
+
+        <button type="submit" th:action="@{/user(filter=${filter})}">Filter</button>
+    </form>
+
     <table class="itemListItem">
         <tr>
             <th>Username</th>

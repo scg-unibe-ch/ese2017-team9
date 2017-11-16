@@ -58,7 +58,7 @@ public class User implements Serializable{
     public String getPassword() { return password;}
     public void setPassword(String password) {this.password = password;}
 
-    public boolean isLocked() {
+    public boolean getLocked() {
         return locked;
     }
     public void setLocked(boolean locked) {

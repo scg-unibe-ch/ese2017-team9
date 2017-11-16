@@ -22,6 +22,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
    List<User> findByFirstname(String firstname);
    void removeByUserid(Long userid);
    long findUserIdByUsername(String username);
+   List<User> findByLockedTrue();
 
 
    @Modifying
@@ -36,5 +37,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
    @Query("select u from User u, UserRole ur where u.userid = ur.userid and ur.role = :role")
    List<User> findAllUserByRole(@Param("role") String role);
+
+
 
 }
