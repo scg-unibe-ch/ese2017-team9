@@ -12,6 +12,16 @@
     <div class="new">
         <a th:href="@{editTour}">new Tour</a>
     </div>
+
+    <form th:action="@{/tour}" th:object="${filter}">
+        <select name="filter">
+            <option value="noFilter" th:selected="${filter == 'noFilter'}">No Filter</option>
+            <option th:each="filter : ${drivers}" th:value="${filter.userid}" th:selected="${filter == filter.userid}" th:text="${filter.firstname+' '+filter.lastname}"></option>
+        </select>
+
+        <button type="submit" th:action="@{/tour(filter=${filter})}">Filter</button>
+    </form>
+
     <table class="itemListItem">
         <tr>
             <th>Name</th>

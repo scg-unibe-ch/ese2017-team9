@@ -29,8 +29,9 @@ public class TourController {
     UserRepository userRepository;
 
     @RequestMapping("/tour")
-    public String tour(Model model){
-        model.addAttribute("tours", tourRepository.findAll());
+    public String tour(@RequestParam(value="filter", defaultValue="No Filter", required=false) String filter , Model model){
+        model.addAttribute("drivers", userRepository.findAllUserByRole("ROLE_USER"));
+
 
         return "tour";
     }
