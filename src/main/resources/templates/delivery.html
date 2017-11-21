@@ -8,11 +8,26 @@
 <body>
 <div th:replace="aui :: header">Header</div>
 
+
+
 <div class="itemList">
 
     <div class="new">
         <a th:href="@{editDelivery}">new Delivery</a>
     </div>
+
+    <form th:action="@{/delivery}" th:object="${filter}">
+        <select name="filter">
+            <option value="noFilter" th:selected="${filter == 'noFilter'}">No Filter</option>
+            <option value="open" th:selected="${filter == 'open'}">Open</option>
+            <option value="scheduled" th:selected="${filter == 'scheduled'}">Scheduled</option>
+            <option value="deliverySuccess" th:selected="${filter == 'deliverySuccess'}">Delivery Success</option>
+            <option value="deliveryFailed" th:selected="${filter == 'deliveryFailed'}">Delivery Failed</option>
+            <option value="noDeliveryPossible" th:selected="${filter == 'noDeliveryPossible'}">No Delivery Possible</option>
+        </select>
+
+        <button type="submit" th:action="@{/delivery(filter=${filter})}">Filter</button>
+    </form>
 
     <table class="itemListItem">
         <tr>

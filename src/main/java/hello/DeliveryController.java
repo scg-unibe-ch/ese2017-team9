@@ -1,7 +1,6 @@
 package hello;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -10,9 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 public class DeliveryController {
@@ -22,8 +18,38 @@ public class DeliveryController {
     CustomerRepository customerRepository;
 
     @RequestMapping("/delivery")
-    public String delivery(Model model){
+    public String delivery(@RequestParam(value="filter", defaultValue="noFilter", required=false) String filter , Model model){
         model.addAttribute("deliveries", deliveryRepository.findAll());
+
+        switch(filter){
+            case "noFilter":
+                model.addAttribute("deliveries", deliveryRepository.findAll());
+                model.addAttribute("filter", filter);
+                break;
+            case "open":
+                model.addAttribute("deliveries", deliveryRepository.findAllDeliveryByStatus("Open"));
+                model.addAttribute("filter", filter);
+                break;
+            case "scheduled":
+                model.addAttribute("deliveries", deliveryRepository.findAllDeliveryByStatus("Scheduled"));
+                model.addAttribute("filter", filter);
+                break;
+            case "deliverySuccess":
+                model.addAttribute("deliveries", deliveryRepository.findAllDeliveryByStatus("Delivery Success"));
+                model.addAttribute("filter", filter);
+                break;
+            case "deliveryFailed":
+                model.addAttribute("deliveries", deliveryRepository.findAllDeliveryByStatus("Delivery Failed"));
+                model.addAttribute("filter", filter);
+                break;
+            case "noDeliveryPossible":
+                model.addAttribute("deliveries", deliveryRepository.findAllDeliveryByStatus("No Delivery Possible"));
+                model.addAttribute("filter", filter);
+                break;
+            default:
+                model.addAttribute("deliveries", deliveryRepository.findAll());
+
+        }
 
         return "delivery";
     }

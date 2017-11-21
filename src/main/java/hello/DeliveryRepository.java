@@ -24,6 +24,9 @@ public interface DeliveryRepository extends CrudRepository<Delivery, Long> {
    @Query("select d from Delivery d where d.status != 'Scheduled' and d.status != 'No Delivery Possible'")
    List<Delivery> findAllDeliveryNotScheduled();
 
+   @Query("select d from Delivery d where d.status=:status")
+   List<Delivery> findAllDeliveryByStatus(@Param("status") String status);
+
    @Modifying
    @Transactional
    @Query("update Delivery set status = :status where deliveryId=:deliveryId")
