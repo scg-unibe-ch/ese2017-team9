@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Are You Sure</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/global.css" th:src="@{/css/global.css}" />
+</head>
+<body>
+
+<div th:fragment="areYouSure">
+
+
+    <button th:id="${customer.customerId}" type="button">Dlt</button>
+
+    <div id="surePopup" class="modal">
+        <div class="modal-content">
+
+            <p>are you sure</p>
+            <button name="exitCancel" type="button">dont delete</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var popupSure = document.getElementById('surePopup');
+
+        var customerId = [[${customer.customerId}]];
+        // Get the button that opens the modal
+        var btnSure = document.getElementById(customerId.toString());
+
+        // Get the span element that closes the modal
+        var spanSure = document.getElementsByName("exitCancel")[0];
+
+        // When the user clicks the button, open the modal
+        btnSure.onclick = function() {
+            popupSure.style.display = "block";
+        }
+
+        // When the user clicks on span (x), close the modal
+        spanSure.onclick = function() {
+            popupSure.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == popupSure) {
+                popupSure.style.display = "none";
+            }
+        }
+    </script>
+
+</div>
+
+
+</body>
+</html>

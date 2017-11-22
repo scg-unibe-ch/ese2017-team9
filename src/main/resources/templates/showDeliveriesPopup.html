@@ -9,22 +9,24 @@
 
 <div th:fragment="showDelsPopup">
 
-    <button id="showItemList" type="button">Show Dels</button>
+
+    <button th:id="${tour.tourId}" type="button">Show Dels</button>
 
     <div id="myPopupShow" class="modal">
         <div class="modal-content">
-            
+
             <p>List of Deliveries</p>
             <button name="exitDeliveryList" type="button">Cancel</button>
         </div>
     </div>
 
-    <script>
+    <script th:inline="javascript">
         // Get the modal
         var popupShow = document.getElementById('myPopupShow');
 
+        var tourId = [[${tour.tourId}]];
         // Get the button that opens the modal
-        var btnList = document.getElementById("showItemList");
+        var btnList = document.getElementById(tourId.toString());
 
         // Get the span element that closes the modal
         var spanList = document.getElementsByName("exitDeliveryList")[0];
