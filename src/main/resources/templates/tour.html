@@ -15,8 +15,8 @@
 
     <form th:action="@{/tour}" th:object="${filter}">
         <select name="filter">
-            <option value="noFilter" th:selected="${filter == 'noFilter'}">No Filter</option>
-            <option th:each="filter : ${drivers}" th:value="${filter.userid}" th:selected="${filter == filter.userid}" th:text="${filter.firstname+' '+filter.lastname}"></option>
+            <option value="No Filter" th:selected="${filter == 'No Filter'}">No Filter</option>
+            <option th:each="driver : ${drivers}" th:value="${driver.userid}" th:selected="${filter == driver.userid}" th:text="${driver.firstname+' '+driver.lastname}"></option>
         </select>
 
         <button type="submit" th:action="@{/tour(filter=${filter})}">Filter</button>

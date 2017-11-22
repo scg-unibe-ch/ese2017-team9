@@ -30,6 +30,16 @@ public class TourController {
 
     @RequestMapping("/tour")
     public String tour(@RequestParam(value="filter", defaultValue="No Filter", required=false) String filter , Model model){
+
+
+        if(filter.equals("No Filter")) {
+            model.addAttribute("tours", tourRepository.findAll());
+            model.addAttribute("filter", filter);
+        }
+        else {
+            model.addAttribute("tours", tourRepository.findAllByDriver(Long.parseLong(filter)));
+            model.addAttribute("filter", Long.parseLong(filter));
+        }
         model.addAttribute("drivers", userRepository.findAllUserByRole("ROLE_USER"));
 
 
