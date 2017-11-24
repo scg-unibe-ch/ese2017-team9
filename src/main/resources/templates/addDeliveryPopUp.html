@@ -10,13 +10,13 @@
 <div th:fragment="deliveryPopup">
     <button id="addDeliveryButton" type="button">Add Delivery</button>
 
-    <div id="addDeliveryPopup" class="modal">
+    <div id="addDeliveryPopup" class="modal" style="height:94%;overflow:scroll;">
         <div class="modal-content">
             <div>Select Deliveries to Add: <br/>
                 <form th:action="@{/addDeliveryPopUp}" th:method="post">
                     <input type="hidden" name="tourId" th:field="${currentTour.tourId}"/>
                     <th:block th:each="delivery : ${deliveries}">
-                    <label><input type="checkbox" th:each="delivery : ${deliveries}" name="Checkboxes" th:value="${delivery.deliveryId}" >
+                    <label><input type="checkbox" name="Checkboxes" th:value="${delivery.deliveryId}" >
 
                         <table class="searchItem">
 
