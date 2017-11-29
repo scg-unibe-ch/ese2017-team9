@@ -15,10 +15,9 @@ public class CurrentUserController {
 
     @ModelAttribute("loggedInUser")
     public User getCurrentUser(@AuthenticationPrincipal UserDetails loggedInUser) {
-        System.out.println("Current logged in user: " + loggedInUser);
         User user = null;
         if(loggedInUser != null)
-            user = userRepository.findUserByUsername(loggedInUser.getUsername());
+            user = userRepository.findByUsername(loggedInUser.getUsername());
         return (user == null) ? null: user;
     }
 
