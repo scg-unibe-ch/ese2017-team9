@@ -3,29 +3,37 @@
 <head>
     <title>SUI</title>
     <link rel="stylesheet" type="text/css" media="all"
-          href="../css/global.css" th:src="@{/css/global.css}" />
+          href="../css/globalMobile.css" th:src="@{/css/global.css}" />
 </head>
 <body>
 <div class="header" th:fragment="header">
-    <nav class="header-left">
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <b>DELSAY</b>
         <a th:href="@{/driverTours}" target="_self">My Tours</a>
-    </nav>
+        <a href="myProfile" target="_self" >My Profile</a>
 
-    <div class="header-right" >
-        <button class="dropbtn" onclick="myFunction()" type="button" th:text ="${loggedInUser.firstname + ' ' + loggedInUser.lastname}">
+        <a id="changePwLink">Change Password</a>
 
-        </button>
-        <div class="dropdown-content" id="myDropdown">
-            <a href="myProfile" target="_self" >My Profile</a>
+        <form class="logoutbtn"  th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
 
-            <a id="changePwLink">Change Password</a>
-
-            <form class="logoutbtn"  th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
-            </form>
-        </div>
     </div>
+
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+
+
     <!-- The Modal -->
     <div id="myModal" class="modal">
 
