@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<a style="color:black;" th:href="@{/driverTours(loggedInUser=${loggedInUser.username})}">Load Tours</a>
+<div th:replace="sui :: header" >Header</div>
 
 <div th:each="tour : ${tours}" th:if="tours != null">
     <a th:href="@{/driverTourDeliveries(tourId=${tour.tourId})}" >

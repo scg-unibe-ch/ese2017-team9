@@ -20,8 +20,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers(  "/aui", "/", "/user", "/customer", "/delivery", "/tour", "/myProfile", "/editTour", "/editUser", "/editDelivery", "/editCustomer").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/greeting", "/driverTours", "/driverTourDeliveries", "/driverDelivery").access("hasRole('ROLE_USER')")
+                .antMatchers(  "/aui", "/", "/user", "/customer", "/delivery", "/tour", "/myProfile", "/editTour", "/editUser", "/editDelivery", "/editCustomer", "/addDeliveryPopUp", "/areYouSurePopUp").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/greeting", "/sui", "/driverTours", "/driverTourDeliveries", "/driverDelivery").access("hasRole('ROLE_USER')")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().successHandler(successHandler).loginPage("/login")

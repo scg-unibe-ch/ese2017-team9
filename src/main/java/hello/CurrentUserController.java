@@ -1,6 +1,8 @@
 package hello;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,9 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @ControllerAdvice
 public class CurrentUserController {
 
+    @Autowired
+    UserRepository userRepository;
+
     @ModelAttribute("loggedInUser")
-    public User getCurrentUser(@AuthenticationPrincipal User loggedInUser) {
-        return (loggedInUser == null) ? null: loggedInUser;
+    public User getCurrentUser(@AuthenticationPrincipal UserDetails loggedInUser) {
+        System.out.println("Current logged in user: " + loggedInUser);
+        User user = null;
+        if(loggedInUser != null)
+            user = userRepository.findUserByUsername(loggedInUser.getUsername());
+        return (user == null) ? null: user;
     }
 
 }

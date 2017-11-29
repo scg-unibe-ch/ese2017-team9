@@ -22,7 +22,7 @@ public class SecurityHandler implements AuthenticationSuccessHandler {
             response.sendRedirect("aui");
         }
         else{
-            response.sendRedirect("driverTours");
+            response.sendRedirect("sui");
         }
     }
 }

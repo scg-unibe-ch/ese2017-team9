@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SUI</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/global.css" th:src="@{/css/global.css}" />
+</head>
+<body>
+<div class="header" th:fragment="header">
+    <nav class="header-left">
+        <b>DELSAY</b>
+        <a th:href="@{/driverTours(loggedInUser=${loggedInUser.username})}" target="_self">My Tours</a>
+    </nav>
+
+    <div class="header-right" >
+        <button class="dropbtn" onclick="myFunction()" type="button" th:text ="${loggedInUser.firstname + ' ' + loggedInUser.lastname}">
+
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+            <a href="myProfile" target="_self" >My Profile</a>
+
+            <a id="changePwLink">Change Password</a>
+
+            <form class="logoutbtn"  th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p>Change Password</p>
+            <form th:action="@{/aui}" th:object="${loggedInUser}" method="post">
+                <input type="hidden" name="username" th:field="*{username}"/>
+                <div>old Password: <input type="password" name="oldPassword"/></div>
+                <div>new Password: <input type="password" name="newPassword"/></div>
+                <div>confirm new Password<input type="password" name="confirm"/></div>
+                <button name="exitmodal" type="button">Cancel</button>
+                <button th:action="@{/aui(username=${username}, oldPassword=${oldPassword}, newPassword=${newPassword}, confirm=${confirm})}" type="submitPw">Save Password</button>
+            </form>
+        </div>
+
+    </div>
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+            if (!e.target.matches('.dropbtn')) {
+                var myDropdown = document.getElementById("myDropdown");
+                if (myDropdown.classList.contains('show')) {
+                    myDropdown.classList.remove('show');
+                }
+            }
+        }
+    </script>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("changePwLink");
+
+        // Get the span element that closes the modal
+        var span = document.getElementsByName("exitmodal")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on span (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    <!-- Reference: https://www.w3schools.com/howto/howto_js_dropdown.asp -->
+
+</div>
+
+
+
+
+
+</body>
+</html>

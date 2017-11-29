@@ -30,10 +30,6 @@ public class MyProfileController {
         return "myProfile";
     }
 
-    @RequestMapping("/aui")
-    public String aui(){
-        return "aui";
-    }
 
     @RequestMapping("/editMyProfile")
     public String editMyProfile(@RequestParam(value="username", defaultValue = "-1") String username, Model model){

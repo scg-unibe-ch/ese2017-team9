@@ -21,7 +21,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
    User findByUserid(long id);
    List<User> findByFirstname(String firstname);
    void removeByUserid(Long userid);
-   long findUserIdByUsername(String username);
+   User findUserByUsername(String username);
    List<User> findByLockedTrue();
 
 
