@@ -57,8 +57,7 @@ public class UserController {
     public String editUser(@RequestParam(value="usrId", defaultValue = "-1") long usrId, Model model){
         if(usrId != -1){
             User currentUser = userRepository.findByUserid(usrId);
-            List<String> roles = userRoleRepository.findRoleByUserName(currentUser.getUsername());
-            isRole(roles, currentUser, model);
+            model.addAttribute("role", userRoleRepository.findRoleByUserName(currentUser.getUserid()));
             model.addAttribute("currentUser", currentUser);
         }
         else{
@@ -104,12 +103,6 @@ public class UserController {
         return new ModelAndView("redirect:/user");
     }
 
-
-    public void isRole(List<String> roles, User user, Model model){
-
-        model.addAttribute("isAdmin", user.isAdmin(roles));
-        model.addAttribute("isUser", user.isUser(roles));
-    }
 
     public void updateRoles(List<String> checked, long userId){
 

@@ -1,12 +1,16 @@
 package hello;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +43,10 @@ public class DriverController {
     public String showDeliveriesOfTour(@RequestParam(value="tourId", defaultValue = "-1") long tourId, Model model) {
         List<Delivery> tourDeliveriesTemp = new ArrayList<>();
         List<TourDelivery> tourDeliveries = tourDeliveryRepository.findByTourIdOrderByOrderId(tourId);
-        System.out.println("tourId: " + tourId);
-        System.out.println("tourSize: " + tourDeliveries.size());
         for(int i = 0; i < tourDeliveries.size(); i++){
             tourDeliveriesTemp.add(deliveryRepository.findByDeliveryId(tourDeliveries.get(i).getDeliveryId()));
-            System.out.println("delivery: " + i);
         }
+        model.addAttribute("tourId", tourId);
 
         model.addAttribute("deliveries", tourDeliveriesTemp);
         
@@ -64,6 +66,21 @@ public class DriverController {
         return "/driverDelivery";
 
 
+    }
+
+    @Modifying
+    @PostMapping("/driverTourDeliveries")
+    public ModelAndView saveTour(@Param("tourId") long tourId, @RequestParam(value = "orderIds", required = false, defaultValue = "-1") List<Long> deliveryOrder) {
+        long order = 0;
+        System.out.println("tourid:" + tourId);
+        for (long tourDeliveryId : deliveryOrder){
+            order++;
+            tourDeliveryRepository.setOrderIdbyDeliveryIdAndTourId(order, tourDeliveryId, tourId);
+            System.out.println("Id: " + tourDeliveryId);
+            System.out.println("order: " + order);
+        }
+        System.out.println("I was here!!");
+        return new ModelAndView("redirect:/driverTours");
     }
 
 }

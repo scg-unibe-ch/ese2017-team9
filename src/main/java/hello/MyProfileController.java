@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -20,30 +22,28 @@ public class MyProfileController {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserRoleRepository userRoleRepository;
 
 
     @RequestMapping("/myProfile")
-    public String myProfile(@RequestParam(value="usrId", defaultValue = "-1", required = false) long usrId,
-                       Model model){
-
-        if(usrId != -1){model.addAttribute("loggedInUser", userRepository.findByUserid(usrId));}
+    public String myProfile(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userRepository.findByUsername(auth.getName());
+        model.addAttribute("loggedInUser", currentUser);
+        model.addAttribute("role", userRoleRepository.findRoleByUserName(currentUser.getUserid()));
         return "myProfile";
     }
 
 
     @RequestMapping("/editMyProfile")
-    public String editMyProfile(@RequestParam(value="username", defaultValue = "-1") String username, Model model){
+    public String editMyProfile(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userRepository.findByUsername(auth.getName());
 
-        if(username != "-1"){
-            User loggedInUser = userRepository.findByUsername(username);
-            model.addAttribute("loggedInUser", loggedInUser);
-        }
-        else{
-            User currentUser = new User();
-            model.addAttribute("currentUser", currentUser);
-            model.addAttribute("isAdmin", false);
-            model.addAttribute("isUser", false);
-        }
+        model.addAttribute("loggedInUser", currentUser);
+        model.addAttribute("role", userRoleRepository.findRoleByUserName(currentUser.getUserid()));
+
         return "editMyProfile";
     }
 
@@ -59,7 +59,7 @@ public class MyProfileController {
         }
         catch (DataIntegrityViolationException ex) {
             System.out.println("Exception: " + ex.toString());
-            return new ModelAndView("redirect:editMyProfile?username=" + user.getUsername() + "&error");
+            return new ModelAndView("redirect:editMyProfile?error");
         }
 
         return new ModelAndView("redirect:/myProfile");
