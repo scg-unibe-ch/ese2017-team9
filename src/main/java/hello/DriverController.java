@@ -46,7 +46,7 @@ public class DriverController {
         for(int i = 0; i < tourDeliveries.size(); i++){
             tourDeliveriesTemp.add(deliveryRepository.findByDeliveryId(tourDeliveries.get(i).getDeliveryId()));
         }
-        model.addAttribute("tourId", tourId);
+        model.addAttribute("tour", tourRepository.findByTourId(tourId));
 
         model.addAttribute("deliveries", tourDeliveriesTemp);
         

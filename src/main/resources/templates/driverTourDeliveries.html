@@ -16,9 +16,9 @@
 
 <div th:replace="sui :: header" >Header</div>
 
-<form th:action="@{/driverTourDeliveries}" method="post">
+<form th:action="@{/driverTourDeliveries}" th:object="${tour}" method="post">
 
-    <input type="hidden" th:value="${tourId}"/>
+    <input type="hidden" th:field="${tour.tourId}"/>
     <ul id="items2" class="items">
         <li style="list-style-type: none;" th:each="delivery : ${deliveries}">
             <table class="searchItem">
@@ -54,7 +54,7 @@
         <button name="back" type="button">Back</button>
     </a>
 
-    <button th:action="@{/driverTourDeliveries(tourId=${tourId})}" type="submit">Save</button>
+    <button th:action="@{/driverTourDeliveries(tourId=${tour.tourId})}" type="submit">Save</button>
 
 </form>
 
