@@ -49,7 +49,13 @@ public class DriverController {
         model.addAttribute("tour", tourRepository.findByTourId(tourId));
 
         model.addAttribute("deliveries", tourDeliveriesTemp);
-        
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userRepository.findByUsername(auth.getName());
+        long driverId = tourRepository.findByTourId(tourId).getDriver();
+        if(currentUser.getUserid() != driverId)
+            return "/driverTours";
+
         return "/driverTourDeliveries";
     }
 
@@ -72,14 +78,10 @@ public class DriverController {
     @PostMapping("/driverTourDeliveries")
     public ModelAndView saveTour(@Param("tourId") long tourId, @RequestParam(value = "orderIds", required = false, defaultValue = "-1") List<Long> deliveryOrder) {
         long order = 0;
-        System.out.println("tourid:" + tourId);
         for (long tourDeliveryId : deliveryOrder){
             order++;
             tourDeliveryRepository.setOrderIdbyDeliveryIdAndTourId(order, tourDeliveryId, tourId);
-            System.out.println("Id: " + tourDeliveryId);
-            System.out.println("order: " + order);
         }
-        System.out.println("I was here!!");
         return new ModelAndView("redirect:/driverTours");
     }
 
