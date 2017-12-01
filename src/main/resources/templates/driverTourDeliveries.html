@@ -18,11 +18,12 @@
 
 <form th:action="@{/driverTourDeliveries}" th:object="${tour}" method="post">
 
-    <input type="hidden" th:field="${tour.tourId}"/>
+
     <ul id="items2" class="items">
         <li style="list-style-type: none;" th:each="delivery : ${deliveries}">
+
+            <input type="hidden" name="orderIds" th:value="${delivery.deliveryId}"/>
             <table class="searchItem">
-                <input type="hidden" name="orderIds" th:value="${delivery.deliveryId}"/>
 
                 <tr >
                     <td th:text="${delivery.deliveryName}"></td>
@@ -30,8 +31,20 @@
                 <tr >
                     <td th:text="${delivery.recipient}"></td>
                 </tr>
+                <tr >
+                    <td th:text="${delivery.status}"></td>
+                </tr>
+
+                <tr>
+                     <td>
+                         <a th:href="@{driverDeliveryStatus(deliveryId=${delivery.deliveryId})}">
+                             <button name="edit" type="button">Status/Comment</button>
+                         </a>
+                     </td>
+                </tr>
 
             </table>
+
         </li>
     </ul>
 
@@ -54,9 +67,12 @@
         <button name="back" type="button">Back</button>
     </a>
 
+    <input type="hidden" name="tourId" th:value="${tour.tourId}"/>
     <button th:action="@{/driverTourDeliveries(tourId=${tour.tourId})}" type="submit">Save</button>
 
 </form>
+
+
 
 </body>
 </html>

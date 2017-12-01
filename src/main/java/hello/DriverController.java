@@ -59,30 +59,41 @@ public class DriverController {
         return "/driverTourDeliveries";
     }
 
-    @RequestMapping("/driverDelivery")
-    public String driverDelivery(@RequestParam(value="deliveryId", defaultValue = "-1", required = false) long deliveryId,
-                           Model model){
-        if(deliveryId != -1){
-            Delivery delivery = deliveryRepository.findByDeliveryId(deliveryId);
-            model.addAttribute("currentDelivery", delivery);
-            model.addAttribute("customer", customerRepository.findByCustomerId(delivery.getCustomer()));
+
+    @Modifying
+    @PostMapping(value = "/driverTourDeliveries")
+    public ModelAndView saveTour(@Param("tourId") long tourId, @RequestParam(value = "orderIds", required = false, defaultValue = "-1") List<Long> deliveryOrder) {
+        if(deliveryOrder.get(0) != -1) {
+            long order = 0;
+            for (long tourDeliveryId : deliveryOrder) {
+                order++;
+                tourDeliveryRepository.setOrderIdbyDeliveryIdAndTourId(order, tourDeliveryId, tourId);
+                System.out.println("order: " + order);
+                System.out.println("id: " + tourDeliveryId);
+            }
         }
-        model.addAttribute("deliveries", deliveryRepository.findByDeliveryId(deliveryId));
-
-        return "/driverDelivery";
+        System.out.println("tourId: " + tourId);
 
 
+        return new ModelAndView("redirect:/driverTours");
+    }
+
+    @RequestMapping("/driverDeliveryStatus")
+    public String driverDeliveryStatus(@RequestParam("deliveryId") long deliveryId ,Model model){
+        model.addAttribute("delivery", deliveryRepository.findByDeliveryId(deliveryId));
+        return "driverDeliveryStatus";
     }
 
     @Modifying
-    @PostMapping("/driverTourDeliveries")
-    public ModelAndView saveTour(@Param("tourId") long tourId, @RequestParam(value = "orderIds", required = false, defaultValue = "-1") List<Long> deliveryOrder) {
-        long order = 0;
-        for (long tourDeliveryId : deliveryOrder){
-            order++;
-            tourDeliveryRepository.setOrderIdbyDeliveryIdAndTourId(order, tourDeliveryId, tourId);
-        }
-        return new ModelAndView("redirect:/driverTours");
+    @PostMapping("/driverDeliveryStatus")
+    public ModelAndView saveStatusAndComment(@Param("delivery") Delivery delivery) {
+        long deliveryId = delivery.getDeliveryId();
+        deliveryRepository.setStatusByDeliveryId(deliveryId, delivery.getStatus());
+        deliveryRepository.setCommentByDeliveryId(deliveryId, delivery.getComment());
+        long tourId = tourDeliveryRepository.findTourIdByDeliveryId(deliveryId);
+        return new ModelAndView("redirect:/driverTourDeliveries?tourId=" + tourId);
     }
+
+
 
 }

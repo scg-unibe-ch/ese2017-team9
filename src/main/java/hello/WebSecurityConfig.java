@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(  "/aui", "/", "/user", "/customer", "/delivery", "/tour", "/editTour", "/editUser", "/editDelivery", "/editCustomer", "/addDeliveryPopUp", "/areYouSurePopUp").access("hasRole('ROLE_ADMIN')")
-                .antMatchers( "/sui", "/driverTours", "/driverTourDeliveries", "/driverDelivery").access("hasRole('ROLE_USER')")
+                .antMatchers( "/sui", "/driverTours", "/driverTourDeliveries", "/driverDelivery", "/driverDeliveryStatus").access("hasRole('ROLE_USER')")
                 .antMatchers("/myProfile").access("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
                 .anyRequest().permitAll()
                 .and()

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Delivery Status</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/global.css" th:src="@{/css/global.css}" />
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/globalMobile.css" th:src="@{/css/globalMobile.css}" />
+
+</head>
+<body>
+
+<div>
+
+
+    <div th:text="'Current Status: ' + ${delivery.status}"></div>
+
+    <form th:action="@{/driverDeliveryStatus}" th:object="${delivery}" method="post">
+        <input type="hidden" name="deliveryId" th:value="*{deliveryId}"/>
+        <input type="hidden" name="status" th:value="Open"/>
+
+        <div class="accordion">Open</div>
+        <div class="panel">
+            <div>Comment: <input type="text" name="comment" th:value="*{comment}"/></div>
+            <button th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
+        </div>
+    </form>
+
+    <form th:action="@{/driverDeliveryStatus}" th:object="${delivery}" method="post">
+        <input type="hidden" name="deliveryId" th:value="*{deliveryId}"/>
+        <input type="hidden" name="status" th:value="Scheduled"/>
+
+        <div class="accordion">Scheduled</div>
+        <div class="panel">
+            <div>Comment: <input type="text" name="comment" th:value="*{comment}"/></div>
+            <button th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
+        </div>
+    </form>
+
+    <form th:action="@{/driverDeliveryStatus}" th:object="${delivery}" method="post">
+        <input type="hidden" name="deliveryId" th:value="*{deliveryId}"/>
+        <input type="hidden" name="status" value="Delivery Success"/>
+
+
+        <div class="accordion">Delivery Success</div>
+        <div class="panel">
+            <div>Comment: <input type="text" name="comment" th:value="*{comment}"/></div>
+            <button th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
+        </div>
+    </form>
+
+    <form th:action="@{/driverDeliveryStatus}" th:object="${delivery}" method="post">
+        <input type="hidden" name="deliveryId" th:value="*{deliveryId}"/>
+        <input type="hidden" name="status" value="Delivery Failed"/>
+
+
+        <div class="accordion">Delivery Failed</div>
+        <div class="panel">
+            <div>Comment: <input type="text" name="comment" th:value="*{comment}"/></div>
+            <button th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
+        </div>
+    </form>
+
+    <form th:action="@{/driverDeliveryStatus}" th:object="${delivery}" method="post">
+        <input type="hidden" name="deliveryId" th:value="*{deliveryId}"/>
+        <input type="hidden" name="status" value="No Delivery Possible"/>
+
+
+        <div class="accordion">No Delivery Possible</div>
+        <div class="panel">
+            <div>Comment: <input type="text" name="comment" th:value="*{comment}"/></div>
+            <button th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
+        </div>
+    </form>
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; /*<![CDATA[*/i < acc.length/*]]>*/; i++) {
+            acc[i].onclick = function(){
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display == 'block') {
+                    panel.style.display = 'none';
+                } else {
+                    var pan = document.getElementsByClassName("panel");
+                    for(i = 0; /*<![CDATA[*/i < pan.length/*]]>*/; i++){
+                        pan[i].style.display = 'none';
+                    }
+                    panel.style.display = 'block';
+                }
+            }
+        }
+    </script>
+
+</div>
+
+</body>
+</html>
