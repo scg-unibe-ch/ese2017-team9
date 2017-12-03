@@ -16,7 +16,7 @@
     <div>First Name: <input type="text" maxlength="255" name="firstname" th:field="*{firstname}"/></div>
     <div>Last Name: <input type="text" maxlength="255" name="lastname" th:field="*{lastname}"/></div>
     <div>E-Mail: <input type="email" th:name="email" th:field="*{email}" /></div>
-    <div>Roles: <input type="checkbox" name="Checkboxes" th:checked="${isAdmin}" value="ROLE_ADMIN"/>Admin <input type="checkbox" th:name="Checkboxes" th:checked="${isUser}" value="ROLE_USER"/>Driver</div>
+    <div>Roles: <input type="radio" name="Checkboxes" th:checked="${role == 'ROLE_ADMIN'}" value="ROLE_ADMIN"/>Admin <input type="radio" th:name="Checkboxes" th:checked="${role == 'ROLE_USER'}" value="ROLE_USER"/>Driver</div>
     <div>Password: <input type="password" name="newPassword" /></div>
     <div>Confirm: <input type="password" name="confirm" /></div>
     <div>Locked: <select name="Locked" >
@@ -24,7 +24,7 @@
         <option value="True" th:selected="*{locked=='True'}">True</option>
     </select></div>
 
-    <a th:href="@{user(usrId=${currentUser.userid})}">
+    <a th:href="@{user}">
         <button name="cancel" type="button">Cancel</button>
     </a>
 

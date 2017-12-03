@@ -1,25 +1,78 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>User</title>
+    <title>Tour Deliveries</title>
     <link rel="stylesheet" type="text/css" media="all"
-          href="../css/globalMobile.css" th:src="@{/css/global.css}" />
+          href="../css/global.css" th:src="@{/css/global.css}" />
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/globalMobile.css" th:src="@{/css/globalMobile.css}" />
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
+
 </head>
 <body>
 
-<div th:each="delivery : ${deliveries}">
-    <a th:href="@{/driverDelivery(deliveryId=${delivery.deliveryId})}" >
-        <table class="searchItem">
-            <tr>
-                <td th:text="${delivery.deliveryName}"></td>
-            </tr>
-        </table>
-    </a>
-</div>
+<div th:replace="sui :: header" >Header</div>
 
-<a th:href="@{driverTours}">
-    <button name="back" type="button">Back</button>
-</a>
+<form th:action="@{/driverTourDeliveries}" th:object="${tour}" method="post">
+
+
+    <ul id="items2" class="items">
+        <li style="list-style-type: none;" th:each="delivery : ${deliveries}">
+
+            <input type="hidden" name="orderIds" th:value="${delivery.deliveryId}"/>
+            <table class="searchItem">
+
+                <tr >
+                    <td th:text="${delivery.deliveryName}"></td>
+                </tr>
+                <tr >
+                    <td th:text="${delivery.recipient}"></td>
+                </tr>
+                <tr >
+                    <td th:text="${delivery.status}"></td>
+                </tr>
+
+                <tr>
+                     <td>
+                         <a th:href="@{driverDeliveryStatus(deliveryId=${delivery.deliveryId})}">
+                             <button name="edit" type="button">Status/Comment</button>
+                         </a>
+                     </td>
+                </tr>
+
+            </table>
+
+        </li>
+    </ul>
+
+    <script>
+        $(function () {
+            $("#items2").sortable({
+                connectWith: "#items2",
+                start: function (event, ui) {
+                    ui.item.toggleClass("highlight");
+                },
+                stop: function (event, ui) {
+                    ui.item.toggleClass("highlight");
+                }
+            });
+            $("#items2").disableSelection();
+        });
+    </script>
+
+    <a th:href="@{driverTours}">
+        <button name="back" type="button">Back</button>
+    </a>
+
+    <input type="hidden" name="tourId" th:value="${tour.tourId}"/>
+    <button th:action="@{/driverTourDeliveries(tourId=${tour.tourId})}" type="submit">Save</button>
+
+</form>
+
+
 
 </body>
 </html>

@@ -32,4 +32,9 @@ public interface DeliveryRepository extends CrudRepository<Delivery, Long> {
    @Query("update Delivery set status = :status where deliveryId=:deliveryId")
    void setStatusByDeliveryId(@Param("deliveryId") long deliveryId, @Param("status") String status);
 
+   @Modifying
+   @Transactional
+   @Query("update Delivery set comment = :comment where deliveryId=:deliveryId")
+   void setCommentByDeliveryId(@Param("deliveryId") long deliveryId, @Param("comment") String comment);
+
 }

@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>AUI</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../css/global.css" th:src="@{/css/global.css}" />
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/globalMobile.css" th:src="@{/css/globalMobile.css}" />
     <title>My Profile</title>
 </head>
 <body>
-<div th:replace="aui :: header">Header</div>
+<div th:if="${role} == 'ROLE_ADMIN'">
+    <div th:replace="aui :: header">Header</div>
+</div>
+<div th:if="${role} == 'ROLE_USER'">
+    <div th:replace="sui :: header">Header</div>
+</div>
 
 <table>
     <tr>
@@ -32,7 +38,7 @@
     </tr>
 </table>
 
-<a th:href="@{editMyProfile(username=${loggedInUser.username})}">
+<a th:href="@{editMyProfile}">
     <button name="edit" type="button">Edit</button>
 </a>
 

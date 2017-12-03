@@ -35,4 +35,9 @@ public interface TourDeliveryRepository extends CrudRepository<TourDelivery, Lon
     void setOrderIdbyDeliveryIdAndTourId(@Param("orderId") long orderId, @Param("deliveryId") long deliveryId, @Param("tourId") long tourId);
 
 
+    @Transactional
+    @Query("select tourId from TourDelivery where deliveryId=:deliveryId")
+    long findTourIdByDeliveryId(@Param("deliveryId") long deliveryId);
+
+
 }

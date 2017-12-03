@@ -85,24 +85,4 @@ public class User implements Serializable{
 
     public User(){}
 
-    public boolean isAdmin(List<String> roles){
-        if(!roles.isEmpty()) {
-            for (int i = 0; i < roles.size(); i++) {
-                if (roles.get(i).equals("ROLE_ADMIN"))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isUser(List<String> roles){
-        if(!roles.isEmpty()) {
-            for (int i = 0; i < roles.size(); i++) {
-                if (roles.get(i).equals("ROLE_USER"))
-                    return true;
-            }
-        }
-        return false;
-    }
-
 }

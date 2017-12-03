@@ -79,8 +79,6 @@ public class DeliveryController {
     @PostMapping("/editDelivery")
     public String saveDelivery(@Param("delivery") Delivery delivery) {
 
-        System.out.println("get time: "+delivery.getDeliveryWindowEnd().getTime());
-        System.out.println("get delend: "+delivery.getDeliveryWindowEnd());
         deliveryRepository.save(delivery);
 
         return "redirect:/delivery";

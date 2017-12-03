@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,7 +28,9 @@ public class CustomUserDetailsService implements UserDetailsService{
         if(null == user){
             throw new UsernameNotFoundException("No user present with username: "+username);
         }else {
-            List<String> userRoles = userRoleRepository.findRoleByUserName(username);
+            String userRole = userRoleRepository.findRoleByUserName(user.getUserid());
+            List<String> userRoles = new ArrayList<String>();
+            userRoles.add(userRole);
             return new CustomUserDetails(user, userRoles);
         }
     }
