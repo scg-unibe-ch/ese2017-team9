@@ -31,6 +31,16 @@ public class TourController {
     @RequestMapping("/tour")
     public String tour(@RequestParam(value="filter", defaultValue="No Filter", required=false) String filter , Model model){
 
+        for(Tour t:tourRepository.findAll()){
+            List<String> deliveries = tourRepository.findDeliveryNameByTourId(t.getTourId());
+            //t.setDeliveriesInTour(deliveries);
+            String oneDel = "";
+            for(String s : deliveries){
+                oneDel += s + "#%";
+            }
+            t.setDeliveriesInTour(oneDel);
+            System.out.println(t.getDeliveriesInTour());
+        }
 
         if(filter.equals("No Filter")) {
             model.addAttribute("tours", tourRepository.findAll());
@@ -45,6 +55,7 @@ public class TourController {
 
         return "tour";
     }
+
 
     @RequestMapping("/editTour")
     public String editTour(@RequestParam(value="tourId", defaultValue = "-1") long tourId, Model model){
@@ -124,10 +135,12 @@ public class TourController {
         return new ModelAndView("redirect:/editTour?tourId=" + tourId);
     }
 
-    @RequestMapping("/showDeliveriesPopup")
-    public String showDeliveriesFromTour(@Param("tourId") Long tourId){
+    /*@RequestMapping("/showDeliveriesPopup")
+    public void showDeliveriesFromTour(@RequestParam(value="tourId", defaultValue = "-1") long tourId){
         System.out.println("something");
-        return "tour";
-    }
+        System.out.println(tourId);
+        List<String> deliveries = tourRepository.findDeliveryNameByTourId(tourId);
+        System.out.println(deliveries);
+    }*/
 
 }

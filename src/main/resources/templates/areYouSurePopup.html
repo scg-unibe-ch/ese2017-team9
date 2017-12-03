@@ -16,11 +16,14 @@
         <div class="modal-content">
 
             <p>are you sure</p>
+            <form th:action="@{/customer/remove(customerId=${customer.customerId})}" th:object="${customer}" method="post">
+                <input type="submit" value="Delete"/>
+            </form>
             <button name="exitCancel" type="button">dont delete</button>
         </div>
     </div>
 
-    <script>
+    <script th:inline="javascript">
         // Get the modal
         var popupSure = document.getElementById('surePopup');
 

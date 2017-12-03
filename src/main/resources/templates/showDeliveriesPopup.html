@@ -10,23 +10,40 @@
 <div th:fragment="showDelsPopup">
 
 
-    <button th:id="${tour.tourId}" type="button">Show Dels</button>
+    <!--<button th:action="@{/showDeliveriesPopup(tourId=${tour.tourId})}" th:id="${tour.tourId}" type="button">Show Dels</button>-->
 
-    <div id="myPopupShow" class="modal">
+    <!--<form th:action="@{/showDeliveriesPopup(tourId=${tour.tourId})}" th:object="${tour}" method="post">
+        <input th:id="${tour.tourId}" type="submit" value="Show Dels"/>
+    </form>-->
+
+    <button th:id="buttondel + ${tour.tourId}" type="button">Showing</button>
+
+    <div th:id="myPopup + ${tour.tourId}" class="modal">
         <div class="modal-content">
+            <div>
+                <table>
+                    <tr>
+                        <th>Delivierey name</th>
+                    </tr>
+                    <tr class="itemListItem">
+                        <td class="itemListItem" th:text="${tour.deliveriesInTour}"></td>
+                    </tr>
+                </table>
 
+            </div>
             <p>List of Deliveries</p>
             <button name="exitDeliveryList" type="button">Cancel</button>
         </div>
     </div>
 
     <script th:inline="javascript">
-        // Get the modal
-        var popupShow = document.getElementById('myPopupShow');
-
         var tourId = [[${tour.tourId}]];
+
+        // Get the modal
+        var popupShow = document.getElementById('myPopup' + tourId);
+
         // Get the button that opens the modal
-        var btnList = document.getElementById(tourId.toString());
+        var btnList = document.getElementById('buttondel' + tourId);
 
         // Get the span element that closes the modal
         var spanList = document.getElementsByName("exitDeliveryList")[0];
@@ -35,6 +52,7 @@
         btnList.onclick = function() {
             popupShow.style.display = "block";
         }
+
 
         // When the user clicks on span (x), close the modal
         spanList.onclick = function() {
@@ -47,6 +65,7 @@
                 popupShow.style.display = "none";
             }
         }
+
     </script>
 
 </div>

@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Time;
 import java.util.List;
@@ -33,7 +34,8 @@ public class Tour implements Serializable{
     @DateTimeFormat(pattern = "HH:mm")
     private Date usedTime;
     private long driver;
-
+    //private List<String> deliveriesFromTour;
+    private String deliveriesInTour;
 
     public long getTourId() { return tourId; }
     public void setTourId(long tourId) { this.tourId = tourId; }
@@ -52,6 +54,23 @@ public class Tour implements Serializable{
 
     public long getDriver() {return driver;}
     public void setDriver(long driver) {this.driver = driver;}
+
+    /*public List<String> getDeliveriesInTour() {return deliveriesFromTour;}
+    public void setDeliveriesInTour(List<String> deliveriesFromTour) {this.deliveriesFromTour = deliveriesFromTour;}*/
+
+    public List<String> getDeliveriesInTour() {
+        List<String> delsTour = new ArrayList<>();
+
+        String[] ary = this.deliveriesInTour.split("#%");
+        int j=0;
+        while(j<ary.length){
+            delsTour.add(ary[j]);
+            j++;
+        }
+        return delsTour;
+    }
+    public void setDeliveriesInTour(String deliveriesInTour) {this.deliveriesInTour = deliveriesInTour;}
+
     
 
     public Tour(String tourName, Date deliveryDay, Date estimatedTime, Date usedTime, long driver){
