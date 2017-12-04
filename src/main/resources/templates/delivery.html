@@ -63,9 +63,31 @@
                 </a>
             </td>
             <td>
-                <form th:action="@{/delivery/remove(deliveryId=${delivery.deliveryId})}" th:object="${currentDelivery}" method="post">
+                <!--<form th:action="@{/delivery/remove(deliveryId=${delivery.deliveryId})}" th:object="${currentDelivery}" method="post">
                     <input type="submit" value="Delete"/>
-                </form>
+                </form>-->
+                <input type="button" th:onclick="'toggle_visibility(\'surePopupDelivery' + ${delivery.deliveryId} + '\');'" value="Delete"/>
+                <script>
+                    function toggle_visibility(id){
+                        if (document.getElementById(id).style.display != "block"){
+                            document.getElementById(id).style.display = "block";
+                        } else {
+                            document.getElementById(id).style.display = "none";
+                        }
+                    }
+                </script>
+                <div th:id="surePopupDelivery + ${delivery.deliveryId}" class="modal">
+                    <div class="modal-content">
+                        Delete Delivery:
+                        <p th:text="${delivery.deliveryName}"></p>
+                        <p>Are you sure?</p>
+                        <p th:text="${delivery.isDeliveryErasable}"></p>
+                        <form th:action="@{/delivery/remove(deliveryId=${delivery.deliveryId})}" th:object="${currentDelivery}" method="post">
+                            <input type="submit" value="Delete"/>
+                        </form>
+                        <input type="button" th:onclick="'toggle_visibility(\'surePopupDelivery' + ${delivery.deliveryId} + '\');'" value="No"/>
+                    </div>
+                </div>
             </td>
         </tr>
 

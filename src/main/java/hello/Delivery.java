@@ -36,6 +36,10 @@ public class Delivery implements Serializable{
     private String status;
     private long customer;
     private String comment;
+    private boolean deleting;
+
+    public boolean getIsDeliveryErasable(){return deleting;}
+    public void setIsDeliveryErasable(boolean deleting){this.deleting = deleting;}
 
     public long getDeliveryId() {
         return deliveryId;

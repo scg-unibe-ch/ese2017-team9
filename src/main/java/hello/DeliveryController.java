@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class DeliveryController {
     @Autowired
@@ -49,6 +51,15 @@ public class DeliveryController {
             default:
                 model.addAttribute("deliveries", deliveryRepository.findAll());
 
+        }
+
+        for(Delivery d:deliveryRepository.findAll()){
+            List<String> tours=deliveryRepository.deliveryListErasable(d.getDeliveryId());
+            if(tours.isEmpty()){
+                d.setIsDeliveryErasable(true);
+            }else{
+                d.setIsDeliveryErasable(false);
+            }
         }
 
         return "delivery";
