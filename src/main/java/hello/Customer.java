@@ -22,6 +22,12 @@ public class Customer implements Serializable {
     private String city;
     private String phone;
     private String email;
+    private boolean deleting;
+
+    public boolean getIsCustomerErasable(){return deleting;}
+
+    public void setIsCustomerErasable(boolean deleting){this.deleting = deleting;}
+
 
     public long getCustomerId() {
         return customerId;

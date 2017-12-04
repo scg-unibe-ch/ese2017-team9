@@ -39,6 +39,7 @@ public class TourController {
                 oneDel += s + "#%";
             }
             t.setDeliveriesInTour(oneDel);
+            t.setIsTourErasable(deliveries.isEmpty());
         }
 
         if(filter.equals("No Filter")) {

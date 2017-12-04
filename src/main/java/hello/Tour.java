@@ -34,11 +34,14 @@ public class Tour implements Serializable{
     @DateTimeFormat(pattern = "HH:mm")
     private Date usedTime;
     private long driver;
-    //private List<String> deliveriesFromTour;
     private String deliveriesInTour;
+    private boolean deleting;
 
     public long getTourId() { return tourId; }
-    public void setTourId(long tourId) { this.tourId = tourId; }
+    public void setTourId(long tourId) { this.tourId = tourId;}
+
+    public boolean getIsTourErasable(){return deleting;}
+    public void setIsTourErasable(boolean deleting){this.deleting = deleting;}
 
     public String getTourName() {return tourName;}
     public void setTourName(String tourName) {this.tourName = tourName;}

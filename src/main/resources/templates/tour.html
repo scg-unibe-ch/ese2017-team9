@@ -28,7 +28,7 @@
             <th>Deliver Day</th>
             <th>Estimated Time</th>
             <th>User Time</th>
-            <!--<th>Driver</th>-->
+            <th>Driver</th>
             <th>Deliveries</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -38,7 +38,7 @@
             <td class="itemListItem" th:text="${tour.deliverDay}"></td>
             <td class="itemListItem" th:text="${{tour.estimatedTime}}"></td>
             <td class="itemListItem" th:text="${{tour.usedTime}}"></td>
-            <!--<td class="itemListItem" th:text="${driver.firstname + ' ' + driver.lastname}"></td>-->
+            <td class="itemListItem" th:text="${tour.driver}"></td>
 
             <!--<td>
                 <button id="showItemList" type="button">Show Deliveries</button>
@@ -78,9 +78,31 @@
                 </a>
             </td>
             <td>
-                <form th:action="@{/tour/remove(tourId=${tour.tourId})}" th:object="${tour}" method="post">
+                <!--<form th:action="@{/tour/remove(tourId=${tour.tourId})}" th:object="${tour}" method="post">
                     <input type="submit" value="Delete"/>
-                </form>
+                </form>-->
+                <input type="button" th:onclick="'toggle_visibility(\'surePopupTour' + ${tour.tourId} + '\');'" value="Delete"/>
+                <script>
+                    function toggle_visibility(id){
+                        if (document.getElementById(id).style.display != "block"){
+                            document.getElementById(id).style.display = "block";
+                        } else {
+                            document.getElementById(id).style.display = "none";
+                        }
+                    }
+                </script>
+                <div th:id="surePopupTour + ${tour.tourId}" class="modal">
+                    <div class="modal-content">
+                        Delete Tour:
+                        <p th:text="${tour.tourName}"></p>
+                        <p>Are you sure?</p>
+                        <p th:text="${tour.isTourErasable}"></p>
+                        <form th:action="@{/tour/remove(tourId=${tour.tourId})}" th:object="${tour}" method="post">
+                            <input type="submit" value="Delete"/>
+                        </form>
+                        <input type="button" th:onclick="'toggle_visibility(\'surePopupTour' + ${tour.tourId} + '\');'" value="No"/>
+                    </div>
+                </div>
             </td>
         </tr>
     </table>

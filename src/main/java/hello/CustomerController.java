@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Controller
 public class CustomerController {
@@ -20,6 +21,15 @@ public class CustomerController {
     @RequestMapping("/customer")
     public String customer(Model model){
         model.addAttribute("customers", customerRepository.findAll());
+
+        for(Customer c:customerRepository.findAll()){
+            List<String> deliveries=customerRepository.customerListErasable(c.getCustomerId());
+            if(deliveries.isEmpty()){
+                c.setIsCustomerErasable(true);
+            }else{
+                c.setIsCustomerErasable(false);
+            }
+        }
 
         return "customer";
     }
@@ -49,5 +59,6 @@ public class CustomerController {
         }
         return "editCustomer";
     }
+
 
 }

@@ -15,6 +15,9 @@ import java.util.List;
 // CRUD refers Create, Read, Update, Delete
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
+    @Query("select d.deliveryId from Delivery d, Customer c where ?1 in (d.customer)")
+    List<String> customerListErasable(long customerId);
+
 
     Customer findByCustomerId(Long customerId);
     List<Customer> findAll();
