@@ -39,7 +39,28 @@
                 <!--<form th:action="@{/customer/remove(customerId=${customer.customerId})}" th:object="${customer}" method="post">
                     <input type="submit" value="Delete"/>
                 </form>-->
-                <div th:replace="areYouSurePopup :: areYouSure">Sure?</div>
+                <!-- <div th:replace="areYouSurePopup :: areYouSure">Sure?</div>-->
+                <input type="button" th:onclick="'toggle_visibility(\'surePopup' + ${customer.customerId} + '\');'" value="Delete"/>
+                <script>
+                    function toggle_visibility(id){
+                        if (document.getElementById(id).style.display != "block"){
+                            document.getElementById(id).style.display = "block";
+                        } else {
+                            document.getElementById(id).style.display = "none";
+                        }
+                    }
+                </script>
+                <div th:id="surePopup + ${customer.customerId}" class="modal">
+                    <div class="modal-content">
+                        Delete Customer:
+                        <p th:text="${customer.company}"></p>
+                        <p>Are you sure?</p>
+                        <form th:action="@{/customer/remove(customerId=${customer.customerId})}" th:object="${customer}" method="post">
+                            <input type="submit" value="Delete"/>
+                        </form>
+                        <input type="button" th:onclick="'toggle_visibility(\'surePopup' + ${customer.customerId} + '\');'" value="No"/>
+                    </div>
+                </div>
             </td>
         </tr>
     </table>

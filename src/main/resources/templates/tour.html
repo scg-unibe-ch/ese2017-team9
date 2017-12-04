@@ -44,7 +44,32 @@
                 <button id="showItemList" type="button">Show Deliveries</button>
             </td>-->
             <td>
-                <div th:replace="showDeliveriesPopup :: showDelsPopup">ShowDels</div>
+                <input type="button" th:onclick="'toggle_visibility(\'myPopup' + ${tour.tourId} + '\');'" value="Show Deliveries"/>
+                <script>
+                    function toggle_visibility(id){
+                        if (document.getElementById(id).style.display != "block"){
+                            document.getElementById(id).style.display = "block";
+                        }else {
+                            document.getElementById(id).style.display = "none";
+                        }
+                    }
+                </script>
+                <!--<div th:replace="showDeliveriesPopup :: showDelsPopup">ShowDels</div>-->
+                <div th:id="myPopup + ${tour.tourId}" class="modal">
+                    <div class="modal-content">
+                        <div>
+                            <table>
+                                <tr>
+                                    <th th:text="${tour.tourName}"></th>
+                                </tr>
+                                <tr class="itemListItem">
+                                    <td class="itemListItem" th:text="${tour.deliveriesInTour}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <input type="button" th:onclick="'toggle_visibility(\'myPopup' + ${tour.tourId} + '\');'" value="Close"/>
+                    </div>
+                </div>
             </td>
 
             <td>

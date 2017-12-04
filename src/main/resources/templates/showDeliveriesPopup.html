@@ -23,15 +23,13 @@
             <div>
                 <table>
                     <tr>
-                        <th>Delivierey name</th>
+                        <th th:text="${tour.tourName}"></th>
                     </tr>
                     <tr class="itemListItem">
                         <td class="itemListItem" th:text="${tour.deliveriesInTour}"></td>
                     </tr>
                 </table>
-
             </div>
-            <p>List of Deliveries</p>
             <button name="exitDeliveryList" type="button">Cancel</button>
         </div>
     </div>
@@ -67,6 +65,7 @@
         }
 
     </script>
+
 
 </div>
 
