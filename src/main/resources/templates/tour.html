@@ -91,14 +91,19 @@
                 </script>
                 <div th:id="surePopupTour + ${tour.tourId}" class="modal">
                     <div class="modal-content">
-                        Delete Tour:
-                        <p th:text="${tour.tourName}"></p>
-                        <p>Are you sure?</p>
-                        <p th:text="${tour.isTourErasable}"></p>
-                        <form th:action="@{/tour/remove(tourId=${tour.tourId})}" th:object="${tour}" method="post">
-                            <input type="submit" value="Delete"/>
-                        </form>
-                        <input type="button" th:onclick="'toggle_visibility(\'surePopupTour' + ${tour.tourId} + '\');'" value="No"/>
+                        Delete Tour: <span th:text="${tour.tourName}"></span>
+                        <div th:if="${tour.isTourErasable} == false">
+                            <p>Failed! The tour has still some deliveries attached!</p>
+                            <input type="button" th:onclick="'toggle_visibility(\'surePopupTour' + ${tour.tourId} + '\');'" value="Cancel"/>
+                        </div>
+                        <div th:if="${tour.isTourErasable} == true">
+                            <p>Are you sure?</p>
+                            <form th:action="@{/tour/remove(tourId=${tour.tourId})}" th:object="${tour}" method="post">
+                                <input type="submit" value="Delete"/>
+                            </form>
+                            <input type="button" th:onclick="'toggle_visibility(\'surePopupTour' + ${tour.tourId} + '\');'" value="No"/>
+                        </div>
+
                     </div>
                 </div>
             </td>
