@@ -52,14 +52,18 @@
                 </script>
                 <div th:id="surePopupCustomer + ${customer.customerId}" class="modal">
                     <div class="modal-content">
-                        Delete Customer:
-                        <p th:text="${customer.company}"></p>
-                        <p>Are you sure?</p>
-                        <p th:text="${customer.isCustomerErasable}"></p>
-                        <form th:action="@{/customer/remove(customerId=${customer.customerId})}" th:object="${customer}" method="post">
-                            <input type="submit" value="Delete"/>
-                        </form>
-                        <input type="button" th:onclick="'toggle_visibility(\'surePopupCustomer' + ${customer.customerId} + '\');'" value="No"/>
+                        Delete Customer: <span th:text="${customer.company}"></span>
+                        <div th:if="${customer.isCustomerErasable} == true">
+                            <p>Are you sure?</p>
+                            <form th:action="@{/customer/remove(customerId=${customer.customerId})}" th:object="${customer}" method="post">
+                                <input type="submit" value="Delete"/>
+                            </form>
+                            <input type="button" th:onclick="'toggle_visibility(\'surePopupCustomer' + ${customer.customerId} + '\');'" value="No"/>
+                        </div>
+                        <div th:if="${customer.isCustomerErasable} == false">
+                            <p>Failed! The customer ist attached to an existing delivery!</p>
+                            <input type="button" th:onclick="'toggle_visibility(\'surePopupCustomer' + ${customer.customerId} + '\');'" value="Cancel"/>
+                        </div>
                     </div>
                 </div>
             </td>
