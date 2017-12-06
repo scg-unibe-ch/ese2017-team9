@@ -78,14 +78,18 @@
                 </script>
                 <div th:id="surePopupDelivery + ${delivery.deliveryId}" class="modal">
                     <div class="modal-content">
-                        Delete Delivery:
-                        <p th:text="${delivery.deliveryName}"></p>
-                        <p>Are you sure?</p>
-                        <p th:text="${delivery.isDeliveryErasable}"></p>
-                        <form th:action="@{/delivery/remove(deliveryId=${delivery.deliveryId})}" th:object="${currentDelivery}" method="post">
-                            <input type="submit" value="Delete"/>
-                        </form>
-                        <input type="button" th:onclick="'toggle_visibility(\'surePopupDelivery' + ${delivery.deliveryId} + '\');'" value="No"/>
+                        Delete Delivery: <span th:text="${delivery.deliveryName}"></span>
+                        <div th:if="${delivery.isDeliveryErasable} == true">
+                            <p>Are you sure?</p>
+                            <form th:action="@{/delivery/remove(deliveryId=${delivery.deliveryId})}" th:object="${currentDelivery}" method="post">
+                                <input type="submit" value="Delete"/>
+                            </form>
+                            <input type="button" th:onclick="'toggle_visibility(\'surePopupDelivery' + ${delivery.deliveryId} + '\');'" value="No"/>
+                        </div>
+                        <div th:if="${delivery.isDeliveryErasable} == false">
+                            <p>Failed! The delivery must have the status Open to delete.</p>
+                            <input type="button" th:onclick="'toggle_visibility(\'surePopupDelivery' + ${delivery.deliveryId} + '\');'" value="Cancel"/>
+                        </div>
                     </div>
                 </div>
             </td>
