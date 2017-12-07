@@ -49,6 +49,12 @@ public class UserController {
             default:
                 model.addAttribute("users", userRepository.findAll());
         }
+        for(User u : userRepository.findAll()){
+            List<String> tours = userRepository.findTourByUserid(u.getUserid());
+            u.setIsUserErasable(tours.isEmpty());
+        }
+
+
         return "user";
     }
 

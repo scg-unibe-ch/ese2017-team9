@@ -48,9 +48,40 @@
                 </a>
             </td>
             <td>
-                <form th:action="@{/user/remove(usrId=${user.userid})}" th:object="${user}" method="post">
-                    <input type="submit" value="Delete"/>
-                </form>
+                <input type="button" th:onclick="'toggle_visibility(\'surePopupUser' + ${user.userid} + '\');'" value="Delete"/>
+                <script>
+                    function toggle_visibility(id){
+                        if (document.getElementById(id).style.display != "block"){
+                            document.getElementById(id).style.display = "block";
+                        }else {
+                            document.getElementById(id).style.display = "none";
+                        }
+                    }
+                </script>
+                <!--<div th:replace="showDeliveriesPopup :: showDelsPopup">ShowDels</div>-->
+                <div th:id="surePopupUser + ${user.userid}" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            Delete User: <span th:text="${user.username}"></span>
+                        </div>
+                        <div th:if="${user.isUserErasable} == false">
+                            <p class="modal-body">Failed! The user has still some tours attached!</p>
+                            <div class="modal-footer">
+                                <input class="modal-button" type="button" th:onclick="'toggle_visibility(\'surePopupUser' + ${user.userid} + '\');'" value="Cancel"/>
+                            </div>
+                        </div>
+                        <div th:if="${user.isUserErasable} == true">
+                            <p class="modal-body">Are you sure?</p>
+                            <div class="modal-footer">
+                                <form th:action="@{/user/remove(usrId=${user.userid})}" th:object="${user}" method="post">
+                                    <input class="modal-button" style="float: left" type="submit" value="Delete"/>
+                                </form>
+                                <input class="modal-button" style="float: right" type="button" th:onclick="'toggle_visibility(\'surePopupUser' + ${user.userid} + '\');'" value="No"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </td>
         </tr>
 

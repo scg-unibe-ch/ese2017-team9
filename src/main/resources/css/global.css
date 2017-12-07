@@ -153,7 +153,7 @@ footer {
 
 .modal-header {
     padding: 2px 16px;
-    background-color: #552579;
+    background-color: #a791c1;
     color: white;
     font-size: 32px;
     font-weight: bold;
@@ -163,12 +163,12 @@ footer {
 
 .modal-footer {
     padding: 2px 16px;
-    background-color: #552579;
+    background-color: #a791c1;
     color: white;
 }
 
 .modal-button {
-    background-color: rgb(184,16,16);
+    background-color: #cc5c45;
     color: white;
     font-size: 16px;
     font-weight: bold;

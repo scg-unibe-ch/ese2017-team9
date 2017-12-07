@@ -36,6 +36,8 @@ public class Tour implements Serializable{
     private long driver;
     private String deliveriesInTour;
     private boolean deleting;
+    private String driverFirstName;
+    private String driverLastName;
 
     public long getTourId() { return tourId; }
     public void setTourId(long tourId) { this.tourId = tourId;}
@@ -58,8 +60,12 @@ public class Tour implements Serializable{
     public long getDriver() {return driver;}
     public void setDriver(long driver) {this.driver = driver;}
 
-    /*public List<String> getDeliveriesInTour() {return deliveriesFromTour;}
-    public void setDeliveriesInTour(List<String> deliveriesFromTour) {this.deliveriesFromTour = deliveriesFromTour;}*/
+    public String getDriverFirstName() {return driverFirstName;}
+    public void setDriverFirstName(String driverFirstName) {this.driverFirstName = driverFirstName;}
+
+    public String getDriverLastName() {return driverLastName;}
+    public void setDriverLastName(String driverLastName) {this.driverLastName = driverLastName;}
+
 
     public List<String> getDeliveriesInTour() {
         List<String> delsTour = new ArrayList<>();

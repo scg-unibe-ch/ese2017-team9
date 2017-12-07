@@ -38,6 +38,11 @@ public interface UserRepository extends CrudRepository<User, Long> {
    @Query("select u from User u, UserRole ur where u.userid = ur.userid and ur.role = :role")
    List<User> findAllUserByRole(@Param("role") String role);
 
+   @Query("select t.tourId from Tour t, User u where ?1 in (t.driver)")
+   List<String> findTourByUserid(long userId);
+
+
+
 
 
 }

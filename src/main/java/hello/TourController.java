@@ -40,6 +40,8 @@ public class TourController {
             }
             t.setDeliveriesInTour(oneDel);
             t.setIsTourErasable(deliveries.isEmpty());
+            t.setDriverFirstName(tourRepository.findDriverFirstNameByTourId(t.getTourId()));
+            t.setDriverLastName(tourRepository.findDriverLastNameByTourId(t.getTourId()));
         }
 
         if(filter.equals("No Filter")) {

@@ -22,6 +22,7 @@ public class User implements Serializable{
     private String email;
     private String password;
     private boolean locked;
+    public boolean deleting;
 
 
     public long getUserid() {
@@ -63,6 +64,13 @@ public class User implements Serializable{
     }
     public void setLocked(boolean locked) {
         this.locked = locked;
+    }
+
+    public boolean getIsUserErasable() {
+        return deleting;
+    }
+    public void setIsUserErasable(boolean deleting) {
+        this.deleting = deleting;
     }
 
     public User(User user){
