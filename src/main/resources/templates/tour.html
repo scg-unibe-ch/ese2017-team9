@@ -28,6 +28,7 @@
             <th>Deliver Day</th>
             <th>Estimated Time</th>
             <th>User Time</th>
+            <!--<th>Driver</th>-->
             <th>Deliveries</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -37,7 +38,7 @@
             <td class="itemListItem" th:text="${tour.deliverDay}"></td>
             <td class="itemListItem" th:text="${{tour.estimatedTime}}"></td>
             <td class="itemListItem" th:text="${{tour.usedTime}}"></td>
-
+            <!--<td class="itemListItem" th:text="${tour.deliverDay}"></td>-->
             <!--<td>
                 <button id="showItemList" type="button">Show Deliveries</button>
             </td>-->
@@ -55,17 +56,19 @@
                 <!--<div th:replace="showDeliveriesPopup :: showDelsPopup">ShowDels</div>-->
                 <div th:id="myPopup + ${tour.tourId}" class="modal">
                     <div class="modal-content">
-                        <div>
+                        <div class="modal-header">
+                            <p th:text="${tour.tourName}"></p>
+                        </div>
+                        <div class="modal-body">
                             <table>
-                                <tr>
-                                    <th th:text="${tour.tourName}"></th>
-                                </tr>
                                 <tr class="itemListItem" th:each="delivery : ${tour.deliveriesInTour}">
                                     <td th:text="${delivery}"></td>
                                 </tr>
                             </table>
                         </div>
-                        <input type="button" th:onclick="'toggle_visibility(\'myPopup' + ${tour.tourId} + '\');'" value="Close"/>
+                        <div class="modal-footer">
+                            <input class="modal-button" type="button" th:onclick="'toggle_visibility(\'myPopup' + ${tour.tourId} + '\');'" value="Close"/>
+                        </div>
                     </div>
                 </div>
             </td>

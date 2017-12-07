@@ -34,14 +34,20 @@
 
         <!-- Modal content -->
         <div class="modal-content">
-            <p>Change Password</p>
+            <div class="modal-header">
+                <p>Change Password</p>
+            </div>
             <form th:action="@{/aui}" th:object="${loggedInUser}" method="post">
-                <input type="hidden" name="username" th:field="*{username}"/>
-                <div>old Password: <input type="password" name="oldPassword"/></div>
-                <div>new Password: <input type="password" name="newPassword"/></div>
-                <div>confirm new Password<input type="password" name="confirm"/></div>
-                <button name="exitmodal" type="button">Cancel</button>
-                <button th:action="@{/aui(username=${username}, oldPassword=${oldPassword}, newPassword=${newPassword}, confirm=${confirm})}" type="submitPw">Save Password</button>
+                <div class="modal-body">
+                    <input type="hidden" name="username" th:field="*{username}"/>
+                    <div>Old Password: <input type="password" name="oldPassword"/></div>
+                    <div>New Password: <input type="password" name="newPassword"/></div>
+                    <div>Confirm new Password<input type="password" name="confirm"/></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-button" style="width: 150px;" th:action="@{/aui(username=${username}, oldPassword=${oldPassword}, newPassword=${newPassword}, confirm=${confirm})}" type="submitPw">Save Password</button>
+                    <button class="modal-button" style="width: 150px;" name="exitmodal" type="button">Cancel</button>
+                </div>
             </form>
         </div>
 
