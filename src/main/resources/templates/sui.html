@@ -7,8 +7,9 @@
 </head>
 <body>
 <div class="header" th:fragment="header">
+    <div id="overlay"></div>
     <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a style="font-size: 35px;" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <b>DELSAY</b>
         <a th:href="@{/driverTours}" target="_self">My Tours</a>
         <a href="myProfile" target="_self" >My Profile</a>
@@ -16,22 +17,12 @@
         <a id="changePwLink">Change Password</a>
 
         <form class="logoutbtn"  th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
+            <input style="width: 100%; font-size: 15px; text-align: left; padding-left: 32px;" type="submit" value="Sign Out"/>
         </form>
 
     </div>
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-
-    <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-    </script>
 
 
     <!-- The Modal -->
@@ -52,6 +43,17 @@
 
     </div>
     <script>
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+
         /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
         function myFunction() {
@@ -67,9 +69,7 @@
                 }
             }
         }
-    </script>
 
-    <script>
         // Get the modal
         var modal = document.getElementById('myModal');
 
@@ -81,6 +81,7 @@
 
         // When the user clicks the button, open the modal
         btn.onclick = function() {
+            closeNav();
             modal.style.display = "block";
         }
 
