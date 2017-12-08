@@ -6,6 +6,41 @@
     <link rel="stylesheet" type="text/css" media="all"
           href="../css/global.css" th:src="@{/css/global.css}" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <style>
+
+        div.login-left{
+            width: 40%;
+            text-align: right;
+            float:left;
+            padding-right: 3px;
+        }
+
+        div.login-right{
+            width: 55%;
+            text-align: left;
+            float:right;
+        }
+
+        @media(max-width: 600px){
+
+            div.login-left{
+                width: 100%;
+                text-align: left;
+                float:left;
+                padding-right: 3px;
+            }
+
+            div.login-right{
+                width: 100%;
+                text-align: left;
+                float:none;
+            }
+
+        }
+
+    </style>
+
 </head>
 <body>
 <header class="header">
@@ -34,17 +69,17 @@
     <form th:action="@{/login}" method="post">
         <div style="width: 95%; text-align:left;">
             <div>
-                <label>User Name: </label>
-                <label><input type="text" name='username'/> </label>
+                <div class="login-left"><label>User Name</label></div>
+                <div class="login-right"><label><input type="text" name='username'/> </label></div>
             </div>
         </div>
         <div style="width: 95%; text-align:left;">
             <div>
-                <label>Password: </label>
-                <label><input type="password" name="password"/> </label>
+                <div class="login-left"><label>Password</label></div>
+                <div class="login-right"><label><input type="password" name="password"/> </label> </div>
             </div>
         </div>
-        <div class="loginbtn"><input type="submit" value="Sign In"/></div>
+        <div style="width: 60%; text-align: left; float:right;"><div class="loginbtn"><input type="submit" value="Sign In"/></div></div>
     </form>
     <br class="clear" />
 
