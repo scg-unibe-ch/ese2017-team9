@@ -92,6 +92,7 @@ public class DriverController {
     @RequestMapping("/driverDeliveryStatus")
     public String driverDeliveryStatus(@RequestParam("deliveryId") long deliveryId ,Model model){
         model.addAttribute("delivery", deliveryRepository.findByDeliveryId(deliveryId));
+        model.addAttribute("tourId", tourDeliveryRepository.findTourIdByDeliveryId(deliveryId));
         return "driverDeliveryStatus";
     }
 

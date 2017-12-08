@@ -8,6 +8,9 @@
     <link rel="stylesheet" type="text/css" media="all"
           href="../css/globalMobile.css" th:src="@{/css/globalMobile.css}" />
 
+    <style>
+        body{font-size: 15px; }
+    </style>
 </head>
 <body>
 
@@ -15,7 +18,7 @@
     <div th:replace="sui :: header" >Header</div>
     <div class="main-content-driver">
 
-    <div th:text="${delivery.deliveryName} + 'current Status: ' + ${delivery.status}"></div>
+    <div style="padding-left: 18px; padding-top: 10px; font-weight: bold;" th:text="${delivery.deliveryName} + ' current Status: ' + ${delivery.status}"></div>
 
     <form th:action="@{/driverDeliveryStatus}" th:object="${delivery}" method="post">
         <input type="hidden" name="deliveryId" th:value="*{deliveryId}"/>
@@ -24,7 +27,7 @@
         <div class="accordion">Open</div>
         <div class="panel">
             <div>Comment: <input type="text" name="comment" th:value="*{comment}"/></div>
-            <button th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
+            <button style="width: 100%; margin-right: 18px; margin-top:10px; height: 40px; background-color: #aaa;" th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
         </div>
     </form>
 
@@ -35,7 +38,7 @@
         <div class="accordion">Scheduled</div>
         <div class="panel">
             <div>Comment: <input type="text" name="comment" th:value="*{comment}"/></div>
-            <button th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
+            <button style="width: 100%; margin-right: 18px; margin-top:10px; height: 40px; background-color: #aaa;" th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
         </div>
     </form>
 
@@ -47,7 +50,7 @@
         <div class="accordion">Delivery Success</div>
         <div class="panel">
             <div>Comment: <input type="text" name="comment" th:value="*{comment}"/></div>
-            <button th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
+            <button style="width: 100%; margin-right: 18px; margin-top:10px; height: 40px; background-color: #aaa;" th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
         </div>
     </form>
 
@@ -59,7 +62,7 @@
         <div class="accordion">Delivery Failed</div>
         <div class="panel">
             <div>Comment: <input type="text" name="comment" th:value="*{comment}"/></div>
-            <button th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
+            <button style="width: 100%; margin-right: 18px; margin-top:10px; height: 40px; background-color: #aaa;" th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
         </div>
     </form>
 
@@ -71,7 +74,7 @@
         <div class="accordion">No Delivery Possible</div>
         <div class="panel">
             <div>Comment: <input type="text" name="comment" th:value="*{comment}"/></div>
-            <button th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
+            <button style="width: 100%; margin-right: 18px; margin-top:10px; height: 40px; background-color: #aaa;" th:action="@{/driverDeliveryStatus}" type="submit">Save Status and Comment</button>
         </div>
     </form>
 
@@ -81,7 +84,7 @@
 
         for (i = 0; /*<![CDATA[*/i < acc.length/*]]>*/; i++) {
             acc[i].onclick = function(){
-                this.classList.toggle("active");
+
                 var panel = this.nextElementSibling;
                 if (panel.style.display == 'block') {
                     panel.style.display = 'none';
@@ -95,8 +98,10 @@
             }
         }
     </script>
+        <a style="float:left; bottom: 0; position:fixed; text-align: center; font-size: 15px; border: 1px solid black; color:black; width: 100%; padding-top: 10px; padding-bottom:10px; background-color: #aaa;" th:href="@{/driverTourDeliveries(tourId=${tourId})}">Back</a>
 
-</div>
+
+    </div>
 </div>
 
 </body>
