@@ -96,5 +96,10 @@ table.displayItemsDriver {
     font-size: 15px;
 }
 
+.main-content-driver{
+    margin-top: 40px;
+    width: 100%;
+}
+
 
 

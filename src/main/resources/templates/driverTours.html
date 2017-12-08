@@ -12,7 +12,7 @@
 <body>
 
 <div th:replace="sui :: header" >Header</div>
-<div class="main-content">
+<div class="main-content-driver">
 <div th:each="tour : ${tours}" th:if="tours != null">
     <a th:href="@{/driverTourDeliveries(tourId=${tour.tourId})}" >
         <table class="displayItemsDriver">
