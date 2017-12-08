@@ -17,7 +17,7 @@
 <div th:if="${role} == 'ROLE_USER'">
     <div th:replace="sui :: header">Header</div>
 </div>
-
+<div class="main-content">
 <form th:action="@{/editMyProfile}" th:object="${loggedInUser}" method="post">
     <div> <input type="hidden" name="username" th:field="*{username}"/></div>
     <div>First Name: <input type="text" name="firstname" th:field="*{firstname}"/></div>
@@ -36,7 +36,7 @@
     </div>
 
 </form>
-
+</div>
 
 </body>
 </html>

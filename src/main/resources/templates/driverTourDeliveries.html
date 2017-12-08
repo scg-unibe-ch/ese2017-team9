@@ -15,43 +15,40 @@
 </head>
 <body>
 
-<div th:replace="sui :: header" >Header</div>
-
+<div th:replace="sui :: header">Header</div>
+<div class="main-content">
 <form th:action="@{/driverTourDeliveries}" th:object="${tour}" method="post">
 
 
-    <ul id="items2" class="items">
+    <ul id="items2" class="items" style="padding-left: 0px;">
         <li style="list-style-type: none;" th:each="delivery : ${deliveries}">
-
+            <span style="curser:all-scroll; float:left" class="handle">::</span>
             <input type="hidden" name="orderIds" th:value="${delivery.deliveryId}"/>
-            <table class="searchItem">
+            <a th:href="@{driverDeliveryStatus(deliveryId=${delivery.deliveryId})}">
+                <table class="displayItemsDriver">
 
-                <tr >
-                    <td th:text="${delivery.deliveryName}"></td>
-                </tr>
-                <tr >
-                    <td th:text="${delivery.recipient}"></td>
-                </tr>
-                <tr >
-                    <td th:text="${delivery.status}"></td>
-                </tr>
+                    <tr >
+                        <td style="font-weight: bold;" th:text="${delivery.deliveryName}"></td>
+                    </tr>
+                    <tr >
+                        <td th:text="${delivery.recipient}"></td>
+                    </tr>
+                    <tr >
+                        <td th:text="'Status: ' + ${delivery.status}"></td>
+                    </tr>
+                    <tr >
+                        <td th:text="'Comment: ' + ${delivery.comment}"></td>
+                    </tr>
 
-                <tr>
-                     <td>
-                         <a th:href="@{driverDeliveryStatus(deliveryId=${delivery.deliveryId})}">
-                             <button name="edit" type="button">Status/Comment</button>
-                         </a>
-                     </td>
-                </tr>
-
-            </table>
+                </table>
+            </a>
 
         </li>
     </ul>
 
     <script>
         $(function () {
-            $("#items2").sortable({
+            $("#items2").sortable({ handle: '.handle' })({
                 connectWith: "#items2",
                 start: function (event, ui) {
                     ui.item.toggleClass("highlight");
@@ -73,7 +70,7 @@
 
 </form>
 
-
+</div>
 
 </body>
 </html>

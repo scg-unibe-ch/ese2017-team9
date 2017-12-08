@@ -8,7 +8,7 @@
 <body>
 
 <div th:replace="aui :: header" >Header</div>
-
+<div class="main-content">
 <form th:action="@{/editUser}" th:object="${currentUser}" method="post">
     <input type="hidden" name="userid" th:field="*{userid}"/>
     <input type="hidden" th:field="*{password}" />
@@ -35,6 +35,6 @@
     </div>
 </form>
 
-
+</div>
 </body>
 </html>

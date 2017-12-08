@@ -49,7 +49,7 @@ public class TourController {
             model.addAttribute("filter", filter);
         }
         else {
-            model.addAttribute("tours", tourRepository.findAllByDriver(Long.parseLong(filter)));
+            model.addAttribute("tours", tourRepository.findAllByDriverOrderByDeliverDay(Long.parseLong(filter)));
             model.addAttribute("filter", Long.parseLong(filter));
         }
         model.addAttribute("drivers", userRepository.findAllUserByRole("ROLE_USER"));

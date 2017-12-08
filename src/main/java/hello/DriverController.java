@@ -33,7 +33,7 @@ public class DriverController {
     public String loadTours(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userRepository.findByUsername(auth.getName());
-        model.addAttribute("tours", tourRepository.findAllByDriver(currentUser.getUserid()));
+        model.addAttribute("tours", tourRepository.findAllByDriverOrderByDeliverDay(currentUser.getUserid()));
 
         return "driverTours";
     }

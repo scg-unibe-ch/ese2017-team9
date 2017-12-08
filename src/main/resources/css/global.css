@@ -12,6 +12,13 @@ body {
     color: white;
     display: inline-table;
     font-size: 18px;
+    position: fixed;
+    top: 0;
+}
+
+div.main-content {
+    margin-top: 60px;
+    width: 100%;
 }
 
 .header-left{
@@ -24,9 +31,7 @@ body {
     padding-left: 14px;
 }
 
-.header-right{
-    float:right;
-}
+
 
 .header-right a{
     padding: 14px;
@@ -84,7 +89,9 @@ footer {
     border: 0;
 }
 
-/* Drop Menu*/
+/*-----------------------------------------------------------------------------
+ Drop Menu
+ -------------------------------------------------------------------------------*/
 
 .dropbtn {
     cursor: pointer;
@@ -99,11 +106,9 @@ footer {
     font-family: "Berlin Sans FB", sans-serif;
 }
 
-
-
 .dropdown-content {
     display: none;
-    position: absolute;
+    position: fixed;
     right:16px;
     padding-right: 5px;
     background-color: #f9f9f9;
@@ -112,6 +117,13 @@ footer {
 }
 
 .dropdown-content a {
+    float: none;
+    padding: 12px;
+    display: block;
+    text-align: right;
+    color: black;
+}
+.dropdown-content input {
     float: none;
     padding: 12px;
     display: block;
@@ -129,9 +141,14 @@ footer {
     background-color: inherit;
 }
 
-.show {
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown-content input:hover {background-color: #f1f1f1}
+
+.header-right:hover .dropdown-content {
     display: block;
 }
+
 
 /* The Modal (background) */
 .modal {
@@ -269,12 +286,6 @@ div.showItem {
 /*------------------------------------------------------------------------------------------
  SEARCH
  --------------------------------------------------------------------------------------------*/
-
-div.itemList {
-    width: 100%;
-    background-color: lightgray;
-
-}
 
 table.itemListItem {
     width: 100%

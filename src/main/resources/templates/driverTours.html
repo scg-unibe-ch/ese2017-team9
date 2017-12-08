@@ -12,18 +12,20 @@
 <body>
 
 <div th:replace="sui :: header" >Header</div>
-
+<div class="main-content">
 <div th:each="tour : ${tours}" th:if="tours != null">
     <a th:href="@{/driverTourDeliveries(tourId=${tour.tourId})}" >
-        <table class="searchItem">
+        <table class="displayItemsDriver">
             <tr>
-                <td th:text="${tour.tourName}"></td>
+                <td style="font-weight: bold;" th:text="${tour.tourName}"></td>
+            </tr>
+            <tr>
+                <td th:text="${tour.deliverDay}"></td>
             </tr>
         </table>
     </a>
 </div>
-
-
+</div>
 
 </body>
 </html>

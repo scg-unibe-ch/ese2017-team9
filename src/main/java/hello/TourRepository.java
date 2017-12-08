@@ -23,7 +23,7 @@ public interface TourRepository extends CrudRepository<Tour, Long> {
    Tour findByTourId(long tourId);
    List<Tour> findAll();
    void removeByTourId(long tourId);
-   List<Tour> findAllByDriver(long driverId);
+   List<Tour> findAllByDriverOrderByDeliverDay(long driverId);
    Tour findByTourName(String tourname);
 
 }

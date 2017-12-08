@@ -8,7 +8,7 @@
 <body>
 
 <div th:replace="aui :: header" >Header</div>
-
+<div class="main-content">
 <form th:action="@{/editCustomer}" th:object="${currentCustomer}" method="post">
     <input type="hidden" name="customerId" th:field="*{customerId}"/>
     <div>Company: <input type="text" maxlength="255" name="company" th:field="*{company}"/></div>
@@ -26,7 +26,7 @@
     <button th:action="@{/editCustomer(customer=${currentCustomer})}" type="submit">Save</button>
 
 </form>
-
+</div>
 
 </body>
 </html>

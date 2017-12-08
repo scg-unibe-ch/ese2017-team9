@@ -12,9 +12,10 @@
 <body>
 
 <div>
+    <div th:replace="sui :: header" >Header</div>
+    <div class="main-content">
 
-
-    <div th:text="'Current Status: ' + ${delivery.status}"></div>
+    <div th:text="${delivery.deliveryName} + 'current Status: ' + ${delivery.status}"></div>
 
     <form th:action="@{/driverDeliveryStatus}" th:object="${delivery}" method="post">
         <input type="hidden" name="deliveryId" th:value="*{deliveryId}"/>
@@ -95,6 +96,7 @@
         }
     </script>
 
+</div>
 </div>
 
 </body>

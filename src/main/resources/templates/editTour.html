@@ -14,7 +14,7 @@
 <body>
 
 <div th:replace="aui :: header" >Header</div>
-
+<div class="main-content">
 <form th:action="@{/editTour}" th:object="${currentTour}" method="post">
     <input type="hidden" name="tourId" th:field="*{tourId}"/>
     <div>Tour Name: <input type="text" maxlength="255" name="tourId" th:field="*{tourName}"/></div>
@@ -84,6 +84,6 @@
     <div th:replace="addDeliveryPopUp :: deliveryPopup" >AddDeliveriesInTour</div>
 
 </div>
-
+</div>
 </body>
 </html>
