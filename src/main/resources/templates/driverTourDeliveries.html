@@ -12,6 +12,13 @@
     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
 
+    <style>
+        .highlight {
+            border: 1px solid white;
+            background-color: #a791c1;
+            height: 100px;
+        }
+    </style>
 </head>
 <body>
 
@@ -20,12 +27,15 @@
 <form th:action="@{/driverTourDeliveries}" th:object="${tour}" method="post">
 
 
-    <ul id="items2" class="items" style="padding-left: 0px;">
+    <ul id="items2" style="padding-left: 0px;">
         <li style="list-style-type: none;" th:each="delivery : ${deliveries}">
-            <span style="curser:all-scroll; float:left" class="handle">::</span>
+
             <input type="hidden" name="orderIds" th:value="${delivery.deliveryId}"/>
             <a th:href="@{driverDeliveryStatus(deliveryId=${delivery.deliveryId})}">
                 <table class="displayItemsDriver">
+                    <tr>
+                        <td class="handle" style="width:100%; text-align: center; background-color: #aaa;">:::</td>
+                    </tr>
 
                     <tr >
                         <td style="font-weight: bold;" th:text="${delivery.deliveryName}"></td>
@@ -45,18 +55,9 @@
 
         </li>
     </ul>
-
     <script>
         $(function () {
-            $("#items2").sortable({ handle: '.handle' })({
-                connectWith: "#items2",
-                start: function (event, ui) {
-                    ui.item.toggleClass("highlight");
-                },
-                stop: function (event, ui) {
-                    ui.item.toggleClass("highlight");
-                }
-            });
+            $("#items2").sortable({ handle: '.handle', placeholder: "highlight" });
             $("#items2").disableSelection();
         });
     </script>
