@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import java.util.Date;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +31,20 @@ public class DriverController {
 
 
     @RequestMapping("/driverTours")
-    public String loadTours(Model model) {
+    public String loadTours(@RequestParam(value = "all", defaultValue = "false") boolean all, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userRepository.findByUsername(auth.getName());
-        model.addAttribute("tours", tourRepository.findAllByDriverOrderByDeliverDay(currentUser.getUserid()));
+        List<Tour> tours = tourRepository.findAllByDriverOrderByDeliverDay(currentUser.getUserid());
+        if(all)
+            model.addAttribute("tours", tours);
+        else{
+            Date today = new Date();
+            for(Tour tour : tours){
+                if(tour.getDeliverDay().before(today))
+                    tours.remove(tour);
+            }
+            model.addAttribute("tours", tours);
+        }
 
         return "driverTours";
     }

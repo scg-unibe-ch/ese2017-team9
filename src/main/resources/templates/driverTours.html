@@ -13,7 +13,11 @@
 
 <div th:replace="sui :: header" >Header</div>
 <div class="main-content-driver">
-<div th:each="tour : ${tours}" th:if="tours != null">
+
+    <a style="float:left; text-align: center; font-size: 15px; border: 1px solid black; color:black; width: 49%; padding-top: 10px; padding-bottom:10px; background-color: #aaa;" th:href="@{/driverTours}">Upcoming Tours</a>
+    <a style="float:right; text-align: center; font-size: 15px; border: 1px solid black; color:black; width: 49%; padding-top: 10px; padding-bottom:10px; background-color: #aaa;" th:href="@{/driverTours(all=true)}">All Tours</a>
+
+        <div th:each="tour : ${tours}" th:if="tours != null">
     <a th:href="@{/driverTourDeliveries(tourId=${tour.tourId})}" >
         <table class="displayItemsDriver">
             <tr>
