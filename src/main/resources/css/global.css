@@ -47,6 +47,12 @@ div.login{
     color: black;
     text-align: center;
 }
+
+@media(max-width: 600px){
+    div.login{
+        width: 80%;
+    }
+}
 .logoutbtn input[type=submit] {
     font-family: "Berlin Sans FB", sans-serif;
     color: black;
