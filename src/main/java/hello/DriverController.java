@@ -1,6 +1,7 @@
 package hello;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
@@ -106,6 +107,32 @@ public class DriverController {
         return new ModelAndView("redirect:/driverTourDeliveries?tourId=" + tourId);
     }
 
+    @Modifying
+    @PostMapping("/sui")
+    public ModelAndView savePasswordSui(@Param("oldPassword") String oldPassword, @Param("newPassword") String newPassword, @Param("confirm") String confirm) {
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(auth.getName());
+        System.out.println("new password");
+        if(oldPassword.equals(user.getPassword())){
+            if(newPassword.equals(confirm) && !newPassword.equals("")) {
+                user.setPassword(confirm);
+            }
+            else
+                return new ModelAndView("redirect:myProfile?error");
+        }else{
+            return new ModelAndView("redirect:myProfile?error");
+        }
+
+        try {
+            userRepository.save(user);
+        }
+        catch (DataIntegrityViolationException ex) {
+            System.out.println("Exception: " + ex.toString());
+            return new ModelAndView("redirect:editMyProfile?error");
+        }
+
+        return new ModelAndView("redirect:/myProfile?success");
+    }
 
 }

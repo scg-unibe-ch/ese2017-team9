@@ -67,18 +67,20 @@ public class MyProfileController {
 
     @Modifying
     @PostMapping("/aui")
-    public ModelAndView savePassword(@Param("username") String username, @Param("oldPassword") String oldPassword, @Param("newPassword") String newPassword, @Param("confirm") String confirm) {
+    public ModelAndView savePasswordAui(@Param("username") String username, @Param("oldPassword") String oldPassword, @Param("newPassword") String newPassword, @Param("confirm") String confirm) {
 
         User user = userRepository.findByUsername(username);
 
         user.setUserid(userRepository.findByUsername(user.getUsername()).getUserid());
 
         if(oldPassword.equals(user.getPassword())){
-            if(newPassword.equals(confirm) && !newPassword.equals("")) {
+            if(newPassword.equals(confirm) && !newPassword.equals(""))
                 user.setPassword(confirm);
-            }
+            else
+                return new ModelAndView("redirect:myProfile?error");
+
         }else{
-            System.out.println("Password was not right");
+            return new ModelAndView("redirect:myProfile?error");
         }
 
         try {
@@ -86,9 +88,10 @@ public class MyProfileController {
         }
         catch (DataIntegrityViolationException ex) {
             System.out.println("Exception: " + ex.toString());
-            return new ModelAndView("redirect:editMyProfile?username=" + user.getUsername() + "&error");
+            return new ModelAndView("redirect:editMyProfile?error");
         }
 
-        return new ModelAndView("redirect:/myProfile");
+        return new ModelAndView("redirect:/myProfile?success");
     }
+
 }

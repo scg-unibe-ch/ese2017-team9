@@ -201,6 +201,27 @@ footer {
     width: 100px;
 }
 
+@media (max-width: 600px){
+
+    .modal-content{
+        font-size: 15px;
+        width: 90%;
+    }
+
+    .modal-header{
+        font-size: 15px;
+
+    }
+
+    .modal-body{
+        font-size: 15px;
+    }
+
+    .modal-footer{
+        font-size: 15px;
+    }
+}
+
 
 /* Popup show on click*/
 .popupShow {
