@@ -27,7 +27,7 @@
 <form th:action="@{/driverTourDeliveries}" th:object="${tour}" method="post">
 
 
-    <ul id="items2" style="padding-left: 0px;">
+    <ul id="items2" style="padding-left: 0px; margin-bottom: 40px;">
         <li style="list-style-type: none;" th:each="delivery : ${deliveries}">
 
             <input type="hidden" name="orderIds" th:value="${delivery.deliveryId}"/>
@@ -62,13 +62,14 @@
         });
     </script>
 
-    <a th:href="@{driverTours}">
-        <button name="back" type="button">Back</button>
-    </a>
+    <div style="bottom: 0; position:fixed; overflow: hidden; width:100%;">
+        <a th:href="@{driverTours}">
+            <button style="float:left; width: 50%; height: 40px; background-color: #aaa;" name="back" type="button">Back</button>
+        </a>
 
-    <input type="hidden" name="tourId" th:value="${tour.tourId}"/>
-    <button th:action="@{/driverTourDeliveries(tourId=${tour.tourId})}" type="submit">Save</button>
-
+        <input type="hidden" name="tourId" th:value="${tour.tourId}"/>
+        <button style="float:right; width: 50%; height: 40px; background-color: #aaa;" th:action="@{/driverTourDeliveries(tourId=${tour.tourId})}" type="submit">Save</button>
+    </div>
 </form>
 
 </div>
