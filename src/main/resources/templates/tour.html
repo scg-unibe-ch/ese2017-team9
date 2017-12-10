@@ -9,7 +9,7 @@
 <div th:replace="aui :: header">Header</div>
 <div class="main-content">
     <div class="new">
-        <a th:href="@{editTour}">new Tour</a>
+        <a th:href="@{editTour}">+ Tour</a>
     </div>
 
     <form th:action="@{/tour}" th:object="${filter}">
@@ -63,7 +63,7 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <input class="modal-button" type="button" th:onclick="'toggle_visibility(\'myPopup' + ${tour.tourId} + '\');'" value="Close"/>
+                            <input class="modal-button" style="float: right" type="button" th:onclick="'toggle_visibility(\'myPopup' + ${tour.tourId} + '\');'" value="Close"/>
                         </div>
                     </div>
                 </div>
@@ -89,17 +89,23 @@
                 </script>
                 <div th:id="surePopupTour + ${tour.tourId}" class="modal">
                     <div class="modal-content">
-                        Delete Tour: <span th:text="${tour.tourName}"></span>
+                        <div class="modal-header">
+                            Delete Tour: <span th:text="${tour.tourName}"></span>
+                        </div>
                         <div th:if="${tour.isTourErasable} == false">
-                            <p>Failed! The tour has still some deliveries attached!</p>
-                            <input type="button" th:onclick="'toggle_visibility(\'surePopupTour' + ${tour.tourId} + '\');'" value="Cancel"/>
+                            <p class="modal-body" >Failed! The tour has still some deliveries attached!</p>
+                            <div class="modal-footer">
+                                <input class="modal-button" style="float: right" type="button" th:onclick="'toggle_visibility(\'surePopupTour' + ${tour.tourId} + '\');'" value="Cancel"/>
+                            </div>
                         </div>
                         <div th:if="${tour.isTourErasable} == true">
-                            <p>Are you sure?</p>
-                            <form th:action="@{/tour/remove(tourId=${tour.tourId})}" th:object="${tour}" method="post">
-                                <input type="submit" value="Delete"/>
-                            </form>
-                            <input type="button" th:onclick="'toggle_visibility(\'surePopupTour' + ${tour.tourId} + '\');'" value="No"/>
+                            <p class="modal-body">Are you sure?</p>
+                            <div class="modal-footer">
+                                <form th:action="@{/tour/remove(tourId=${tour.tourId})}" th:object="${tour}" method="post">
+                                    <input class="modal-button" style="float: left" type="submit" value="Delete"/>
+                                </form>
+                                <input class="modal-button" style="float: right" type="button" th:onclick="'toggle_visibility(\'surePopupTour' + ${tour.tourId} + '\');'" value="Cancel"/>
+                            </div>
                         </div>
 
                     </div>

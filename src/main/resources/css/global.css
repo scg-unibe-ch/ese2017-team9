@@ -207,10 +207,11 @@ footer {
     padding: 2px 16px;
     background-color: #a791c1;
     color: white;
+    overflow: hidden;
 }
 
 .modal-button {
-    background-color: #cc5c45;
+    background-color: gray;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -218,6 +219,9 @@ footer {
     border-radius: 2px;
     padding: 10px 15px;
     width: 100px;
+    display: inline-block;
+    position: relative;
+
 }
 
 @media (max-width: 600px){

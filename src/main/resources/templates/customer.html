@@ -9,7 +9,7 @@
 <div th:replace="aui :: header">Header</div>
 <div class="main-content">
     <div class="new">
-        <a th:href="@{editCustomer}">new Customer</a>
+        <a th:href="@{editCustomer}">+ Customer</a>
     </div>
     <table class="itemListItem" >
         <tr>
@@ -48,17 +48,23 @@
                 </script>
                 <div th:id="surePopupCustomer + ${customer.customerId}" class="modal">
                     <div class="modal-content">
-                        Delete Customer: <span th:text="${customer.company}"></span>
+                        <div class="modal-header">
+                            Delete Customer: <span th:text="${customer.company}"></span>
+                        </div>
                         <div th:if="${customer.isCustomerErasable} == true">
-                            <p>Are you sure?</p>
-                            <form th:action="@{/customer/remove(customerId=${customer.customerId})}" th:object="${customer}" method="post">
-                                <input type="submit" value="Delete"/>
-                            </form>
-                            <input type="button" th:onclick="'toggle_visibility(\'surePopupCustomer' + ${customer.customerId} + '\');'" value="No"/>
+                            <p class="modal-body">Are you sure?</p>
+                            <div class="modal-footer">
+                                <form th:action="@{/customer/remove(customerId=${customer.customerId})}" th:object="${customer}" method="post">
+                                    <input class="modal-button" style="float: left" type="submit" value="Delete"/>
+                                </form>
+                                <input class="modal-button" style="float: right" type="button" th:onclick="'toggle_visibility(\'surePopupCustomer' + ${customer.customerId} + '\');'" value="Cancel"/>
+                            </div>
                         </div>
                         <div th:if="${customer.isCustomerErasable} == false">
-                            <p>Failed! The customer ist attached to an existing delivery!</p>
-                            <input type="button" th:onclick="'toggle_visibility(\'surePopupCustomer' + ${customer.customerId} + '\');'" value="Cancel"/>
+                            <p class="modal-body">Failed! The customer ist attached to an existing delivery!</p>
+                            <div class="modal-footer">
+                                <input class="modal-button" style="float: right" type="button" th:onclick="'toggle_visibility(\'surePopupCustomer' + ${customer.customerId} + '\');'" value="Cancel"/>
+                            </div>
                         </div>
                     </div>
                 </div>

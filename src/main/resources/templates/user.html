@@ -66,7 +66,7 @@
                         <div th:if="${user.isUserErasable} == false">
                             <p class="modal-body">Failed! The user has still some tours attached!</p>
                             <div class="modal-footer">
-                                <input class="modal-button" type="button" th:onclick="'toggle_visibility(\'surePopupUser' + ${user.userid} + '\');'" value="Cancel"/>
+                                <input class="modal-button" style="float: right" type="button" th:onclick="'toggle_visibility(\'surePopupUser' + ${user.userid} + '\');'" value="Cancel"/>
                             </div>
                         </div>
                         <div th:if="${user.isUserErasable} == true">
@@ -75,7 +75,7 @@
                                 <form th:action="@{/user/remove(usrId=${user.userid})}" th:object="${user}" method="post">
                                     <input class="modal-button" style="float: left" type="submit" value="Delete"/>
                                 </form>
-                                <input class="modal-button" style="float: right" type="button" th:onclick="'toggle_visibility(\'surePopupUser' + ${user.userid} + '\');'" value="No"/>
+                                <input class="modal-button" style="float: right" type="button" th:onclick="'toggle_visibility(\'surePopupUser' + ${user.userid} + '\');'" value="Cancel"/>
                             </div>
                         </div>
 
