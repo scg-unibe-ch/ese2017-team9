@@ -7,26 +7,27 @@
 </head>
 <body>
 <div class="header" th:fragment="header">
-    <nav class="header-left">
-        <b>DELSAY</b>
+    <div class="header-left">
+        <a><b>DELSAY</b></a>
         <a href="user" target="_self">User</a>
         <a href="delivery" target="_self">Delivery</a>
         <a href="tour" target="_self">Tour</a>
         <a href="customer" target="_self">Customer</a>
-    </nav>
+        <div class="dropdown">
+            <button class="dropbtn" th:text ="${loggedInUser.firstname + ' ' + loggedInUser.lastname}"></button>
+            <div class="dropdown-content">
+                <a href="myProfile" target="_self" >My Profile</a>
 
-    <div class="header-right" >
-        <button class="dropbtn" th:text ="${loggedInUser.firstname + ' ' + loggedInUser.lastname}"></button>
-        <div class="dropdown-content">
-            <a href="myProfile" target="_self" >My Profile</a>
+                <a id="changePwLink">Change Password</a>
 
-            <a id="changePwLink">Change Password</a>
-
-            <form class="logoutbtn"  th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
-            </form>
+                <form class="logoutbtn"  th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </div>
         </div>
     </div>
+
+
     <!-- The Modal -->
     <div id="myModal" class="modal">
 

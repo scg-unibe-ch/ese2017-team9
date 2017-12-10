@@ -29,17 +29,15 @@
     <table class="itemListItem">
         <tr>
             <th>Delivery Name</th>
-            <th>Width</th>
-            <th>Height</th>
-            <th>Depth</th>
-            <th>Weight</th>
+            <th>W[cm]</th>
+            <th>H[cm]</th>
+            <th>D[cm]</th>
+            <th>Kg</th>
             <th>Recipient</th>
-            <th>Delivery Window Start</th>
-            <th>Delivery Window End</th>
+            <th>Delivery Window</th>
             <th>Type</th>
             <th>Status</th>
-            <th></th>
-            <th></th>
+            <th>Actions</th>
         </tr>
 
         <tr th:each="delivery : ${deliveries}">
@@ -50,16 +48,13 @@
             <td th:text="${delivery.depth}"></td>
             <td th:text="${delivery.weight}"></td>
             <td th:text="${delivery.recipient}"></td>
-            <td th:text="${{delivery.deliveryWindowStart}}"></td>
-            <td th:text="${{delivery.deliveryWindowEnd}}"></td>
+            <td th:text="${{delivery.deliveryWindowStart}} + ' - ' + ${{delivery.deliveryWindowEnd}}"></td>
             <td th:text="${delivery.type}"></td>
             <td th:text="${delivery.status}"></td>
             <td>
                 <a th:href="@{editDelivery(deliveryId=${delivery.deliveryId})}">
                     <button name="edit" type="button">Edit</button>
                 </a>
-            </td>
-            <td>
                 <!--<form th:action="@{/delivery/remove(deliveryId=${delivery.deliveryId})}" th:object="${currentDelivery}" method="post">
                     <input type="submit" value="Delete"/>
                 </form>-->
