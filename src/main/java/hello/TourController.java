@@ -33,7 +33,6 @@ public class TourController {
 
         for(Tour t:tourRepository.findAll()){
             List<String> deliveries = tourRepository.findDeliveryNameByTourId(t.getTourId());
-            //t.setDeliveriesInTour(deliveries);
             String oneDel = "";
             for(String s : deliveries){
                 oneDel += s + "#%";
@@ -133,13 +132,5 @@ public class TourController {
 
         return new ModelAndView("redirect:/editTour?tourId=" + tourId);
     }
-
-    /*@RequestMapping("/showDeliveriesPopup")
-    public void showDeliveriesFromTour(@RequestParam(value="tourId", defaultValue = "-1") long tourId){
-        System.out.println("something");
-        System.out.println(tourId);
-        List<String> deliveries = tourRepository.findDeliveryNameByTourId(tourId);
-        System.out.println(deliveries);
-    }*/
 
 }

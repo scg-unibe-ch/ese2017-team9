@@ -53,12 +53,10 @@
             <td th:text="${delivery.status}"></td>
             <td>
                 <a th:href="@{editDelivery(deliveryId=${delivery.deliveryId})}">
-                    <button name="edit" type="button">Edit</button>
+                    <button class="tab-button" name="edit" type="button">Edit</button>
                 </a>
-                <!--<form th:action="@{/delivery/remove(deliveryId=${delivery.deliveryId})}" th:object="${currentDelivery}" method="post">
-                    <input type="submit" value="Delete"/>
-                </form>-->
-                <input type="button" th:onclick="'toggle_visibility(\'surePopupDelivery' + ${delivery.deliveryId} + '\');'" value="Delete"/>
+
+                <input class="tab-button" type="button" th:onclick="'toggle_visibility(\'surePopupDelivery' + ${delivery.deliveryId} + '\');'" value="Delete"/>
                 <script>
                     function toggle_visibility(id){
                         if (document.getElementById(id).style.display != "block"){

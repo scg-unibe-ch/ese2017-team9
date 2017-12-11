@@ -30,13 +30,9 @@
             <td class="itemListItem" th:text="${customer.email}"></td>
             <td>
                 <a th:href="@{editCustomer(customerId=${customer.customerId})}">
-                    <button name="edit" type="button">Edit</button>
+                    <button class="tab-button" name="edit" type="button">Edit</button>
                 </a>
-                <!--<form th:action="@{/customer/remove(customerId=${customer.customerId})}" th:object="${customer}" method="post">
-                    <input type="submit" value="Delete"/>
-                </form>-->
-                <!-- <div th:replace="areYouSurePopup :: areYouSure">Sure?</div>-->
-                <input type="button" th:onclick="'toggle_visibility(\'surePopupCustomer' + ${customer.customerId} + '\');'" value="Delete"/>
+                <input class="tab-button" type="button" th:onclick="'toggle_visibility(\'surePopupCustomer' + ${customer.customerId} + '\');'" value="Delete"/>
                 <script>
                     function toggle_visibility(id){
                         if (document.getElementById(id).style.display != "block"){

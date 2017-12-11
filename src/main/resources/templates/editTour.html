@@ -17,19 +17,45 @@
 <div class="main-content">
 <form th:action="@{/editTour}" th:object="${currentTour}" method="post">
     <input type="hidden" name="tourId" th:field="*{tourId}"/>
-    <div>Tour Name: <input type="text" maxlength="255" name="tourId" th:field="*{tourName}"/></div>
-    <div>Deliver Day: <input type="date" name="deliverDay" th:field="*{deliverDay}"/></div>
-    <div>Estimated Time: <input type="time" name="estimatedTime" th:field="*{estimatedTime}"/></div>
-    <div>Used Time: <input type="time" name="usedTime" th:field="*{usedTime}"/></div>
-    <div>Driver:
-
-        <select name="driver" >
-            <option th:each="driver : ${drivers}" th:value="${driver.userid}" th:selected="${driver.userid == currentTour.driver}" th:text="${driver.firstname+' '+driver.lastname}"></option>
-        </select>
+    <div class="cancelsave">
+        <a th:href="@{tour}">
+            <button class="savecancel-button" name="cancel" type="button">Cancel</button>
+        </a>
+        <button class="savecancel-button" th:action="@{/editTour(tour=${currentTour})}" type="submit">Save</button>
     </div>
+    <table>
+        <tr>
+            <td class="tab-left">Tour Name</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="tourId" th:field="*{tourName}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Deliver Day</td>
+            <td class="tab-right"><input type="date" name="deliverDay" th:field="*{deliverDay}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Estimated Time</td>
+            <td class="tab-right"><input type="time" name="estimatedTime" th:field="*{estimatedTime}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Used Time</td>
+            <td class="tab-right"><input type="time" name="usedTime" th:field="*{usedTime}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Driver</td>
+            <td class="tab-right">
+                <select name="driver" >
+                    <option th:each="driver : ${drivers}" th:value="${driver.userid}" th:selected="${driver.userid == currentTour.driver}" th:text="${driver.firstname+' '+driver.lastname}"></option>
+                </select>
+            </td>
+        </tr>
+    </table>
 
     <!-- drag und drop -->
     <div th:if="${currentTour.tourId != null}">
+        <div style="padding-left: 5px; padding-top: 5px">
+            Deliveries
+        </div>
+
 
         <script>
             $(function () {
@@ -71,11 +97,7 @@
 
     </div>
 
-    <a th:href="@{tour}">
-        <button name="cancel" type="button">Cancel</button>
-    </a>
 
-    <button th:action="@{/editTour(tour=${currentTour})}" type="submit">Save</button>
 
 </form>
 

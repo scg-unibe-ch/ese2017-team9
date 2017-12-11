@@ -12,24 +12,54 @@
 <form th:action="@{/editUser}" th:object="${currentUser}" method="post">
     <input type="hidden" name="userid" th:field="*{userid}"/>
     <input type="hidden" th:field="*{password}" />
-    <div>Username: <input type="text" maxlength="255" name="username" th:field="*{username}" required="required"/></div>
-    <div>First Name: <input type="text" maxlength="255" name="firstname" th:field="*{firstname}"/></div>
-    <div>Last Name: <input type="text" maxlength="255" name="lastname" th:field="*{lastname}"/></div>
-    <div>E-Mail: <input type="email" th:name="email" th:field="*{email}" /></div>
-    <div>Roles: <input type="radio" name="Checkboxes" th:checked="${role == 'ROLE_ADMIN'}" value="ROLE_ADMIN"/>Admin <input type="radio" th:name="Checkboxes" th:checked="${role == 'ROLE_USER'}" value="ROLE_USER"/>Driver</div>
-    <div>Password: <input type="password" name="newPassword" /></div>
-    <div>Confirm: <input type="password" name="confirm" /></div>
-    <div>Locked: <select name="Locked" >
-        <option value="False" th:selected="*{locked=='False'}">False</option>
-        <option value="True" th:selected="*{locked=='True'}">True</option>
-    </select></div>
-
-    <a th:href="@{user}">
-        <button name="cancel" type="button">Cancel</button>
-    </a>
-
-    <button th:action="@{/editUser(user=${currentUser}, newPassword=${newPassword}, confirm=${confirm})}" type="submit">Save</button>
-
+    <div class="cancelsave">
+        <a th:href="@{user}">
+            <button class="savecancel-button" name="cancel" type="button">Cancel</button>
+        </a>
+        <button class="savecancel-button" th:action="@{/editUser(user=${currentUser}, newPassword=${newPassword}, confirm=${confirm})}" type="submit">Save</button>
+    </div>
+    <table>
+        <tr>
+            <td class="tab-left">Username</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="username" th:field="*{username}" required="required"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">First Name</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="firstname" th:field="*{firstname}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Last Name</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="lastname" th:field="*{lastname}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">E-Mail</td>
+            <td class="tab-right"><input type="email" th:name="email" th:field="*{email}" /></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Roles</td>
+            <td class="tab-right">
+                <input type="radio" name="Checkboxes" th:checked="${role == 'ROLE_ADMIN'}" value="ROLE_ADMIN"/>Admin
+                <input type="radio" th:name="Checkboxes" th:checked="${role == 'ROLE_USER'}" value="ROLE_USER"/>Driver
+            </td>
+        </tr>
+        <tr>
+            <td class="tab-left">Password</td>
+            <td class="tab-right"><input type="password" name="newPassword" /></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Confirm</td>
+            <td class="tab-right"><input type="password" name="confirm" /></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Locked</td>
+            <td class="tab-right">
+                <select name="Locked" >
+                    <option value="False" th:selected="*{locked=='False'}">False</option>
+                    <option value="True" th:selected="*{locked=='True'}">True</option>
+                </select>
+            </td>
+        </tr>
+    </table>
     <div style="color: red;" th:if="${param.error}" >
         This Username is already taken!
     </div>

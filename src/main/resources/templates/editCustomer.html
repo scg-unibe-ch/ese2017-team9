@@ -11,19 +11,39 @@
 <div class="main-content">
 <form th:action="@{/editCustomer}" th:object="${currentCustomer}" method="post">
     <input type="hidden" name="customerId" th:field="*{customerId}"/>
-    <div>Company: <input type="text" maxlength="255" name="company" th:field="*{company}"/></div>
-    <div>Contact Person: <input type="text" maxlength="255" name="contact" th:field="*{contact}"/></div>
-    <div>Street: <input type="text" maxlength="255" name="street" th:field="*{street}"/></div>
-    <div>City: <input type="text" maxlength="255" name="city" th:field="*{city}"/></div>
-    <div>Phone(10 digests): <input type="tel" pattern="\d{10}" name="phone" th:field="*{phone}"/></div>
-    <div>E-Mail: <input type="email" name="email" th:field="*{email}" /></div>
+    <div class="cancelsave">
+        <a th:href="@{customer}">
+            <button class="savecancel-button" name="cancel" type="button">Cancel</button>
+        </a>
 
-
-    <a th:href="@{customer}">
-        <button name="cancel" type="button">Cancel</button>
-    </a>
-
-    <button th:action="@{/editCustomer(customer=${currentCustomer})}" type="submit">Save</button>
+        <button class="savecancel-button" th:action="@{/editCustomer(customer=${currentCustomer})}" type="submit">Save</button>
+    </div>
+    <table>
+        <tr>
+            <td class="tab-left">Company</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="company" th:field="*{company}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Contact Person</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="contact" th:field="*{contact}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Street</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="street" th:field="*{street}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">City</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="city" th:field="*{city}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Phone(10 digests)</td>
+            <td class="tab-right"><input type="tel" pattern="\d{10}" name="phone" th:field="*{phone}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">E-Mail</td>
+            <td class="tab-right"><input type="email" name="email" th:field="*{email}" /></td>
+        </tr>
+    </table>
 
 </form>
 </div>

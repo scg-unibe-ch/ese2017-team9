@@ -11,38 +11,81 @@
 <div class="main-content">
 <form th:action="@{/editDelivery}" th:object="${currentDelivery}" method="post">
     <input type="hidden" name="customerId" th:field="*{deliveryId}"/>
-    <div>Delivery Name: <input type="text" maxlength="255" name="deliveryId" th:field="*{deliveryName}"/></div>
-    <div>Width: <input type="number" name="width" th:field="*{width}" min="0"/> cm</div>
-    <div>Height: <input type="number" name="height" th:field="*{height}" min="0"/> cm</div>
-    <div>Depth: <input type="number" name="depth" th:field="*{depth}" min="0"/> cm</div>
-    <div>Weight: <input type="number" name="weight" th:field="*{weight}" step="any" min="0"/> kg</div>
-    <div>Recipient: <textarea type="text" cols="40" maxlength="255"
-                           rows="3" name="recipient" th:field="*{recipient}"/></div>
-    <div>Delivery Window Start: <input type="time" value="00:00" name="deliveryWindowStart" th:field="*{deliveryWindowStart}" /></div>
-    <div>Delivery Window End: <input type="time" value="00:00" name="deliveryWindowEnd" th:field="*{deliveryWindowEnd}" /></div>
-    <div>Type: <select name="type" >
-        <option></option>
-        <option value="Dangerous Goods" th:selected="*{type=='Dangerous Goods'}">Dangerous Goods</option>
-        <option value="Endangered Goods" th:selected="*{type=='Endangered Goods'}">Endangered Goods</option>
-    </select></div>
-    <div>Status: <select name="status" >
-        <option value="Open" th:selected="*{status=='Open'}">Open</option>
-        <option value="Scheduled" th:selected="*{status=='Scheduled'}">Scheduled</option>
-        <option value="Delivery Success" th:selected="*{status=='Delivery Success'}">Delivery Success</option>
-        <option value="Delivery Failed" th:selected="*{status=='Delivery Failed'}">Delivery Failed</option>
-        <option value="No Delivery Possible" th:selected="*{status=='No Delivery Possible'}">No Delivery Possible</option>
-    </select></div>
-    <div>Customer: <select name="customer" >
-        <option th:each="customer : ${customers}" th:value="${customer.customerId}" th:selected="${customer.customerId == currentDelivery.customer}" th:text="${customer.company+': '+customer.contact}"></option>
-    </select></div>
-    <div>Comment: <input type="text" maxlength="255" name="comment" th:field="*{comment}"/></div>
-
-
-    <a th:href="@{delivery(deliveryId=*{deliveryId})}">
-        <button name="cancel" type="button">Cancel</button>
-    </a>
-
-    <button th:action="@{/editDelivery(delivery=${currentDelivery})}" type="submit">Save</button>
+    <div class="cancelsave">
+        <a th:href="@{delivery(deliveryId=*{deliveryId})}">
+            <button class="savecancel-button" name="cancel" type="button">Cancel</button>
+        </a>
+        <button class="savecancel-button" th:action="@{/editDelivery(delivery=${currentDelivery})}" type="submit">Save</button>
+    </div>
+    <table>
+        <tr>
+            <td class="tab-left">Delivery Name</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="deliveryId" th:field="*{deliveryName}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Width</td>
+            <td class="tab-right"><input type="number" name="width" th:field="*{width}" min="0"/> cm</td>
+        </tr>
+        <tr>
+            <td class="tab-left">Height</td>
+            <td class="tab-right"><input type="number" name="height" th:field="*{height}" min="0"/> cm</td>
+        </tr>
+        <tr>
+            <td class="tab-left">Depth</td>
+            <td class="tab-right"><input type="number" name="depth" th:field="*{depth}" min="0"/> cm</td>
+        </tr>
+        <tr>
+            <td class="tab-left">Weight</td>
+            <td class="tab-right"><input type="number" name="weight" th:field="*{weight}" step="any" min="0"/> kg</td>
+        </tr>
+        <tr>
+            <td class="tab-left">Recipient</td>
+            <td class="tab-right"><textarea type="text" cols="40" maxlength="255"
+                                            rows="3" name="recipient" th:field="*{recipient}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Delivery Window Start</td>
+            <td class="tab-right"><input type="time" value="00:00" name="deliveryWindowStart" th:field="*{deliveryWindowStart}" /></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Delivery Window End</td>
+            <td class="tab-right"><input type="time" value="00:00" name="deliveryWindowEnd" th:field="*{deliveryWindowEnd}" /></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Type</td>
+            <td class="tab-right">
+                <select name="type" >
+                    <option></option>
+                    <option value="Dangerous Goods" th:selected="*{type=='Dangerous Goods'}">Dangerous Goods</option>
+                    <option value="Endangered Goods" th:selected="*{type=='Endangered Goods'}">Endangered Goods</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="tab-left">Status</td>
+            <td class="tab-right">
+                <select name="status" >
+                    <option value="Open" th:selected="*{status=='Open'}">Open</option>
+                    <option value="Scheduled" th:selected="*{status=='Scheduled'}">Scheduled</option>
+                    <option value="Delivery Success" th:selected="*{status=='Delivery Success'}">Delivery Success</option>
+                    <option value="Delivery Failed" th:selected="*{status=='Delivery Failed'}">Delivery Failed</option>
+                    <option value="No Delivery Possible" th:selected="*{status=='No Delivery Possible'}">No Delivery Possible</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="tab-left">Customer</td>
+            <td class="tab-right">
+                <select name="customer" >
+                    <option th:each="customer : ${customers}" th:value="${customer.customerId}" th:selected="${customer.customerId == currentDelivery.customer}" th:text="${customer.company+': '+customer.contact}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="tab-left">Comment</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="comment" th:field="*{comment}"/></td>
+        </tr>
+    </table>
 
 </form>
 </div>

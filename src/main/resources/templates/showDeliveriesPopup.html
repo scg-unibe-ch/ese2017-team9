@@ -10,12 +10,6 @@
 <div th:fragment="showDelsPopup">
 
 
-    <!--<button th:action="@{/showDeliveriesPopup(tourId=${tour.tourId})}" th:id="${tour.tourId}" type="button">Show Dels</button>-->
-
-    <!--<form th:action="@{/showDeliveriesPopup(tourId=${tour.tourId})}" th:object="${tour}" method="post">
-        <input th:id="${tour.tourId}" type="submit" value="Show Dels"/>
-    </form>-->
-
     <button th:id="buttondel + ${tour.tourId}" type="button">Showing</button>
 
     <div th:id="myPopup + ${tour.tourId}" class="modal">

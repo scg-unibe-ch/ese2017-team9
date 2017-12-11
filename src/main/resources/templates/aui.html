@@ -4,6 +4,15 @@
     <title>AUI</title>
     <link rel="stylesheet" type="text/css" media="all"
           href="../css/global.css" th:src="@{/css/global.css}" />
+    <style>
+        .tpw-left{
+            width: 50%;
+        }
+        .tpw-right{
+            width: 45%;
+        }
+    </style>
+
 </head>
 <body>
 <div class="header" th:fragment="header">
@@ -39,35 +48,30 @@
             <form th:action="@{/aui}" th:object="${loggedInUser}" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="username" th:field="*{username}"/>
-                    <div>Old Password: <input type="password" name="oldPassword"/></div>
-                    <div>New Password: <input type="password" name="newPassword"/></div>
-                    <div>Confirm new Password<input type="password" name="confirm"/></div>
+                    <table>
+                        <tr>
+                            <td class="tpw-left">Old Password</td>
+                            <td class="tpw-right"><input type="password" name="oldPassword"/></td>
+                        </tr>
+                        <tr>
+                            <td class="tpw-left">New Password</td>
+                            <td class="tpw-right"><input type="password" name="newPassword"/></td>
+                        </tr>
+                        <tr>
+                            <td class="tpw-left">Confirm New Password</td>
+                            <td class="tpw-right"><input type="password" name="confirm"/></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="modal-footer">
-                    <button class="modal-button" style="width: 150px;" th:action="@{/aui(username=${username}, oldPassword=${oldPassword}, newPassword=${newPassword}, confirm=${confirm})}" type="submitPw">Save Password</button>
-                    <button class="modal-button" style="width: 150px;" name="exitmodal" type="button">Cancel</button>
+                    <button class="modal-button" style="width: auto; float: left" th:action="@{/aui(username=${username}, oldPassword=${oldPassword}, newPassword=${newPassword}, confirm=${confirm})}" type="submitPw">Save Password</button>
+                    <button class="modal-button" style="width: auto; float: right;" name="exitmodal" type="button">Cancel</button>
                 </div>
             </form>
         </div>
 
     </div>
-    <!--<script>
-        /* When the user clicks on the button,
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(e) {
-            if (!e.target.matches('.dropbtn')) {
-                var myDropdown = document.getElementById("myDropdown");
-                if (myDropdown.classList.contains('show')) {
-                    myDropdown.classList.remove('show');
-                }
-            }
-        }
-    </script>-->
 
     <script>
         // Get the modal

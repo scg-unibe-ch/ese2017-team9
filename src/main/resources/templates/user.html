@@ -43,10 +43,10 @@
             <td th:text="${user.locked}"></td>
             <td>
                 <a th:href="@{editUser(usrId=${user.userid})}">
-                    <button name="edit" type="button">Edit</button>
+                    <button class="tab-button" name="edit" type="button">Edit</button>
                 </a>
 
-                <input type="button" th:onclick="'toggle_visibility(\'surePopupUser' + ${user.userid} + '\');'" value="Delete"/>
+                <input class="tab-button" type="button" th:onclick="'toggle_visibility(\'surePopupUser' + ${user.userid} + '\');'" value="Delete"/>
 
                 <script>
                     function toggle_visibility(id){
@@ -57,7 +57,6 @@
                         }
                     }
                 </script>
-                <!--<div th:replace="showDeliveriesPopup :: showDelsPopup">ShowDels</div>-->
                 <div th:id="surePopupUser + ${user.userid}" class="modal">
                     <div class="modal-content">
                         <div class="modal-header">

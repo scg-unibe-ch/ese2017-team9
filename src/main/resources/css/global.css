@@ -84,6 +84,17 @@ footer {
     border: 0;
 }
 
+.tab-left{
+    width: 15%;
+}
+.tab-right{
+    width: 80%;
+}
+
+.cancelsave{
+    float: right;
+}
+
 /*-----------------------------------------------------------------------------
  Drop Menu
  -------------------------------------------------------------------------------*/
@@ -223,6 +234,36 @@ footer {
     position: relative;
 
 }
+
+.savecancel-button {
+    background-color: gray;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 2px;
+    padding: 10px 15px;
+    width: 100px;
+    display: inline-block;
+    position: relative;
+    right: 5px;
+
+}
+
+.tab-button {
+    background-color: gray;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    border: none;
+    border-radius: 2px;
+    padding: 3px 10px;
+    width: auto;
+    display: inline-block;
+    position: relative;
+
+}
+
 
 @media (max-width: 600px){
 
