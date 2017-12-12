@@ -33,14 +33,10 @@
         <td>E-Mail: </td>
         <td th:text ="${loggedInUser.email}"></td>
     </tr>
-    <tr>
-        <td>Id: </td>
-        <td th:text ="${loggedInUser.userid}"></td>
-    </tr>
 </table>
 
 <a th:href="@{editMyProfile}">
-    <button name="edit" type="button">Edit</button>
+    <button class="savecancel-button" style="margin-top: 8px; margin-left:5px; margin-bottom: 8px;" name="edit" type="button">Edit</button>
 </a>
 
     <div style="color: red;" th:if="${param.error}" >
