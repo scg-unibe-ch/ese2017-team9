@@ -50,10 +50,16 @@
         </tr>
     </table>
 
+    <div th:if="${currentTour.tourId == 0}">
+        <div style="padding-left: 5px; padding-top: 5px; color: blue;">
+            Save Tour first, before you can add deliveries.
+        </div>
+    </div>
     <!-- drag und drop -->
-    <div th:if="${currentTour.tourId != null}">
+    <div th:if="${currentTour.tourId != 0}">
         <div style="padding-left: 5px; padding-top: 5px">
             Deliveries
+
         </div>
 
 
@@ -92,18 +98,13 @@
                 </table>
             </li>
         </ul>
-
+        <div th:replace="addDeliveryPopUp :: deliveryPopup" >AddDeliveriesInTour</div>
     </div>
 
 
 
 </form>
 
-<div th:if="${currentTour.tourId != 0}">
-
-    <div th:replace="addDeliveryPopUp :: deliveryPopup" >AddDeliveriesInTour</div>
-
-</div>
 </div>
 </body>
 </html>
