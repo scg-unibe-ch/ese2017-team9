@@ -8,34 +8,39 @@
 <body>
 
 <div th:fragment="deliveryPopup">
-    <button class="savecancel-button" style="left: 5px" id="addDeliveryButton" type="button">Add Delivery</button>
+    <button class="savecancel-button" style="margin-left: 10px; margin-bottom: 10px;" id="addDeliveryButton" type="button">Add Delivery</button>
 
     <div id="addDeliveryPopup" class="modal" style="height:90%;overflow:scroll;">
         <div class="modal-content">
-            <div>Select Deliveries to Add: <br/>
+            <div class="modal-header">Select Deliveries to Add: </div>
+
                 <form th:action="@{/addDeliveryPopUp}" th:method="post">
                     <input type="hidden" name="tourId" th:field="${currentTour.tourId}"/>
-                    <th:block th:each="delivery : ${deliveries}">
-                    <label><input type="checkbox" name="Checkboxes" th:value="${delivery.deliveryId}" >
+                    <div class="modal-body" style="background-color: white;">
+                        <th:block th:each="delivery : ${deliveries}">
+                        <label><input type="checkbox" name="Checkboxes" th:value="${delivery.deliveryId}" >
 
-                        <table class="searchItem">
+                            <table class="searchItem">
 
-                            <tr >
-                                <td th:text="${delivery.deliveryName}"></td>
-                            </tr>
-                            <tr >
-                                <td th:text="${delivery.recipient}"></td>
-                            </tr>
+                                <tr >
+                                    <td style="min-width: 100px;" th:text="${delivery.deliveryName}"></td>
 
-                        </table>
-                    </input>
-                    </label>
-                    </th:block>
+                                    <td style="white-space:pre; min-width: 150px;" th:text="${delivery.recipient}"></td>
+                                </tr>
 
-                    <button th:action="@{/addDeliveryPopUp(tourId=${tourId})}" type="submit">Save</button>
+                            </table>
+                        </input>
+                        </label>
+                        </th:block>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-button" style="width: auto; float: left" th:action="@{/addDeliveryPopUp(tourId=${tourId})}" type="submit">Add</button>
+                    <button class="modal-button" style="width: auto; float: right;" name="exitAddDelivery" type="button">Cancel</button>
+                </div>
                 </form>
-            </div>
-            <button name="exitAddDelivery" type="button">Cancel</button>
+
+
+
         </div>
     </div>
 

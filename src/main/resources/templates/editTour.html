@@ -74,16 +74,14 @@
 
         <ul id="items1" class="items">
             <li style="list-style-type: none;" class="list g" th:each="deliverySelected : ${deliveriesSelected}">
-                <table class="searchItem">
+                <table class="searchItem" >
                     <input type="hidden" name="orderIds" th:value="${deliverySelected.deliveryId}"/>
 
                     <tr >
-                        <td th:text="${deliverySelected.deliveryName}"></td>
-                    </tr>
-                    <tr >
-                        <td th:text="${deliverySelected.recipient}"></td>
-                    </tr>
-                    <tr>
+                        <td style="min-width: 100px;" th:text="${deliverySelected.deliveryName}"></td>
+
+                        <td style="white-space:pre; min-width: 150px;" th:text="${deliverySelected.recipient}"></td>
+
                         <td>
                             <a th:href="@{removeDelivery(tourId=${currentTour.tourId}, deliveryId=${deliverySelected.deliveryId})}">
                                 <button type="button">Remove</button>

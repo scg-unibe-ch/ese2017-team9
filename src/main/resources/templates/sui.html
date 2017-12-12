@@ -16,7 +16,7 @@
         <a th:href="@{/driverTours}" target="_self">My Tours</a>
         <a href="myProfile" target="_self" >My Profile</a>
 
-        <a id="changePwLink">Change Password</a>
+        <a id="changePwLink" style="cursor: pointer;">Change Password</a>
 
         <form class="logoutbtn"  th:action="@{/logout}" method="post">
             <input style="width: 100%; font-size: 15px; text-align: left; padding-left: 32px;" type="submit" value="Sign Out"/>
@@ -38,9 +38,14 @@
             <form th:action="@{/sui}" th:object="${loggedInUser}" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="username" th:field="*{username}"/>
-                    <div>Old Password: <input type="password" name="oldPassword"/></div>
-                    <div>New Password: <input type="password" name="newPassword"/></div>
-                    <div>Confirm new Password<input type="password" name="confirm"/></div>
+                    <table>
+                        <tr><td class="tpw-left" style="border-bottom: none;">Old Password</td></tr>
+                        <tr><td class="tpw-left"><input type="password" name="oldPassword"/></td></tr>
+                        <tr><td class="tpw-left" style="border-bottom: none;">New Password</td></tr>
+                        <tr><td class="tpw-left"><input type="password" name="newPassword"/></td></tr>
+                        <tr><td class="tpw-left" style="border-bottom: none;">Confirm new Password</td></tr>
+                        <tr><td class="tpw-left"><input type="password" name="confirm"/></td></tr>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button class="modal-button" style="width: 40%;" th:action="@{/sui(oldPassword=${oldPassword}, newPassword=${newPassword}, confirm=${confirm})}" type="submitPw">Save</button>

@@ -16,7 +16,7 @@
         .highlight {
             border: 1px solid white;
             background-color: #a791c1;
-            height: 100px;
+            height: 163px;
         }
     </style>
 </head>
@@ -33,20 +33,20 @@
             <a th:href="@{driverDeliveryStatus(deliveryId=${delivery.deliveryId})}">
                 <table class="displayItemsDriver">
                     <tr>
-                        <td class="handle" style="text-align: center; background-color: #aaa;">:::</td>
+                        <td class="handle" style="text-align: center; border-bottom: none; background-color: #aaa;">:::</td>
                     </tr>
 
                     <tr >
-                        <td style="font-weight: bold;" th:text="${delivery.deliveryName}"></td>
+                        <td style="font-weight: bold; border-bottom: none;" th:text="${delivery.deliveryName}"></td>
                     </tr>
                     <tr >
-                        <td th:text="${delivery.recipient}"></td>
+                        <td style="border-bottom: none; white-space:pre;" th:text="${delivery.recipient}"></td>
                     </tr>
                     <tr >
-                        <td th:text="'Status: ' + ${delivery.status}"></td>
+                        <td style="border-bottom: none;" th:text="'Status: ' + ${delivery.status}"></td>
                     </tr>
                     <tr >
-                        <td th:text="'Comment: ' + ${delivery.comment}"></td>
+                        <td style="border-bottom: none;" th:text="'Comment: ' + ${delivery.comment}"></td>
                     </tr>
 
                 </table>
@@ -63,11 +63,11 @@
 
     <div style="bottom: 0; position:fixed; overflow: hidden; width:100%;">
         <a th:href="@{driverTours}">
-            <button style="float:left; width: 50%; height: 40px; background-color: #aaa;" name="back" type="button">Back</button>
+            <button style="float:left; width: 50%; height: 40px; background-color: #aaa; border:none; font-family:'Berlin Sans FB', sans-serif;" name="back" type="button">Back</button>
         </a>
 
         <input type="hidden" name="tourId" th:value="${tour.tourId}"/>
-        <button style="float:right; width: 50%; height: 40px; background-color: #aaa;" th:action="@{/driverTourDeliveries(tourId=${tour.tourId})}" type="submit">Save</button>
+        <button style="float:right; width: 50%; height: 40px; background-color: #aaa; border:none; font-family:'Berlin Sans FB', sans-serif;" th:action="@{/driverTourDeliveries(tourId=${tour.tourId})}" type="submit">Save</button>
     </div>
 </form>
 

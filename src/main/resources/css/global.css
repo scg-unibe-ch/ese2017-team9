@@ -56,12 +56,13 @@ div.login{
 .logoutbtn input[type=submit] {
     font-family: "Berlin Sans FB", sans-serif;
     color: black;
-    font-size: 18px;
+    font-size: 16px;
     background-color: white;
     border: 0;
     cursor: pointer;
     float: right;
     padding: 12px;
+    width:100%;
 }
 
 .loginbtn input[type=submit] {
@@ -231,7 +232,6 @@ footer {
     padding: 10px 15px;
     width: 100px;
     display: inline-block;
-    position: relative;
 
 }
 
@@ -245,7 +245,6 @@ footer {
     padding: 10px 15px;
     width: 100px;
     display: inline-block;
-    position: relative;
     right: 5px;
 
 }
@@ -260,8 +259,6 @@ footer {
     padding: 3px 10px;
     width: auto;
     display: inline-block;
-    position: relative;
-
 }
 
 
@@ -389,7 +386,7 @@ table {
     padding:8px;
 }
 
-th, td{
+th, td {
     border-bottom: 1px solid #ddd;
     padding: 5px;
     text-align: left;

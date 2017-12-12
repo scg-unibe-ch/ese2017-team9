@@ -47,7 +47,7 @@
             <td th:text="${delivery.height}"></td>
             <td th:text="${delivery.depth}"></td>
             <td th:text="${delivery.weight}"></td>
-            <td th:text="${delivery.recipient}"></td>
+            <td style="white-space:pre;" th:text="${delivery.recipient}"></td>
             <td th:text="${{delivery.deliveryWindowStart}} + ' - ' + ${{delivery.deliveryWindowEnd}}"></td>
             <td th:text="${delivery.type}"></td>
             <td th:text="${delivery.status}"></td>
