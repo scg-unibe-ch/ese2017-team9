@@ -19,21 +19,32 @@
 </div>
 <div class="main-content">
 <form th:action="@{/editMyProfile}" th:object="${loggedInUser}" method="post">
-    <div> <input type="hidden" name="username" th:field="*{username}"/></div>
-    <div>First Name: <input type="text" name="firstname" th:field="*{firstname}"/></div>
-    <div>Last Name: <input type="text" name="lastname" th:field="*{lastname}"/></div>
-    <div>E-Mail: <input type="email" th:name="email" th:field="*{email}" /></div>
+    <input type="hidden" name="username" th:field="*{username}"/>
     <input type="hidden" name="newPassword" th:field="*{password}"/>
 
-
-
-    <div>
+    <div class="cancelsave">
         <a th:href="@{/myProfile}">
-            <button name="cancel" type="button">Cancel</button>
+            <button class="savecancel-button" name="cancel" type="button">Cancel</button>
         </a>
 
-        <button th:action="@{/editMyProfile(user=${loggedInUser})}" type="submit">Save</button>
+        <button class="savecancel-button" th:action="@{/editMyProfile(user=${loggedInUser})}" type="submit">Save</button>
     </div>
+
+    <table>
+        <tr>
+            <td class="tab-left">First Name</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="firstname" th:field="*{firstname}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">Last Name</td>
+            <td class="tab-right"><input type="text" maxlength="255" name="lastname" th:field="*{lastname}"/></td>
+        </tr>
+        <tr>
+            <td class="tab-left">E-Mail</td>
+            <td class="tab-right"><input type="email" name="email" th:field="*{email}" /></td>
+        </tr>
+    </table>
+
 
 </form>
 </div>
