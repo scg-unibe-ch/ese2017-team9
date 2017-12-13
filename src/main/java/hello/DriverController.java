@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Calendar;
 import java.util.Date;
 
 import java.util.ArrayList;
@@ -36,15 +38,17 @@ public class DriverController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userRepository.findByUsername(auth.getName());
         List<Tour> tours = tourRepository.findAllByDriverOrderByDeliverDay(currentUser.getUserid());
+        List<Tour> upcomingTours = tourRepository.findAllByDriverOrderByDeliverDay(currentUser.getUserid());
         if(all)
             model.addAttribute("tours", tours);
         else{
-            Date today = new Date();
+            final Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, -1);
             for(Tour tour : tours){
-                if(tour.getDeliverDay().before(today))
-                    tours.remove(tour);
+                if(tour.getDeliverDay().before(cal.getTime()))
+                    upcomingTours.remove(tour);
             }
-            model.addAttribute("tours", tours);
+            model.addAttribute("tours", upcomingTours);
         }
 
         return "driverTours";
